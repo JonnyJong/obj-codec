@@ -1,0 +1,215 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": ["./tsconfig.json"]
+	},
+	"plugins": ["@typescript-eslint", "prettier"],
+	"env": {
+		"browser": false,
+		"node": false,
+		"shared-node-browser": false,
+		"es2022": true
+	},
+	// removed "plugin:prettier/recommended"
+	"extends": ["eslint:recommended"],
+	"rules": {
+		"array-callback-return": "warn",
+		"no-constant-condition": "warn",
+		"no-constructor-return": "error",
+		"no-control-regex": "warn",
+		"no-duplicate-imports": "error",
+		// 考察：禁止嵌套块中出现变量或 function 声明
+		// "no-inner-declarations": "off",
+		"no-new-native-nonconstructor": "warn",
+		"no-promise-executor-return": "error",
+		"no-self-compare": "error",
+		"no-template-curly-in-string": "warn",
+		"no-unreachable-loop": "error",
+		"no-unused-private-class-members": "error",
+		// "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+		"no-unused-vars": "off",
+		"arrow-body-style": ["error", "as-needed"],
+		"block-scoped-var": "error",
+		"camelcase": [
+			"error",
+			{
+				"properties": "always",
+				"ignoreImports": true,
+				"ignoreGlobals": true
+				// 可配置允许的情况
+				// e.g: "UNSAFE_componentWillMount", "^UNSAFE_"
+				// "allow": []
+			}
+		],
+		"class-methods-use-this": "error",
+		// 考察：复杂度检查
+		// 参考：https://zh-hans.eslint.org/docs/latest/rules/complexity
+		// complexity: ["error", 10],
+		"curly": ["error", "multi-line"],
+		"default-case-last": "error",
+		// 考察：默认参数放在最后
+		// ”default-param-last": "error",
+		"dot-notation": "warn",
+		"eqeqeq": "error",
+		"func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+		"grouped-accessor-pairs": "error",
+		// 考察：警告没有调用 Object.hasOwn
+		"guard-for-in": "warn",
+		"prefer-object-has-own": "warn",
+		// 限制标识符使用
+		// 参考：https://zh-hans.eslint.org/docs/latest/rules/id-denylist
+		// id-denylist: ["error", "data", "err", "e", "cb", "callback"],
+		// 考察：最大嵌套深度
+		// 参考：https://zh-hans.eslint.org/docs/latest/rules/max-depth
+		"max-depth": "error",
+		// 需要考察：最大参数数量
+		// 参考：https://zh-hans.eslint.org/docs/latest/rules/max-params
+		"max-params": "error",
+		"new-cap": "error",
+		"no-alert": "warn",
+		"no-array-constructor": "error",
+		// 考察：不允许在 switch 语句中声明变量
+		// "no-case-declarations": "off",
+		// 考察：可能产生混淆的箭头函数
+		"no-confusing-arrow": "error",
+		"no-else-return": ["error", { "allowElseIf": false }],
+		"no-empty": ["error", { "allowEmptyCatch": true }],
+		"no-empty-function": "warn",
+		"no-empty-static-block": "warn",
+		"no-eval": "error",
+		"no-extend-native": "error",
+		"no-extra-label": "error",
+		"no-floating-decimal": "error",
+		"no-implied-eval": "error",
+		// 考察：不允许在代码同一行后添加注释
+		"no-inline-comments": "error",
+		"no-iterator": "error",
+		"no-label-var": "warn",
+		"no-lone-blocks": "error",
+		"no-lonely-if": "error",
+		"no-mixed-operators": [
+			"warn",
+			{
+				"groups": [
+					["~", "**"],
+					["*", "/", "%"],
+					["+", "-"],
+					["<<", ">>", ">>>"],
+					["<", "<=", ">", ">=", "in", "instanceof"],
+					["==", "!=", "===", "!=="],
+					["&", "^", "|"],
+					["&&", "||", "??"]
+				],
+				"allowSamePrecedence": true
+			}
+		],
+		"no-multi-assign": "error",
+		"no-multi-str": "error",
+		"no-new-func": "error",
+		"no-new-object": "warn",
+		"no-new-wrappers": "warn",
+		"no-octal-escape": "error",
+		"no-return-assign": "error",
+		"no-sequences": "error",
+		"no-throw-literal": "error",
+		"no-unneeded-ternary": "error",
+		"no-useless-computed-key": "error",
+		"no-useless-concat": "error",
+		"no-useless-constructor": "error",
+		"no-useless-rename": "error",
+		"no-useless-return": "error",
+		"no-var": "error",
+		"no-void": "warn",
+		"object-shorthand": "error",
+		"operator-assignment": "error",
+		"prefer-exponentiation-operator": "error",
+		"prefer-object-spread": "warn",
+		"prefer-promise-reject-errors": "error",
+		"prefer-spread": "error",
+		"prefer-template": "error",
+		"quote-props": ["error", "as-needed"],
+		"spaced-comment": [
+			"error",
+			"always",
+			{
+				"exceptions": ["-", "+", "*", "/", "=", "%"],
+				"markers": ["#region"]
+			}
+		],
+		// 注意：已在 tsconfig.json 中开启了 strict
+		// "strict": "error",
+		"yoda": "error",
+		"array-bracket-newline": ["error", { "multiline": true }],
+		"array-bracket-spacing": "error",
+		"array-element-newline": ["error", "consistent"],
+		"arrow-parens": "error",
+		// 考察：当箭头函数标记返回类型
+		"arrow-spacing": ["error", { "before": true, "after": true }],
+		"block-spacing": "error",
+		"brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+		"comma-dangle": [
+			"error",
+			{
+				"arrays": "always-multiline",
+				"objects": "always-multiline",
+				"imports": "always-multiline",
+				"exports": "always-multiline",
+				"functions": "never"
+			}
+		],
+		"comma-spacing": "error",
+		"comma-style": "error",
+		"computed-property-spacing": "error",
+		"dot-location": ["error", "property"],
+		"eol-last": "error",
+		"func-call-spacing": "error",
+		"generator-star-spacing": "error",
+		// 考察：缩进风格
+		// 参考：https://zh-hans.eslint.org/docs/latest/rules/indent
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
+		"key-spacing": "error",
+		"keyword-spacing": "error",
+		"line-comment-position": "error",
+		"linebreak-style": "error",
+		"max-len": [
+			"error",
+			{ "code": 100, "ignoreComments": true, "ignoreUrls": true }
+		],
+		"max-statements-per-line": "error",
+		"new-parens": "error",
+		"no-multi-spaces": "error",
+		"no-multiple-empty-lines": "error",
+		"no-trailing-spaces": "error",
+		"nonblock-statement-body-position": "error",
+		"object-curly-newline": [
+			"error",
+			{ "multiline": true, "consistent": true }
+		],
+		"object-curly-spacing": ["error", "always", { "objectsInObjects": true }],
+		/* "operator-linebreak": [
+			"error",
+			"before",
+			{ "overrides": { "=": "ignore" } }
+		], */
+		"padded-blocks": ["error", "never"],
+		"quotes": ["error", "single"],
+		"rest-spread-spacing": "error",
+		"semi": "error",
+		"semi-spacing": "error",
+		"semi-style": "error",
+		"space-before-blocks": "error",
+		"space-before-function-paren": [
+			"error",
+			{ "anonymous": "always", "named": "never", "asyncArrow": "always" }
+		],
+		"space-in-parens": "error",
+		"space-infix-ops": "error",
+		"space-unary-ops": "error",
+		"switch-colon-spacing": "error",
+		"template-curly-spacing": "error",
+		"template-tag-spacing": "error",
+		"wrap-iife": "error",
+		"yield-star-spacing": "error"
+	}
+}

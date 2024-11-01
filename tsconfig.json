@@ -1,0 +1,43 @@
+{
+	"compilerOptions": {
+		// Basic Options
+		"target": "ES2022",
+		"module": "ES2022",
+		"lib": ["ES2022"],
+		// "types": [],
+		"moduleResolution": "Bundler",
+		// Type Checking Options
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
+		"noUnusedLocals": true, // eslint can't check correctly
+		"noUnusedParameters": true, // eslint can't check correctly
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"allowJs": false,
+		"allowSyntheticDefaultImports": true,
+		// Module Resolution Options
+		"baseUrl": "src",
+		// Language Features Options
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		// Other Options
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		"incremental": true,
+		"tsBuildInfoFile": "cache/.tsbuildinfo",
+		"sourceMap": true,
+		"outDir": "dist",
+		"rootDir": "src",
+		"removeComments": true,
+		"newLine": "lf",
+		"declaration": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist"]
+}
