@@ -1,0 +1,15 @@
+.github
+.rollup.cache
+.vscode
+cache
+node_modules
+test
+.editorconfig
+.eslintignore
+.eslintrc.json
+.gitattributes
+.gitignore
+.prettierignore
+.prettierrc
+jest.config.js
+rollup.config.js
