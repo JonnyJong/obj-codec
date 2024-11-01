@@ -1,7 +1,7 @@
 [简体中文](readme.zh-CN.md) | [English](readme.md)
 
 # obj-codec
-![test](https://github.com/JonnyJong/obj-codec/actions/workflows/Test/badge.svg)
+![test](https://github.com/JonnyJong/obj-codec/actions/workflows/test.yml/badge.svg)
 
 Encodes and decodes objects to binary, supports nested references.
 
