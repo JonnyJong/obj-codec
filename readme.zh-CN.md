@@ -1,6 +1,8 @@
 [简体中文](readme.zh-CN.md) | [English](readme.md)
 
 # obj-codec
+![test](https://github.com/JonnyJong/obj-codec/actions/workflows/Test/badge.svg)
+
 将对象编码为二进制并解码为对象，支持嵌套引用。
 
 ## 开发
