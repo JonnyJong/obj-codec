@@ -30,7 +30,6 @@ export class ObjDecoder {
 	private _codecMap: ICodec<any, any, any>[] = [];
 	private _allowIncompleteDecoding: boolean;
 	private _pointerList: [ICodec<any, any, any>, any][] = [];
-	private _innerDeRefTasks: [BaseCodec<any>, any][] = [];
 	private _pointers: Pointer[] = [];
 	private _buffer: Uint8Array = new Uint8Array();
 	private _version?: number;
@@ -206,11 +205,10 @@ export class ObjDecoder {
 			if (this._buffer.length < (this._expectedLength as number)) return end();
 			// Objects: Custom Non-Pointer Type
 			if (this._innerCodec) {
-				let innerData = this._innerCodec.decode(
+				const innerData = this._innerCodec.decode(
 					this._buffer.slice(0, this._expectedLength),
 					this
 				);
-				this._innerDeRefTasks.push([this._innerCodec, innerData]);
 				data = this._currentCodec!.decode(innerData);
 			} else {
 				// Objects: Internal Type
@@ -242,10 +240,6 @@ export class ObjDecoder {
 			throw new Error('Failure to decode in full');
 		}
 		// Dereference
-		for (const [codec, data] of this._innerDeRefTasks) {
-			if (!codec.dereference) continue;
-			codec.dereference(data);
-		}
 		for (const [codec, data] of this._pointerList) {
 			if (!codec.dereference) continue;
 			codec.dereference(data);
