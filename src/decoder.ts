@@ -240,8 +240,16 @@ export class ObjDecoder {
 			throw new Error('Failure to decode in full');
 		}
 		// Dereference
+		const laterDeferences = [];
 		for (const [codec, data] of this._pointerList) {
 			if (!codec.dereference) continue;
+			if (!INTERNAL_CODEC.includes(codec)) {
+				laterDeferences.push([codec, data]);
+				continue;
+			}
+			codec.dereference(data);
+		}
+		for (const [codec, data] of laterDeferences) {
 			codec.dereference(data);
 		}
 		// Complete
