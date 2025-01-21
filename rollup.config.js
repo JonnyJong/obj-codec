@@ -7,7 +7,17 @@ module.exports = [
 		input: './src/index.ts',
 		output: {
 			file: './dist/index.js',
-			format: 'iife',
+			format: 'cjs',
+			sourcemap: true,
+		},
+		plugins: [ts(), tarser()],
+		external: ['@types/node'],
+	},
+	{
+		input: './src/index.ts',
+		output: {
+			file: './dist/index.esm.js',
+			format: 'es',
 			sourcemap: true,
 		},
 		plugins: [ts(), tarser()],

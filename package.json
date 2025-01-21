@@ -3,6 +3,8 @@
 	"version": "0.0.2",
 	"description": "Encodes and decodes objects to binary, supports nested references",
 	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"types": "dist/index.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/JonnyJong/obj-codec.git"
