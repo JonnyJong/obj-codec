@@ -44,7 +44,7 @@ export class ObjEncoder {
 		// TODO: 唯一\非实例类型（各种类、函数）
 		return true;
 	}
-	serialize(item: any): Uint8Array {
+	private serialize(item: any): Uint8Array {
 		// TODO: 唯一\非实例类型（各种类、函数）
 		const buffer = this.serializeBasicType(item);
 		if (buffer !== undefined) return buffer;
