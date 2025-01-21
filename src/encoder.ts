@@ -205,4 +205,14 @@ export class ObjEncoder {
 			yield this.rootSerialize(item);
 		}
 	}
+	getStream() {
+		return new ReadableStream({
+			pull: (controller) => {
+				for (const chunk of this.encode()) {
+					controller.enqueue(chunk);
+				}
+				controller.close();
+			}
+		});
+	}
 }
