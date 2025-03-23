@@ -215,4 +215,11 @@ export class ObjEncoder {
 			}
 		});
 	}
+	async toBuffer(): Promise<Uint8Array> {
+		const chunks = [];
+		for (const chunk of this.encode()) {
+			chunks.push(chunk);
+		}
+		return concatBuffers(...chunks);
+	}
 }

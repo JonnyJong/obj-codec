@@ -255,4 +255,8 @@ export class ObjDecoder {
 		// Complete
 		return this._pointerList[0][1];
 	}
+	async decode(data: BinaryArray): Promise<any> {
+		this.write(data);
+		return this.end();
+	}
 }

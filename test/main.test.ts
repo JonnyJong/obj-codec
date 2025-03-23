@@ -206,4 +206,30 @@ describe('Main', () => {
 			});
 		}).then(customChecker);
 	});
+
+	//#region One-Shot Encode
+	it('Encode: one-shot with internal type', async () => {
+		const encoder = ObjCodec.encode(DATA);
+		const encoded = await encoder.toBuffer();
+		expect(encoded).toEqual(ENCODED);
+	});
+
+	it('Encode: one-shot with custom class', async () => {
+		const encoder = codecWithCustomClass.encode(TEST_CLASS_DATA);
+		const encoded = await encoder.toBuffer();
+		expect(encoded).toEqual(ENCODER_TEST_CLASS_DATA);
+	});
+
+	//#region One-Shot Decode
+	it('Decode: one-shot with internal type', async () => {
+		const decoder = ObjCodec.decode();
+		const data = await decoder.decode(ENCODED);
+		internalChecker(data);
+	});
+
+	it('Decode: one-shot with custom class', async () => {
+		const decoder = codecWithCustomClass.decode();
+		const data = await decoder.decode(ENCODER_TEST_CLASS_DATA);
+		customChecker(data);
+	});
 });
