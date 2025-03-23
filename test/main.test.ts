@@ -47,7 +47,7 @@ describe('Main', () => {
 	};
 	TEST_CLASS_DATA.object = new TestClassObject(TEST_CLASS_DATA);
 	TEST_CLASS_DATA.array = new TestClassArray([TEST_CLASS_DATA.object]);
-	const ENCODEC_TEST_CLASS_DATA = new Uint8Array(
+	const ENCODER_TEST_CLASS_DATA = new Uint8Array(
 		readFileSync(path.join(__dirname, 'custom.bin'))
 	);
 	const codecWithCustomClass = new ObjCodec();
@@ -161,7 +161,7 @@ describe('Main', () => {
 			newData.set(data, encoded.length);
 			encoded = newData;
 		}
-		expect(encoded).toEqual(ENCODEC_TEST_CLASS_DATA);
+		expect(encoded).toEqual(ENCODER_TEST_CLASS_DATA);
 	});
 
 	//#region Decode
@@ -174,7 +174,7 @@ describe('Main', () => {
 
 	it('Decode: custom class', async () => {
 		const decoder = codecWithCustomClass.decode();
-		decoder.write(ENCODEC_TEST_CLASS_DATA);
+		decoder.write(ENCODER_TEST_CLASS_DATA);
 		const data = await decoder.end();
 		customChecker(data);
 	});
