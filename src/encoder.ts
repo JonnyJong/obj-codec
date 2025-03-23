@@ -212,7 +212,7 @@ export class ObjEncoder {
 					controller.enqueue(chunk);
 				}
 				controller.close();
-			}
+			},
 		});
 	}
 	async toBuffer(): Promise<Uint8Array> {
