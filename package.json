@@ -38,9 +38,7 @@
 		"ts-jest": "^29.2.5",
 		"tsc-alias": "^1.8.10",
 		"tslib": "^2.7.0",
-		"typescript": "^5.6.2"
-	},
-	"dependencies": {
+		"typescript": "^5.6.2",
 		"rollup-plugin-dts": "^6.1.1"
 	}
 }
