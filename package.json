@@ -1,6 +1,6 @@
 {
 	"name": "obj-codec",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Encodes and decodes objects to binary, supports nested references",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
