@@ -232,6 +232,7 @@ export class ObjDecoder {
 	async end() {
 		if (this._decodeError) throw this._decodeError;
 		if (this._decodePromise) await this._decodePromise;
+		if (this._buffer.length > 0) await this._decode();
 		// Check Incomplete Decoding
 		if (
 			(this._currentTypeId !== undefined || this._buffer.length > 0) &&
