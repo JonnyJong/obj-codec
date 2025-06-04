@@ -130,6 +130,10 @@ export class ObjDecoder {
 		// Version
 		if (this._version === undefined) {
 			this._version = this._buffer[0];
+			if (this._version !== 0) {
+				this._decodeError = new Error(`Unsupported version: ${this._version}`);
+				return end();
+			}
 			this._consume(1);
 		}
 		// Custom Class Map
