@@ -1,17 +1,15 @@
-import { flexUintCodec } from '../../../src/codec/base/flexable-unsigned-integer';
+import { describe, expect, it } from 'vitest';
+import { flexUintCodec } from '../../../src/codec/base/flexible-unsigned-integer';
 
-describe('Codec(Base): flexable-number', () => {
+describe('Codec(Base): flexible-number', () => {
 	const ZERO = 0;
 	const ENCODED_ZERO = new Uint8Array([0]);
 	const TWO_BYTES = 0b0010_0000_0000_1010;
 	const ENCODED_TWO_BYTES = new Uint8Array([0b1100_0000, 0b0000_1010]);
-	const ENCODED_BUFFER = new Uint8Array([
-		0b1100_0000, 0b0000_1010, 0b0000_0000,
-	]);
+	const ENCODED_BUFFER = new Uint8Array([0b1100_0000, 0b0000_1010, 0b0000_0000]);
 	const INCOMPLETE_BUFFER = new Uint8Array([0b1100_0000]);
 
 	//#region Encode
-
 	it('Encode: zero', () => {
 		const encoded = flexUintCodec.encode(ZERO);
 		expect(encoded).toEqual(ENCODED_ZERO);
@@ -22,7 +20,6 @@ describe('Codec(Base): flexable-number', () => {
 	});
 
 	//#region Decode
-
 	it('Decode: zero', () => {
 		const decoded = flexUintCodec.decode(ENCODED_ZERO);
 		expect(decoded).toEqual(ZERO);
@@ -33,7 +30,6 @@ describe('Codec(Base): flexable-number', () => {
 	});
 
 	//#region GetPointer
-
 	it('GetPointer: zero', () => {
 		const buffer = flexUintCodec.getBuffer(ENCODED_ZERO);
 		expect(buffer).toEqual(ENCODED_ZERO);

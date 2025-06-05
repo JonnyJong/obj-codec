@@ -1,225 +1,184 @@
-import { bigintCodec } from 'codec/base/bigint';
-import { binaryCodec } from 'codec/base/binary';
-import { falseCodec, trueCodec } from 'codec/base/boolean';
-import { flexUintCodec } from 'codec/base/flexable-unsigned-integer';
-import { nullCodec } from 'codec/base/null';
-import { numberCodec } from 'codec/base/number';
-import { stringCodec } from 'codec/base/string';
-import { undefinedCodec } from 'codec/base/undefined';
-import { arrayCodec } from 'codec/internal/array';
-import { objectCodec } from 'codec/internal/object';
+import { flexUintCodec } from './codec/base/flexible-unsigned-integer';
+import { stringCodec } from './codec/base/string';
 import {
 	CUSTOM_TYPE_ID_BEGIN,
+	INTERNAL_CODEC_MAP,
 	INTERNAL_TYPE_ID,
-	INTERNAL_TYPES,
 	VERSION,
-} from 'global';
-import { concatBuffers, isBuffer, LinkedQueue } from 'helper';
-import { AnyCodec, BaseCodec, CodecMap, IClass } from 'types';
+} from './global';
+import { CodecMap, InternalTypeName } from './types';
+import { Queue, concatBuffers, isBinary } from './utils';
 
-interface ObjEncoderOptions {
+export interface EncodeOptions {
 	codec: CodecMap;
 	root: any;
+	uniqueValues?: any[];
 	ignoreUnsupportedTypes?: boolean;
 }
 
-export class ObjEncoder {
-	private _codec: [string, [IClass, AnyCodec]][];
-	private _ignoreUnsupportedTypes: boolean;
-	private _pointerList: any[];
-	private _serializeQueue: LinkedQueue<any> = new LinkedQueue();
-	constructor({ codec, root, ignoreUnsupportedTypes }: ObjEncoderOptions) {
-		this._codec = [...codec];
-		this._ignoreUnsupportedTypes = !!ignoreUnsupportedTypes;
-		this._pointerList = [root];
-		this._serializeQueue.enqueue(root);
+type FlatCodec = CodecMap extends Map<infer K, infer V> ? [K, V] : never;
+
+const INTERNAL_TYPES = [
+	[RegExp, 'REGEXP'],
+	[Date, 'DATE'],
+	[Map, 'MAP'],
+	[Set, 'SET'],
+] as const;
+
+export class Encoder {
+	#codec: FlatCodec[];
+	#uniqueValues: any[];
+	#ignoreUnsupportedTypes: boolean;
+	#queue = new Queue();
+	#pointers: any[] = [];
+	constructor({
+		codec,
+		uniqueValues,
+		ignoreUnsupportedTypes,
+		root,
+	}: EncodeOptions) {
+		this.#codec = [...codec.entries()];
+		this.#uniqueValues = uniqueValues ?? [];
+		this.#ignoreUnsupportedTypes = !!ignoreUnsupportedTypes;
+		this.#queue.enqueue(root);
 	}
-	get ignoreUnsupportedTypes(): boolean {
-		return this._ignoreUnsupportedTypes;
+	#assertSupported(data: any) {
+		if (this.#ignoreUnsupportedTypes) return;
+		if (typeof data !== 'function') return;
+		if (this.#uniqueValues.includes(data)) return;
+		throw new Error(`Unsupported type:\n${data}`);
 	}
-	// eslint-disable-next-line class-methods-use-this
-	isSupported(item: any): boolean {
-		const type = typeof item;
-		if (type === 'function') return false;
-		// TODO: 唯一\非实例类型（各种类、函数）
-		return true;
+	#innerSerialize = (data: any): Uint8Array => {
+		let index = this.#uniqueValues.indexOf(data);
+		if (index !== -1) {
+			return concatBuffers(
+				[INTERNAL_TYPE_ID.UNIQUE_POINTER],
+				flexUintCodec.encode(index),
+			);
+		}
+		const buffer = this.#serializeBasicValue(data);
+		if (buffer) return buffer;
+		index = this.#pointers.indexOf(data);
+		if (index === -1) {
+			index = this.#pointers.length;
+			this.#pointers.push(data);
+			this.#queue.enqueue(data);
+		}
+		return concatBuffers([INTERNAL_TYPE_ID.POINTER], flexUintCodec.encode(index));
+	};
+	#runInternalCodec(type: InternalTypeName, data: any): Uint8Array {
+		const head = [INTERNAL_TYPE_ID[type]];
+		const body = INTERNAL_CODEC_MAP[type].encode(data, this.#innerSerialize);
+		if (typeof INTERNAL_CODEC_MAP[type].bufferLength === 'number') {
+			return concatBuffers(head, body);
+		}
+		return concatBuffers(head, flexUintCodec.encode(body.length), body);
 	}
-	serialize(item: any): Uint8Array {
-		// TODO: 唯一\非实例类型（各种类、函数）
-		const buffer = this.serializeBasicType(item);
-		if (buffer !== undefined) return buffer;
+	#serializeUniqueValue(data: any): Uint8Array | null {
+		const index = this.#uniqueValues.indexOf(data);
+		if (index === -1) return null;
 		return concatBuffers(
-			flexUintCodec.encode(INTERNAL_TYPE_ID.pointer),
-			flexUintCodec.encode(this.getPointer(item))
+			[INTERNAL_TYPE_ID.UNIQUE_POINTER],
+			flexUintCodec.encode(index),
 		);
 	}
-	/**
-	 * 获取目标对象的指针
-	 * @description
-	 * 基本类型不应使用该方法获取指针，
-	 * 应当直接编码
-	 */
-	private getPointer(target: any): number {
-		const index = this._pointerList.indexOf(target);
+	#serializeBasicValue(data: any): Uint8Array | null {
+		const type = (typeof data).toUpperCase();
+		switch (type) {
+			case 'NUMBER':
+			case 'BIGINT':
+			case 'UNDEFINED':
+				return this.#runInternalCodec(type, data);
+			case 'BOOLEAN':
+				return this.#runInternalCodec(data ? 'TRUE' : 'FALSE', data);
+		}
+		if (data !== null) return null;
+		return this.#runInternalCodec('NULL', data);
+	}
+	#serializeReferableValue(data: any, atRoot?: boolean): Uint8Array | null {
+		const index = this.#pointers.indexOf(data);
 		if (index === -1) {
-			this._pointerList.push(target);
-			this._serializeQueue.enqueue(target);
-			return this._pointerList.length - 1;
+			this.#pointers.push(data);
+		} else if (!atRoot) {
+			return concatBuffers(
+				[INTERNAL_TYPE_ID.POINTER],
+				flexUintCodec.encode(index),
+			);
 		}
-		return index;
-	}
-	private getCodecId(name: string) {
-		return this._codec.findIndex(([n]) => n === name) + CUSTOM_TYPE_ID_BEGIN;
-	}
-	private runInternalEncoder<Data>(
-		typeId: number,
-		data: Data,
-		codec: BaseCodec<Data>
-	): Uint8Array {
-		const type = flexUintCodec.encode(typeId);
-		const buffer = codec.encode(data, this);
-		if (codec.encodingLength !== undefined) {
-			return concatBuffers(type, buffer);
-		}
-		return concatBuffers(type, flexUintCodec.encode(buffer.length), buffer);
-	}
-	private serializeBasicType(item: any): Uint8Array | undefined {
-		switch (typeof item) {
-			case 'number':
-				return this.runInternalEncoder(
-					INTERNAL_TYPE_ID.number,
-					item,
-					numberCodec
-				);
-			case 'bigint':
-				return this.runInternalEncoder(
-					INTERNAL_TYPE_ID.bigint,
-					item,
-					bigintCodec
-				);
-			case 'boolean':
-				return this.runInternalEncoder(
-					item ? INTERNAL_TYPE_ID.true : INTERNAL_TYPE_ID.false,
-					item,
-					item ? trueCodec : falseCodec
-				);
-			case 'undefined':
-				return this.runInternalEncoder(
-					INTERNAL_TYPE_ID.undefined,
-					item,
-					undefinedCodec
-				);
-		}
-		if (item === null) {
-			return this.runInternalEncoder(INTERNAL_TYPE_ID.null, item, nullCodec);
-		}
-		return undefined;
-	}
-	private serializePointerableType(item: any): Uint8Array | undefined {
-		switch (typeof item) {
-			case 'string':
-				return this.runInternalEncoder(
-					INTERNAL_TYPE_ID.string,
-					item,
-					stringCodec
-				);
-			case 'symbol':
-				return this.runInternalEncoder(
-					INTERNAL_TYPE_ID.string,
-					item.toString(),
-					stringCodec
-				);
-		}
-		return undefined;
-	}
-	private serializeBinaryType(item: any): Uint8Array | undefined {
-		if (!isBuffer(item)) return undefined;
-		return this.runInternalEncoder(INTERNAL_TYPE_ID.binary, item, binaryCodec);
-	}
-	private serializeInternalType(item: any): Uint8Array | undefined {
-		for (const { type, typeId, codec } of INTERNAL_TYPES) {
-			if (item instanceof type) {
-				return this.runInternalEncoder(typeId, item, codec);
+
+		const type = (typeof data).toUpperCase();
+		switch (type) {
+			case 'STRING':
+			case 'SYMBOL': {
+				return this.#runInternalCodec(type, data);
 			}
 		}
-		return undefined;
+		return null;
 	}
-	private serializeFallbackType(item: any): Uint8Array {
-		if (Array.isArray(item)) {
-			return this.runInternalEncoder(INTERNAL_TYPE_ID.array, item, arrayCodec);
-		}
-		return this.runInternalEncoder(INTERNAL_TYPE_ID.object, item, objectCodec);
+	#serializeBinaryValue(data: any): Uint8Array | null {
+		if (!isBinary(data)) return null;
+		return this.#runInternalCodec('BINARY', data);
 	}
-	private rootSerialize(item: any): Uint8Array {
-		// TODO: 唯一\非实例类型（各种类、函数）
-		// Basic Type
-		let buffer = this.serializeBasicType(item);
-		if (buffer !== undefined) return buffer;
-		// Pointerable Type
-		buffer = this.serializePointerableType(item);
-		if (buffer !== undefined) return buffer;
-		// Binary Type
-		buffer = this.serializeBinaryType(item);
-		if (buffer !== undefined) return buffer;
-		// Custom Type
-		for (const [name, [type, codec]] of this._codec) {
-			if (!(item instanceof type)) continue;
-			const inner = codec.encode(item);
-			return concatBuffers(
-				flexUintCodec.encode(this.getCodecId(name)),
-				this.serialize(inner)
-			);
-			/* buffer = this.serializeBasicType(inner);
-			if (buffer === undefined) buffer = this.serializePointerableType(inner);
-			if (buffer === undefined) buffer = this.serializeBinaryType(inner);
-			if (buffer === undefined) buffer = this.serializeInternalType(inner);
-			if (buffer === undefined) buffer = this.serializeFallbackType(inner);
-			return concatBuffers(
-				flexNumberCodec.encode(this.getCodecId(name)),
-				buffer
-			); */
+	#serializeCustomValue(data: any): Uint8Array | null {
+		for (const [id, [_, codec]] of this.#codec.entries()) {
+			if (!(data instanceof codec.class)) continue;
+			const body = this.#serialize(codec.encode(data));
+			return concatBuffers(flexUintCodec.encode(id + CUSTOM_TYPE_ID_BEGIN), body);
 		}
-		// Internal Type
-		buffer = this.serializeInternalType(item);
-		if (buffer !== undefined) return buffer;
-		// Fallback Type
-		return this.serializeFallbackType(item);
+		return null;
+	}
+	#serializeInternalValue(data: any): Uint8Array | null {
+		for (const [type, name] of INTERNAL_TYPES) {
+			if (!(data instanceof type)) continue;
+			return this.#runInternalCodec(name, data);
+		}
+		return null;
+	}
+	#serializeFallbackValue(data: any): Uint8Array {
+		if (Array.isArray(data)) {
+			return this.#runInternalCodec('ARRAY', data);
+		}
+		return this.#runInternalCodec('OBJECT', data);
+	}
+	#serialize(data: any, atRoot?: boolean): Uint8Array {
+		this.#assertSupported(data);
+		// Unique
+		let buffer = this.#serializeUniqueValue(data);
+		if (buffer) return buffer;
+		// Basic
+		buffer = this.#serializeBasicValue(data);
+		if (buffer) return buffer;
+		// Referable
+		buffer = this.#serializeReferableValue(data, atRoot);
+		if (buffer) return buffer;
+		// Binary
+		buffer = this.#serializeBinaryValue(data);
+		if (buffer) return buffer;
+		// Custom
+		buffer = this.#serializeCustomValue(data);
+		if (buffer) return buffer;
+		// Internal
+		buffer = this.#serializeInternalValue(data);
+		if (buffer) return buffer;
+		// Fallback
+		return this.#serializeFallbackValue(data);
 	}
 	*encode() {
 		// Version
 		yield new Uint8Array([VERSION]);
 		// Custom Class Map
-		yield flexUintCodec.encode(this._codec.length);
-		for (const [name] of this._codec) {
-			const buffer = stringCodec.encode(name, this);
+		this.#codec.sort(([_, a], [__, b]) =>
+			(a.parentClasses ?? []).includes(b.class) ? -1 : 1,
+		);
+		yield flexUintCodec.encode(this.#codec.length);
+		for (const [name] of this.#codec) {
+			const buffer = stringCodec.encode(name);
 			yield flexUintCodec.encode(buffer.length);
 			yield buffer;
 		}
 		// Objects
-		while (!this._serializeQueue.isEmpty) {
-			const item = this._serializeQueue.dequeue();
-			if (!this.isSupported(item)) {
-				if (this._ignoreUnsupportedTypes) continue;
-				throw new Error(`Unsupported type:\n${item}`);
-			}
-			yield this.rootSerialize(item);
+		for (const data of this.#queue.iter()) {
+			yield this.#serialize(data, true);
 		}
-	}
-	getStream() {
-		return new ReadableStream({
-			pull: (controller) => {
-				for (const chunk of this.encode()) {
-					controller.enqueue(chunk);
-				}
-				controller.close();
-			},
-		});
-	}
-	async toBuffer(): Promise<Uint8Array> {
-		const chunks = [];
-		for (const chunk of this.encode()) {
-			chunks.push(chunk);
-		}
-		return concatBuffers(...chunks);
 	}
 }

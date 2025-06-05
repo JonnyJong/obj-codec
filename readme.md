@@ -1,195 +1,240 @@
 [简体中文](readme.zh-CN.md) | [English](readme.md)
-
 # obj-codec
 ![test](https://github.com/JonnyJong/obj-codec/actions/workflows/test.yml/badge.svg)
 
-Encodes and decodes objects to binary, supports nested references.
+Encode objects into binary and decode binary back into objects, supporting nested references, custom object encoding/decoding, unique pointers...
 
-## Dev
+## Installation
 ```sh
-npm i
-npm run compile
-npm run test
+npm install obj-codec
+# or
+yarn add obj-codec
+# or
+pnpm add obj-codec
 ```
 
-## Clean
-1. Remove the following directories and files:
-	- `.rollup.cache`
-	- `cache`
-	- `dist`
-2. Run `npm run compile`
+## Features
+- Supports all JavaScript primitive data types
+  - Primitive types: number, bigint, string, boolean, null, undefined
+  - Collection types: Array, Set, Map
+  - Special objects: Date, RegExp, Symbol
+  - Binary data: Uint8Array, etc.
+- Reference handling
+  - Automatic nested reference processing
+  - Perfect support for circular references
+  - [Unique pointer](#unique-pointer) support
+- Streaming processing
 
-## Features TODO List
-- [ ] Readable(Node) Style API
-- [ ] ReadableStream(Web) Style API
-- [ ] Unique Pointer:  Points to built-in objects, classes, functions, etc
+## Usage
 
-## Document
-
-### Encode
+### Default API
 ```ts
 import { ObjCodec } from 'obj-codec';
-import { createWriteStream } from 'fs';
 
-const DATA = {};
-
-// Using globally registered custom codecs
-function useGlobalCodoc() {
-	const encoder = ObjCodec.encode(DATA);
-	const writeStream = createWriteStream('path/to/file');
-
-	for (const data of encoder.encode()) {
-			writeStream.write(data);
-	}
-
-	writeStream.end();
+// Using global codec
+const encoder = ObjCodec.encode(target);
+const decoder = ObjCodec.decode();
+for (const chunk of encoder.encode()) {
+	decoder.decode(chunk);
 }
+const result = decoder.getResult();
 
-//  Use custom codecs that are instance-only
-function useInstanceCodoc() {
-	const codec = new ObjCodec();
-	//  Call `codec.registerCodecs` to register custom codecs limited to the instance `codec
-	const encoder = codec.encode(DATA);
-	const writeStream = createWriteStream('path/to/file');
-	for (const data of encoder.encode()) {
-			writeStream.write(data);
-	}
-	writeStream.end();
+// Using general codec
+const objCodec = new ObjCodec();
+const encoder = objCodec.encode(target);
+const decoder = objCodec.decode();
+for (const chunk of encoder.encode()) {
+	decoder.decode(chunk);
 }
+const result = decoder.getResult();
+
 ```
 
-### Decode
+### Node Stream API
 ```ts
 import { ObjCodec } from 'obj-codec';
-import { createReadStream } from 'fs';
 
-// Using globally registered custom codecs
-function useGlobalCodoc() {
-	const decoder = ObjCodec.decode();
-	const readStream = createReadStream('path/to/file');
+// Using global codec
+const encoder = ObjCodec.encode(target);
+const decoder = ObjCodec.decode();
+encoder.pipe(decoder).on('finish', () => {
+	const result = decoder.getResult();
+});
 
-	readStream.on('data', (chunk) => {
-		decoder.write(new Uint8Array(chunk));
-	});
+// Using general codec
+const objCodec = new ObjCodec();
+const encoder = objCodec.encode(target);
+const decoder = objCodec.decode();
+encoder.pipe(decoder).on('finish', () => {
+	const result = decoder.getResult();
+});
 
-	readStream.on('end', () => {
-		encoder.end().then(console.log);
-	});
-}
-
-//  Use custom codecs that are instance-only
-function useInstanceCodoc() {
-	const codec = new ObjCodec();
-	//  Call `codec.registerCodecs` to register custom codecs limited to the instance `codec
-	const decoder = codec.decode();
-	const readStream = createReadStream('path/to/file');
-
-	readStream.on('data', (chunk) => {
-		decoder.write(new Uint8Array(chunk));
-	});
-
-	readStream.on('end', () => {
-		encoder.end().then(console.log);
-	});
-}
 ```
 
-### Encoded Data Structure
-| Descripton                       | Type                                                    |
-| -------------------------------- | ------------------------------------------------------- |
-| Version                          | `u8`                                                    |
-| Custom Type Mapping Table Length | [Flexable Unsigned Integer](#flexable-unsigned-integer) |
-| Custom Type Mapping Table        | [Custom Type Mapping Table](#custom-type-mapping-table) |
-| Data Object[]                    | [Data Object](#data-object)                             |
+### Web Stream API
+```ts
+import { ObjCodec } from 'obj-codec/web';
 
-### Custom Type Mapping Table
-1. Structure: Repeat according to `Length of customized type mapping table`.
-	 1. String length: [Flexable Unsigned Integer](#flexable-unsigned-integer)
-	 2. String
+// Using global codec
+const encoder = ObjCodec.encode(target);
+const decoder = ObjCodec.decode();
+await encoder.pipeTo(decoder);
+const result = decoder.getResult();
+
+// Using general codec
+const objCodec = new ObjCodec();
+const encoder = objCodec.encode(target);
+const decoder = objCodec.decode();
+await encoder.pipeTo(decoder);
+const result = decoder.getResult();
+
+```
+
+## Build/Development
+```sh
+pnpm i
+pnpm build
+pnpm test
+```
+
+## Data Structure
+
+| Description            | Type                                                    |
+| ---------------------- | ------------------------------------------------------- |
+| Version number         | u8                                                      |
+| Custom type map length | [Flexible Unsigned Integer](#flexible-unsigned-integer) |
+| Custom type map        | [Custom Type Map](#custom-type-map)                     |
+| Data object table      | Array of [Data Objects](#data-object)                   |
+
+### Custom Type Map
+1. Structure: `[string length, string][]`
+   - String length: [Flexible Unsigned Integer](#flexible-unsigned-integer)
+   - String: Refer to [Codec](#codec)
 2. Mapping
-	 - All strings must be unique
-	 -  The `Data Object` type ID is the index of the mapping table if it is greater than 16, minus 17.
-	 - The mapping table should be created at the time of coding
-	 - Decoding should start by decoding the mapping table and creating an array of `Custom Type Codecs` based on the mapping table
+   - All strings must be unique
+   - If the type ID of a `Data Object` is greater than 16, subtract 17 to get the index in the map
+   - The map should be created first during encoding
+   - During decoding, decode the map first and create an array of `custom type codecs` based on it
 
 ### Data Object
 1. Root object: The first object is the root object
 2. Structure
-	 - Internal Type
-		 1. Type ID: [Flexable Unsigned Integer](#flexable-unsigned-integer)
-		 2. Data Length (non-fixed-length encoding only): [Flexable Unsigned Integer](#flexable-unsigned-integer)
-		 3. Data
-	 - Custom Type
-		 1. Type ID: [Flexable Unsigned Integer](#flexable-unsigned-integer)
-		 2. `Internal Type` Data
+   - Built-in types
+     1. Type ID: [Flexible Unsigned Integer](#flexible-unsigned-integer)
+     2. Data length (only for non-fixed-length encoding): [Flexible Unsigned Integer](#flexible-unsigned-integer)
+     3. Data
+   - Custom types
+     1. Type ID: [Flexible Unsigned Integer](#flexible-unsigned-integer)
+     3. Built-in type data
 
 Reference: [Codec](#codec)
 
 ### Codec
-| ID  | Name             | Length (Bytes) | Weights (the smaller the first) | Referencable* | Comment                                                                                                       |
-| --- | ---------------- | -------------- | ------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
-| 0   | Pointer          | Flexable*      | *N/A*                           | *N/A*         | Implicit type, cannot be used directly. Created automatically by the main codecs (`ObjEncoder`, `ObjDecoder`) |
-| 1   | Binary           |                | 2                               | X             |                                                                                                               |
-| 2   | Number           | 8              | 0                               |               |                                                                                                               |
-| 3   | BigInt           |                | 0                               |               |                                                                                                               |
-| 4   | String           |                | 1                               | X             |                                                                                                               |
-| 5   | `false`          | 0              | 0                               |               | No data area                                                                                                  |
-| 6   | `true`           | 0              | 0                               |               | No data area                                                                                                  |
-| 7   | `null`           | 0              | 0                               |               | No data area                                                                                                  |
-| 8   | `undefined`      | 0              | 0                               |               | No data area                                                                                                  |
-| 9   | *Object*         |                | 5                               | X             | Fallback type                                                                                                 |
-| 10  | *Array*          |                | 5                               | X             | Fallback type                                                                                                 |
-| 11  | Set              |                | 4                               | X             |                                                                                                               |
-| 12  | Map              |                | 4                               | X             |                                                                                                               |
-| 13  | Date             | 8              | 4                               | X             |                                                                                                               |
-| 14  | RegExp           |                | 4                               | X             |                                                                                                               |
-| 15  | Symbol           |                | 1                               | X             |                                                                                                               |
-| 16  | *Unique Pointer* |                |                                 |               | **Not Implemented**                                                                                           |
-| 17+ | Custom Type      | *N/A*          | 3                               | X             |                                                                                                               |
+| ID  | Name           | Length (bytes) | Priority (lower is higher) | Referenceable* | Notes                                                                                                    |
+| --- | -------------- | -------------- | -------------------------- | -------------- | -------------------------------------------------------------------------------------------------------- |
+| 0   | Pointer        | Flexible*      | *N/A*                      | *N/A*          | Implicit type, cannot be used directly. Automatically created by main codec (`ObjEncoder`, `ObjDecoder`) |
+| 1   | Binary         |                | 2                          | ✅              |                                                                                                          |
+| 2   | Number         | 8              | 0                          |                |                                                                                                          |
+| 3   | BigInt         |                | 0                          |                |                                                                                                          |
+| 4   | String         |                | 1                          | ✅              |                                                                                                          |
+| 5   | `false`        | 0              | 0                          |                | No data section                                                                                          |
+| 6   | `true`         | 0              | 0                          |                | No data section                                                                                          |
+| 7   | `null`         | 0              | 0                          |                | No data section                                                                                          |
+| 8   | `undefined`    | 0              | 0                          |                | No data section                                                                                          |
+| 9   | *Object*       |                | 5                          | ✅              | Fallback type                                                                                            |
+| 10  | *Array*        |                | 5                          | ✅              | Fallback type                                                                                            |
+| 11  | Set            |                | 4                          | ✅              |                                                                                                          |
+| 12  | Map            |                | 4                          | ✅              |                                                                                                          |
+| 13  | Date           | 8              | 4                          | ✅              |                                                                                                          |
+| 14  | RegExp         |                | 4                          | ✅              |                                                                                                          |
+| 15  | Symbol         |                | 1                          | ✅              |                                                                                                          |
+| 16  | Unique Pointer | Flexible*      |                            |                |                                                                                                          |
+| 17+ | Custom Type    | *N/A*          | 3                          | ✅              |                                                                                                          |
 
-Comments:
-- "Flexable" Length：reference [Flexable Unsigned Integer](#flexable-unsigned-integer)
-- Referenceable: if the type is contained within a *container type*, it is not encoded as raw data, but as a pointer
+Notes:
+- "Flexible" length: Refer to [Flexible Unsigned Integer](#flexible-unsigned-integer)
+- Referenceable: If a *container type* contains this type, it will not be encoded as raw data but as a pointer
 
-### Flexable Unsigned Integer
-Used to represent unsigned integers, supports dynamic encoding of lengths.
+### Flexible Unsigned Integer
+Used to represent unsigned integers with dynamic encoding length.
 
-1. Representation range: 0 ~ 2^n - n (n is the number of bits required for encoding)
+1. Range: $0$ to $2^n-n$ (where n is the number of bits required for encoding)
 2. Structure
-   - The high bit (bit 8) of each byte is used to indicate the existence of subsequent bytes:
-   - If the high bit is 1, it indicates that there are more bytes to follow.
-   - If the high bit is 1, more bytes follow. If the high bit is 0, this is the last byte.
-   - The remaining 7 bits are used to store the actual data portion.
-3. Encoding example
-   - `0` -> `0b0000_0000
+   - The high bit (8th bit) of each byte indicates the presence of subsequent bytes:
+     - If the high bit is 1, more bytes follow.
+     - If the high bit is 0, this is the last byte.
+   - The remaining 7 bits store the actual data.
+3. Encoding examples
+   - `0` -> `0b0000_0000`
    - `127` -> `0b0111_1111`
-   - `128` -> `0b1000_0000` and `0b0000_0001
-   - `129` -> `0b1000_0001` and `0b0000_0001`.
+   - `128` -> `0b1000_0000` and `0b0000_0001`
+   - `129` -> `0b1000_0001` and `0b0000_0001`
+
+### Unique Pointer
+A unique pointer is a special encoding mechanism for handling:
+- Environment-specific objects that **cannot be directly encoded** (e.g., `globalThis`, built-in `Symbol`, etc.)
+- Globally unique objects that **need to maintain reference consistency**
+- Values that **cannot or should not** be processed by regular codecs
 
 ### Custom Codec
-#### Define
+
+#### Definition
 ```ts
+/**
+ * Codec
+ * @template Type Data type
+ * @template EncodeResult Encoding type
+ * @template DecodeMiddle Decoding intermediate type
+ */
 interface ICodec<
-	Data,
-	DecodeMiddle = Data,
-	EncodeResult extends BasicType,
+	Type extends IClass,
+	EncodeResult,
+	DecodeMiddle extends Type = Type,
 > {
-	encode(data: Data): EncodeResult;
+	/**
+	 * Codec name
+	 * @description
+	 * The codec is identified by its name,
+	 * ensure the name is unique
+	 */
+	name: string;
+	/** Target class for encoding/decoding */
+	class: Type;
+	/**
+	 * Parent classes of the target class
+	 * @description
+	 * Used to determine matching order
+	 * @example
+	 * [ParentClass, GrandClass, GrandGrandClass]
+	 */
+	parentClasses?: IClass[];
+	/**
+	 * Encode
+	 * @param data Data
+	 */
+	encode(data: Type): EncodeResult;
+	/**
+	 * Decode
+	 * @param encoded Encoded data
+	 */
 	decode(encoded: EncodeResult): DecodeMiddle;
-	dereference?(data: DecodeMiddle): any;
+	/**
+	 * Dereference
+	 * @param data Decoding intermediate data
+	 */
+	deref?(data: DecodeMiddle): void;
 }
 ```
 
-The `encode` method can return data of any type belonging to `BasicType`.
-If a non-`BasicType` type is returned, it will be encoded directly as a `BasicType`, and custom codecs will be ignored.
+- The `encode` method can return any type of data, including custom types.
+- The `decode` method must return a `Type`. The `encoded` parameter may contain pointers, which should be preserved in the return value if they cannot be dereferenced.
+- The `dereference` method is used to resolve references in the return value of `decode`. Its return value will be ignored.
 
-The `decode` method needs to return `Data` type.
-Parameter `encoded` may contain a pointer, which cannot be dereferenced and should be kept in the return value.
-
-The `dereference` method is used to dereference the return value of the `decode` method.
-The method return value is ignored.
-
-#### Register
+#### Registration
 ```ts
-registerCodecs(id: string, codec: AnyCodec, constructor: IClass): void;
+// Register global codec
+ObjCodec.register(codec);
+// Register codec
+const objCodec = new ObjCodec();
+objCodec.register(codec);
 ```

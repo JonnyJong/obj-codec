@@ -1,18 +1,13 @@
-import { BaseCodec } from 'types';
+import { InternalCodec } from '../../types';
 
-/*
-Boolean codec is a special case,
-confirmation by type code.
-*/
+export const falseCodec = {
+	bufferLength: 0,
+	encode: () => new Uint8Array([]),
+	decode: () => false,
+} as const satisfies InternalCodec<false>;
 
-export const falseCodec: BaseCodec<false> = {
-	encodingLength: 0,
-	encode: (_data) => new Uint8Array([]),
-	decode: (_encoded) => false,
-};
-
-export const trueCodec: BaseCodec<true> = {
-	encodingLength: 0,
-	encode: (_data) => new Uint8Array([]),
-	decode: (_encoded) => true,
-};
+export const trueCodec = {
+	bufferLength: 0,
+	encode: () => new Uint8Array([]),
+	decode: () => true,
+} as const satisfies InternalCodec<true>;

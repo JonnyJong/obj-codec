@@ -1,5 +1,7 @@
+import { InternalCodec } from '../../types';
+
 export const flexUintCodec = {
-	encode(data: number): Uint8Array {
+	encode(data) {
 		const bufferLength = Math.ceil(data.toString(2).length / 7);
 		const buffer = new Uint8Array(bufferLength);
 		for (let i = 0; i < bufferLength; i++) {
@@ -8,6 +10,11 @@ export const flexUintCodec = {
 		buffer[bufferLength - 1] &= 0b0111_1111;
 		return buffer;
 	},
+	/**
+	 * 获取弹性无符号整型完整缓冲区
+	 * @description
+	 * 若输入缓冲区不完整，返回 `null`
+	 */
 	getBuffer(buffer: Uint8Array): Uint8Array | null {
 		let complete = false;
 		let i = 0;
@@ -19,7 +26,7 @@ export const flexUintCodec = {
 		}
 		return complete ? buffer.slice(0, i) : null;
 	},
-	decode(encoded: Uint8Array): number {
+	decode(encoded) {
 		let data = 0;
 		for (let i = 0; i < encoded.length; i++) {
 			data |= encoded[i] & 0b0111_1111;
@@ -29,4 +36,6 @@ export const flexUintCodec = {
 		}
 		return data;
 	},
+} as const satisfies InternalCodec<number> & {
+	getBuffer(buffer: Uint8Array): Uint8Array | null;
 };

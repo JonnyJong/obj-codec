@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { regexpCodec } from '../../../src/codec/internal/regexp';
 
 describe('Codec(Internal): regexp', () => {
@@ -13,12 +14,10 @@ describe('Codec(Internal): regexp', () => {
 	//#region Encode
 
 	it('Encode: with flags', () => {
-		// @ts-ignore
 		const encoded = regexpCodec.encode(WITH_FLAGS);
 		expect(encoded).toEqual(ENCODED_WITH_FLAGS);
 	});
 	it('Encode: without flags', () => {
-		// @ts-ignore
 		const encoded = regexpCodec.encode(WITHOUT_FLAGS);
 		expect(encoded).toEqual(ENCODED_WITHOUT_FLAGS);
 	});
@@ -26,12 +25,10 @@ describe('Codec(Internal): regexp', () => {
 	//#region Decode
 
 	it('Decode: with flags', () => {
-		// @ts-ignore
 		const decoded = regexpCodec.decode(ENCODED_WITH_FLAGS);
 		expect(decoded).toEqual(WITH_FLAGS);
 	});
 	it('Decode: without flags', () => {
-		// @ts-ignore
 		const decoded = regexpCodec.decode(ENCODED_WITHOUT_FLAGS);
 		expect(decoded).toEqual(WITHOUT_FLAGS);
 	});

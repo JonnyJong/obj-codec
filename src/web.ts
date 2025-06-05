@@ -1,17 +1,29 @@
-import { Readable, Writable } from 'node:stream';
 import { DecodeOptions, Decoder } from './decoder';
 import { EncodeOptions, Encoder } from './encoder';
 import { IObjCodec, globalCodecs } from './global';
 import { BinaryType, ObjDecoderOptions, ObjEncoderOptions } from './types';
 import { mergeCodecs } from './utils';
 
-class ObjEncoder extends Readable {
+class ObjEncoder extends ReadableStream<Uint8Array> {
 	#encoder: Encoder;
 	#generator: Generator<Uint8Array, void, unknown>;
 	constructor(options: EncodeOptions) {
 		super({
-			autoDestroy: true,
-			emitClose: true,
+			pull: (controller) => {
+				try {
+					const { value, done } = this.#generator.next();
+					if (done) {
+						controller.close();
+					} else {
+						controller.enqueue(value);
+					}
+				} catch (error) {
+					controller.error(error);
+				}
+			},
+			cancel: () => {
+				this.#generator.return();
+			},
 		});
 		this.#encoder = new Encoder(options);
 		this.#generator = this.#encoder.encode();
@@ -20,31 +32,19 @@ class ObjEncoder extends Readable {
 	encode(): Generator<Uint8Array, void, unknown> {
 		return this.#generator;
 	}
-	_read(_size: number): void {
-		try {
-			let pushed = true;
-			while (pushed) {
-				const { value, done } = this.#generator.next();
-				if (done) {
-					this.push(null);
-					return;
-				}
-
-				pushed = this.push(value);
-			}
-		} catch (error) {
-			this.destroy(error as Error);
-		}
-	}
 }
 
-class ObjDecoder extends Writable {
+class ObjDecoder extends WritableStream<Uint8Array> {
 	#decoder: Decoder;
 	constructor(options: DecodeOptions) {
 		super({
-			autoDestroy: true,
-			emitClose: true,
-			decodeStrings: true,
+			write: (chunk, controller) => {
+				try {
+					this.#decoder.decode(chunk);
+				} catch (error) {
+					controller.error(error);
+				}
+			},
 		});
 		this.#decoder = new Decoder(options);
 	}
@@ -59,50 +59,6 @@ class ObjDecoder extends Writable {
 	 */
 	getResult(): any {
 		return this.#decoder.getResult();
-	}
-	#toUint8Array(
-		chunk: Uint8Array | Buffer | string,
-		encoding: NodeJS.BufferEncoding = 'utf-8',
-	): Uint8Array {
-		if (typeof chunk === 'string') {
-			return Buffer.from(chunk, encoding);
-		}
-		return chunk;
-	}
-	_write(
-		chunk: any,
-		encoding: NodeJS.BufferEncoding,
-		callback: (error?: Error | null) => void,
-	): void {
-		try {
-			const data = this.#toUint8Array(chunk, encoding);
-			this.#decoder.decode(data);
-			callback();
-		} catch (err) {
-			callback(err as Error);
-		}
-	}
-	_writev(
-		chunks: Array<{ chunk: any; encoding: NodeJS.BufferEncoding }>,
-		callback: (error?: Error | null) => void,
-	): void {
-		try {
-			for (const { chunk, encoding } of chunks) {
-				const data = this.#toUint8Array(chunk, encoding);
-				this.#decoder.decode(data);
-			}
-			callback();
-		} catch (err) {
-			callback(err as Error);
-		}
-	}
-	_final(callback: (error?: Error | null) => void): void {
-		try {
-			this.#decoder.getResult();
-			callback();
-		} catch (err) {
-			callback(err as Error);
-		}
 	}
 }
 

@@ -1,12 +1,10 @@
-import { BaseCodec } from 'types';
+import { InternalCodec } from '../../types';
 
-export const regexpCodec: BaseCodec<RegExp> = {
+export const regexpCodec: InternalCodec<RegExp> = {
 	encode(data) {
-		// eslint-disable-next-line no-undef
 		return new TextEncoder().encode(data.toString().slice(1));
 	},
 	decode(encoded) {
-		// eslint-disable-next-line no-undef
 		const token = new TextDecoder().decode(encoded);
 		const flagsIndex = token.lastIndexOf('/');
 		const flags = token.slice(flagsIndex + 1);

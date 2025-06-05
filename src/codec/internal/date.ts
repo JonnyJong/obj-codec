@@ -1,7 +1,7 @@
-import { BaseCodec } from 'types';
+import { InternalCodec } from '../../types';
 
-export const dateCodec: BaseCodec<Date> = {
-	encodingLength: 8,
+export const dateCodec: InternalCodec<Date> = {
+	bufferLength: 8,
 	encode(data) {
 		const buffer = new Uint8Array(8);
 		const view = new DataView(buffer.buffer);

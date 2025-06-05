@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { dateCodec } from '../../../src/codec/internal/date';
 
 describe('Codec(Internal): date', () => {
@@ -7,7 +8,6 @@ describe('Codec(Internal): date', () => {
 	//#region Encode
 
 	it('Encode', () => {
-		// @ts-ignore
 		const encoded = dateCodec.encode(DATE);
 		expect(encoded).toEqual(ENCODED);
 	});
@@ -15,7 +15,6 @@ describe('Codec(Internal): date', () => {
 	//#region Decode
 
 	it('Decode', () => {
-		// @ts-ignore
 		const decoded = dateCodec.decode(ENCODED);
 		expect(decoded).toEqual(DATE);
 	});

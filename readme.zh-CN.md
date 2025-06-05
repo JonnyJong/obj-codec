@@ -1,111 +1,115 @@
 [简体中文](readme.zh-CN.md) | [English](readme.md)
-
 # obj-codec
 ![test](https://github.com/JonnyJong/obj-codec/actions/workflows/test.yml/badge.svg)
 
-将对象编码为二进制并解码为对象，支持嵌套引用。
+将对象编码为二进制并解码为对象，支持嵌套引用、编解码自定义对象、唯一指针……
 
-## 开发
+## 安装
 ```sh
-npm i
-npm run compile
-npm run test
+npm install obj-codec
+# 或
+yarn add obj-codec
+# 或
+pnpm add obj-codec
 ```
 
-### 清理
-1. 移除以下目录和文件：
-	- `.rollup.cache`
-	- `cache`
-	- `dist`
-2. 运行 `npm run compile`
+## 特性
+- 支持 JavaScript 所有基本数据类型
+  - 原始类型：number, bigint, string, boolean, null, undefined
+  - 集合类型：Array, Set, Map
+  - 特殊对象：Date, RegExp, Symbol
+  - 二进制数据：Uint8Array 等
+- 引用处理
+  - 自动处理嵌套引用
+  - 完美支持循环引用
+  - [唯一指针](#唯一指针)支持
+- 流式处理
 
-## 待实现功能
-- [ ] Readable(Node) 风格 API
-- [ ] ReadableStream(Web) 风格 API
-- [ ] 唯一指针：指向内置对象、类、函数等
+## 使用
 
-## 文档
-
-### 编码
+### 默认 API
 ```ts
 import { ObjCodec } from 'obj-codec';
-import { createWriteStream } from 'fs';
 
-const DATA = {};
-
-// 使用全局注册的自定义编解码器
-function useGlobalCodoc() {
-	const encoder = ObjCodec.encode(DATA);
-	const writeStream = createWriteStream('path/to/file');
-
-	for (const data of encoder.encode()) {
-			writeStream.write(data);
-	}
-
-	writeStream.end();
+// 使用全局编解码器
+const encoder = ObjCodec.encode(target);
+const decoder = ObjCodec.decode();
+for (const chunk of encoder.encode()) {
+	decoder.decode(chunk);
 }
+const result = decoder.getResult();
 
-// 使用仅限实例中的自定义编解码器
-function useInstanceCodoc() {
-	const codec = new ObjCodec();
-	// 调用 `codec.registerCodecs` 注册仅限实例 `codec` 的自定义编解码器
-	const encoder = codec.encode(DATA);
-	const writeStream = createWriteStream('path/to/file');
-	for (const data of encoder.encode()) {
-			writeStream.write(data);
-	}
-	writeStream.end();
+// 使用一般编解码器
+const objCodec = new ObjCodec();
+const encoder = objCodec.encode(target);
+const decoder = objCodec.decode();
+for (const chunk of encoder.encode()) {
+	decoder.decode(chunk);
 }
+const result = decoder.getResult();
+
 ```
 
-### 解码
+### Node Stream API
 ```ts
 import { ObjCodec } from 'obj-codec';
-import { createReadStream } from 'fs';
 
-// 使用全局注册的自定义编解码器
-function useGlobalCodoc() {
-	const decoder = ObjCodec.decode();
-	const readStream = createReadStream('path/to/file');
+// 使用全局编解码器
+const encoder = ObjCodec.encode(target);
+const decoder = ObjCodec.decode();
+encoder.pipe(decoder).on('finish', () => {
+	const result = decoder.getResult();
+});
 
-	readStream.on('data', (chunk) => {
-		decoder.write(new Uint8Array(chunk));
-	});
+// 使用一般编解码器
+const objCodec = new ObjCodec();
+const encoder = objCodec.encode(target);
+const decoder = objCodec.decode();
+encoder.pipe(decoder).on('finish', () => {
+	const result = decoder.getResult();
+});
 
-	readStream.on('end', () => {
-		encoder.end().then(console.log);
-	});
-}
-
-// 使用仅限实例中的自定义编解码器
-function useInstanceCodoc() {
-	const codec = new ObjCodec();
-	// 调用 `codec.registerCodecs` 注册仅限实例 `codec` 的自定义编解码器
-	const decoder = codec.decode();
-	const readStream = createReadStream('path/to/file');
-
-	readStream.on('data', (chunk) => {
-		decoder.write(new Uint8Array(chunk));
-	});
-
-	readStream.on('end', () => {
-		encoder.end().then(console.log);
-	});
-}
 ```
 
-### 编码后数据结构
+### Web Stream API
+```ts
+import { ObjCodec } from 'obj-codec/web';
+
+// 使用全局编解码器
+const encoder = ObjCodec.encode(target);
+const decoder = ObjCodec.decode();
+await encoder.pipeTo(decoder);
+const result = decoder.getResult();
+
+// 使用一般编解码器
+const objCodec = new ObjCodec();
+const encoder = objCodec.encode(target);
+const decoder = objCodec.decode();
+await encoder.pipeTo(decoder);
+const result = decoder.getResult();
+
+```
+
+## 构建/开发
+```sh
+pnpm i
+pnpm build
+pnpm test
+```
+
+## 数据结构
+
 | 描述                 | 类型                                  |
 | -------------------- | ------------------------------------- |
-| 版本号               | `u8`                                  |
+| 版本号               | u8                                    |
 | 自定义类型映射表长度 | [弹性无符号整型](#弹性无符号整型)     |
 | 自定义类型映射表     | [自定义类型映射表](#自定义类型映射表) |
-| 数据对象[]           | [数据对象](#数据对象)                 |
+| 数据对象表           | [数据对象](#数据对象)数组             |
 
 ### 自定义类型映射表
-1. 结构：根据 `自定义类型映射表长度` 重复
-   1. 字符串长度：[弹性无符号整型](#弹性无符号整型)
-   2. 字符串
+1. 结构：`[字符串长度, 字符串][]`
+   - 字符串长度：[弹性无符号整型](#弹性无符号整型)
+   - 字符串：参考[编解码器](#编解码器)
 2. 映射
    - 所有的字符串都必须唯一
    - `数据对象` 类型 ID 若大于 16，则减去 17 后为映射表的索引
@@ -121,7 +125,7 @@ function useInstanceCodoc() {
      3. 数据
    - 自定义类型
      1. 类型 ID：[弹性无符号整型](#弹性无符号整型)
-     2. `内置类型` 数据
+     3. 内置类型数据
 
 参考：[编解码器](#编解码器)
 
@@ -129,23 +133,23 @@ function useInstanceCodoc() {
 | ID  | 名称        | 长度（字节） | 权重（越小越先） | 可引用*  | 备注                                                                       |
 | --- | ----------- | ------------ | ---------------- | -------- | -------------------------------------------------------------------------- |
 | 0   | 指针        | 弹性*        | *不适用*         | *不适用* | 隐含类型，不能直接使用。由主编解码器（`ObjEncoder`、`ObjDecoder`）自动创建 |
-| 1   | 二进制      |              | 2                | X        |                                                                            |
+| 1   | 二进制      |              | 2                | ✅        |                                                                            |
 | 2   | 数字        | 8            | 0                |          |                                                                            |
 | 3   | BigInt      |              | 0                |          |                                                                            |
-| 4   | 字符串      |              | 1                | X        |                                                                            |
+| 4   | 字符串      |              | 1                | ✅        |                                                                            |
 | 5   | `false`     | 0            | 0                |          | 没有数据区域                                                               |
 | 6   | `true`      | 0            | 0                |          | 没有数据区域                                                               |
 | 7   | `null`      | 0            | 0                |          | 没有数据区域                                                               |
 | 8   | `undefined` | 0            | 0                |          | 没有数据区域                                                               |
-| 9   | *对象*      |              | 5                | X        | 后备类型                                                                   |
-| 10  | *数组*      |              | 5                | X        | 后备类型                                                                   |
-| 11  | Set         |              | 4                | X        |                                                                            |
-| 12  | Map         |              | 4                | X        |                                                                            |
-| 13  | Date        | 8            | 4                | X        |                                                                            |
-| 14  | 正则表达式  |              | 4                | X        |                                                                            |
-| 15  | Symbol      |              | 1                | X        |                                                                            |
-| 16  | *唯一指针*  |              |                  |          | **未实现**                                                                 |
-| 17+ | 自定义类型  | *不适用*     | 3                | X        |                                                                            |
+| 9   | *对象*      |              | 5                | ✅        | 后备类型                                                                   |
+| 10  | *数组*      |              | 5                | ✅        | 后备类型                                                                   |
+| 11  | Set         |              | 4                | ✅        |                                                                            |
+| 12  | Map         |              | 4                | ✅        |                                                                            |
+| 13  | Date        | 8            | 4                | ✅        |                                                                            |
+| 14  | 正则表达式  |              | 4                | ✅        |                                                                            |
+| 15  | Symbol      |              | 1                | ✅        |                                                                            |
+| 16  | 唯一指针    | 弹性*        |                  |          |                                                                            |
+| 17+ | 自定义类型  | *不适用*     | 3                | ✅        |                                                                            |
 
 注：
 - “弹性”长度：参考[弹性无符号整型](#弹性无符号整型)
@@ -154,7 +158,7 @@ function useInstanceCodoc() {
 ### 弹性无符号整型
 用于表示无符号整型，支持动态编码长度。
 
-1. 表示范围：0 ~ 2^n - n（n 为编码所需的位数）
+1. 表示范围：$0$ 至 $2^n-n$（n 为编码所需的位数）
 2. 结构
    - 每个字节的高位（第8位）用于指示后续字节的存在性：
      - 如果高位为 1，表示后面还有更多字节。
@@ -166,30 +170,71 @@ function useInstanceCodoc() {
    - `128` -> `0b1000_0000` 和 `0b0000_0001`
    - `129` -> `0b1000_0001` 和 `0b0000_0001`
 
+### 唯一指针
+唯一指针是一种特殊编码机制，用于处理那些：
+- **不适合直接编码**的环境特定对象（如 `globalThis`、内置 `Symbol` 等）
+- **需要保持引用一致性**的全局唯一对象
+- **无法或不适合**通过常规编解码器处理的值
+
 ### 自定义编解码器
+
 #### 定义
 ```ts
+/**
+ * 编解码器
+ * @template Type 数据类型
+ * @template EncodeResult 编码类型
+ * @template DecodeMiddle 解码中间类型
+ */
 interface ICodec<
-	Data,
-	DecodeMiddle = Data,
-	EncodeResult extends BasicType,
+	Type extends IClass,
+	EncodeResult,
+	DecodeMiddle extends Type = Type,
 > {
-	encode(data: Data): EncodeResult;
+	/**
+	 * 编解码器名称
+	 * @description
+	 * 通过编解码器名称确定编解码器，
+	 * 请确保编解码器名称唯一
+	 */
+	name: string;
+	/** 编解码目标类 */
+	class: Type;
+	/**
+	 * 编解码目标类父类
+	 * @description
+	 * 用于确定匹配顺序
+	 * @example
+	 * [ParentClass, GrandClass, GrandGrandClass]
+	 */
+	parentClasses?: IClass[];
+	/**
+	 * 编码
+	 * @param data 数据
+	 */
+	encode(data: Type): EncodeResult;
+	/**
+	 * 解码
+	 * @param encoded 已编码数据
+	 */
 	decode(encoded: EncodeResult): DecodeMiddle;
-	dereference?(data: DecodeMiddle): any;
+	/**
+	 * 解引用
+	 * @param data 解码中间数据
+	 */
+	deref?(data: DecodeMiddle): void;
 }
 ```
 
-`encode` 方法可返回任意类型属于 `BasicType` 的数据。
-若返回非 `BasicType` 类型，将直接作为 `BasicType` 编码，此时自定义编解码将被忽略。
-
-`decode` 方法需返回 `Data` 类型。
-参数 `encoded` 可能包含指针，此时无法解引用，需将指针保留到返回值中。
-
-`dereference` 方法用于解除 `decode` 方法返回值中的引用。
-该方法返回值将被忽略。
+- `encode` 方法可返回任意类型的数据，可返回自定义类型的数据。
+- `decode` 方法需返回 `Type` 类型。参数 `encoded` 可能包含指针，此时无法解引用，需将指针保留到返回值中。
+- `dereference` 方法用于解除 `decode` 方法返回值中的引用。该方法返回值将被忽略。
 
 #### 注册
 ```ts
-registerCodecs(id: string, codec: AnyCodec, constructor: IClass): void;
+// 注册全局编解码器
+ObjCodec.register(codec);
+// 注册编解码器
+const objCodec = new ObjCodec();
+objCodec.register(codec);
 ```

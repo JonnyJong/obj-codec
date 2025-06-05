@@ -1,12 +1,10 @@
-import { BaseCodec } from 'types';
+import { InternalCodec } from '../../types';
 
-export const stringCodec: BaseCodec<string> = {
+export const stringCodec = {
 	encode(data) {
-		// eslint-disable-next-line no-undef
 		return new TextEncoder().encode(data);
 	},
 	decode(encoded) {
-		// eslint-disable-next-line no-undef
 		return new TextDecoder().decode(encoded);
 	},
-};
+} as const satisfies InternalCodec<string>;

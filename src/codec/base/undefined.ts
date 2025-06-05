@@ -1,7 +1,7 @@
-import { BaseCodec } from 'types';
+import { InternalCodec } from '../../types';
 
-export const undefinedCodec: BaseCodec<undefined> = {
-	encodingLength: 0,
-	encode: (_data) => new Uint8Array([]),
-	decode: (_encoded) => undefined,
-};
+export const undefinedCodec = {
+	bufferLength: 0,
+	encode: () => new Uint8Array([]),
+	decode: () => undefined,
+} as const satisfies InternalCodec<undefined>;

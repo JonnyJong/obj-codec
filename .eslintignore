@@ -1,7 +1,0 @@
-.vscode
-dist
-node_modules
-coverage
-test
-jest.config.js
-rollup.config.js

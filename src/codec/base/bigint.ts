@@ -1,11 +1,9 @@
-import { BaseCodec } from 'types';
+import { InternalCodec } from '../../types';
 
-export const bigintCodec: BaseCodec<bigint> = {
-	encode(data: bigint): Uint8Array {
-		// `(data < 0n ? data : -data)` ensures that
-		// the sign bit is included in the byte length calculation
+export const bigintCodec = {
+	encode(data) {
 		const byteLength = Math.ceil(
-			(data < 0n ? data : -data).toString(16).length / 2
+			(data < 0n ? data : -data).toString(16).length / 2,
 		);
 		const buffer = new Uint8Array(byteLength);
 
@@ -15,7 +13,7 @@ export const bigintCodec: BaseCodec<bigint> = {
 
 		return buffer;
 	},
-	decode(encoded: Uint8Array): bigint {
+	decode(encoded) {
 		let result = 0n;
 
 		for (let i = 0; i < encoded.byteLength; i++) {
@@ -29,4 +27,4 @@ export const bigintCodec: BaseCodec<bigint> = {
 
 		return result;
 	},
-};
+} as const satisfies InternalCodec<bigint>;

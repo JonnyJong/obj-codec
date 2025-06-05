@@ -1,12 +1,10 @@
 {
 	"compilerOptions": {
-		// Basic Options
-		"target": "ES2022",
-		"module": "ES2022",
-		"lib": ["ES2022"],
-		// "types": [],
-		"moduleResolution": "Bundler",
-		// Type Checking Options
+		// Basic
+		"target": "esnext",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		// Checking
 		"strict": true,
 		"noImplicitAny": true,
 		"strictNullChecks": true,
@@ -14,30 +12,27 @@
 		"strictPropertyInitialization": true,
 		"noImplicitThis": true,
 		"alwaysStrict": true,
-		"noUnusedLocals": true, // eslint can't check correctly
-		"noUnusedParameters": true, // eslint can't check correctly
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"allowJs": false,
 		"allowSyntheticDefaultImports": true,
-		// Module Resolution Options
-		"baseUrl": "src",
-		// Language Features Options
+		"forceConsistentCasingInFileNames": true,
+		// Features
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"experimentalDecorators": true,
-		// Other Options
-		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true,
-		"incremental": true,
-		"tsBuildInfoFile": "cache/.tsbuildinfo",
+		// Output
 		"sourceMap": true,
-		"outDir": "dist",
-		"rootDir": "src",
-		"removeComments": true,
+		"removeComments": false,
 		"newLine": "lf",
-		"declaration": true
+		"declaration": true,
 	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "dist"]
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"dist/**/*"
+	]
 }

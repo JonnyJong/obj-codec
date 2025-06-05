@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { stringCodec } from '../../../src/codec/base/string';
 
 describe('Codec(Base): string', () => {
@@ -12,17 +13,14 @@ describe('Codec(Base): string', () => {
 	//#region Encode
 
 	it('Encode: empty', () => {
-		// @ts-ignore
 		const encoded = stringCodec.encode('');
 		expect(encoded).toEqual(EMPTY);
 	});
 	it('Encode: english', () => {
-		// @ts-ignore
 		const encoded = stringCodec.encode('hello world');
 		expect(encoded).toEqual(ENGLISH);
 	});
 	it('Encode: chinese', () => {
-		// @ts-ignore
 		const encoded = stringCodec.encode('你好世界');
 		expect(encoded).toEqual(CHINESE);
 	});
@@ -30,17 +28,14 @@ describe('Codec(Base): string', () => {
 	//#region Decode
 
 	it('Decode: empty', () => {
-		// @ts-ignore
 		const decoded = stringCodec.decode(EMPTY);
 		expect(decoded).toEqual('');
 	});
 	it('Decode: english', () => {
-		// @ts-ignore
 		const decoded = stringCodec.decode(ENGLISH);
 		expect(decoded).toEqual('hello world');
 	});
 	it('Decode: chinese', () => {
-		// @ts-ignore
 		const decoded = stringCodec.decode(CHINESE);
 		expect(decoded).toEqual('你好世界');
 	});
