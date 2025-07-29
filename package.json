@@ -2,11 +2,7 @@
 	"name": "obj-codec",
 	"version": "1.0.0",
 	"description": "Encode objects into binary and decode binary back into objects, supporting nested references, custom object encoding/decoding, unique pointers...",
-	"keywords": [
-		"serialization",
-		"binary-encoding",
-		"stream"
-	],
+	"keywords": ["serialization", "binary-encoding", "stream"],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/JonnyJong/obj-codec.git"
@@ -38,10 +34,9 @@
 		}
 	},
 	"scripts": {
-		"preinstall": "npx -y only-allow pnpm",
 		"test": "vitest",
 		"test:ci": "vitest run",
-		"build": "rolldown -c"
+		"compile": "rolldown -c"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"devDependencies": {
@@ -52,5 +47,9 @@
 		"rolldown-plugin-dts": "^0.13.8",
 		"typescript": "^5.8.3",
 		"vitest": "^3.2.1"
+	},
+	"engines": {
+		"node": ">=22",
+		"pnpm": ">=10"
 	}
 }
