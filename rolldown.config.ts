@@ -3,6 +3,11 @@ import { dts } from 'rolldown-plugin-dts';
 
 export default defineConfig([
 	{
+		input: ['src/index.ts', 'src/web.ts'],
+		plugins: [dts()],
+		external: (id) => id.startsWith('node:'),
+	},
+	{
 		input: 'src/index.ts',
 		output: [
 			{
@@ -32,10 +37,5 @@ export default defineConfig([
 				sourcemap: true,
 			},
 		],
-	},
-	{
-		input: ['src/index.ts', 'src/web.ts'],
-		plugins: [dts()],
-		external: (id) => id.startsWith('node:'),
 	},
 ]);

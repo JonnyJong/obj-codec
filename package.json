@@ -36,7 +36,8 @@
 	"scripts": {
 		"test": "vitest",
 		"test:ci": "vitest run",
-		"compile": "rolldown -c"
+		"compile": "rolldown -c",
+		"prepublish": "pnpm compile"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"devDependencies": {
