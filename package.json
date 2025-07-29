@@ -1,6 +1,6 @@
 {
 	"name": "obj-codec",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Encode objects into binary and decode binary back into objects, supporting nested references, custom object encoding/decoding, unique pointers...",
 	"keywords": ["serialization", "binary-encoding", "stream"],
 	"repository": {
