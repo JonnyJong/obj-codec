@@ -31,6 +31,8 @@ export class Encoder {
 	#ignoreUnsupportedTypes: boolean;
 	#queue = new Queue();
 	#pointers: any[] = [];
+	/** 自定义值 → 内部表示；`codec.encode` 对每个值只调用一次 */
+	#customPayloads = new Map<any, any>();
 	constructor({
 		codec,
 		uniqueValues,
@@ -41,6 +43,48 @@ export class Encoder {
 		this.#uniqueValues = uniqueValues ?? [];
 		this.#ignoreUnsupportedTypes = !!ignoreUnsupportedTypes;
 		this.#queue.enqueue(root);
+	}
+	/** 登记指针并返回其下标；自定义值会顺带为内部表示占号 */
+	#reservePointer(data: any): number {
+		const index = this.#pointers.length;
+		this.#pointers.push(data);
+		this.#reserveCustomPayload(data);
+		return index;
+	}
+	/**
+	 * 为自定义值的内部表示预留指针下标
+	 * @description
+	 * 解码器在同一个数据对象内连续登记「包装值 + 内部表示」，
+	 * 所以内部表示必须紧跟在包装值之后占号，
+	 * 否则后续兄弟节点的编号会整体错位。
+	 */
+	#reserveCustomPayload(data: any): void {
+		for (const [_, codec] of this.#codec) {
+			if (!(data instanceof codec.class)) continue;
+			if (this.#customPayloads.has(data)) return;
+			const payload = codec.encode(data);
+			this.#customPayloads.set(data, payload);
+			if (!this.#isReferablePayload(payload)) return;
+			if (this.#pointers.indexOf(payload) !== -1) return;
+			this.#pointers.push(payload);
+			return;
+		}
+	}
+	/**
+	 * 内部表示是否会被解码器登记为独立指针
+	 * @description
+	 * 与 `isReferable` 保持一致：字符串、Symbol、二进制与各类容器都会占号。
+	 */
+	#isReferablePayload(payload: any): boolean {
+		if (this.#uniqueValues.includes(payload)) return false;
+		switch (typeof payload) {
+			case 'string':
+			case 'symbol':
+				return true;
+			case 'object':
+				return payload !== null;
+		}
+		return false;
 	}
 	#assertSupported(data: any) {
 		if (this.#ignoreUnsupportedTypes) return;
@@ -60,8 +104,7 @@ export class Encoder {
 		if (buffer) return buffer;
 		index = this.#pointers.indexOf(data);
 		if (index === -1) {
-			index = this.#pointers.length;
-			this.#pointers.push(data);
+			index = this.#reservePointer(data);
 			this.#queue.enqueue(data);
 		}
 		return concatBuffers([INTERNAL_TYPE_ID.POINTER], flexUintCodec.encode(index));
@@ -98,7 +141,7 @@ export class Encoder {
 	#serializeReferableValue(data: any, atRoot?: boolean): Uint8Array | null {
 		const index = this.#pointers.indexOf(data);
 		if (index === -1) {
-			this.#pointers.push(data);
+			this.#reservePointer(data);
 		} else if (!atRoot) {
 			return concatBuffers(
 				[INTERNAL_TYPE_ID.POINTER],
@@ -122,7 +165,10 @@ export class Encoder {
 	#serializeCustomValue(data: any): Uint8Array | null {
 		for (const [id, [_, codec]] of this.#codec.entries()) {
 			if (!(data instanceof codec.class)) continue;
-			const body = this.#serialize(codec.encode(data));
+			const payload = this.#customPayloads.get(data) ?? codec.encode(data);
+			// 内部表示的指针下标已在 `#reserveCustomPayload` 中预留，
+			// 这里必须内联展开，不能退化成指针。
+			const body = this.#serialize(payload, true);
 			return concatBuffers(flexUintCodec.encode(id + CUSTOM_TYPE_ID_BEGIN), body);
 		}
 		return null;
