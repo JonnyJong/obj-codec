@@ -1,0 +1,37 @@
+{
+	"name": "@obj-codec/benchmark",
+	"private": true,
+	"type": "module",
+	"description": "Benchmark suite for obj-codec: throughput, wire size, memory, fidelity, against 14 other serialization libraries.",
+	"scripts": {
+		"capability": "node capability/probe.mjs",
+		"bench": "tsx runner/run.ts --suite S0,S1,S2,S3 --out results/main.json",
+		"bench:s5": "tsx runner/run.ts --suite S5 --case-timeout 45000 --out results/s5-scaling.json",
+		"bench:stream": "tsx runner/stream.ts --out results/stream.json",
+		"bench:size": "tsx runner/size.ts",
+		"bench:all": "pnpm bench && pnpm bench:s5 && pnpm bench:stream && pnpm bench:size",
+		"report": "tsx report/render.ts results/main.json results/report.md --scaling results/s5-scaling.json --stream results/stream.json --sizes results/library-size.json"
+	},
+	"dependencies": {
+		"@msgpack/msgpack": "3.1.3",
+		"@ungap/structured-clone": "1.4.0",
+		"@types/ungap__structured-clone": "1.2.0",
+		"bson": "7.3.3",
+		"cbor-x": "1.6.8",
+		"devalue": "6.0.3",
+		"flatted": "3.4.4",
+		"ion-js": "5.2.1",
+		"msgpackr": "2.1.2",
+		"seroval": "1.7.2",
+		"superjson": "2.2.6",
+		"turbo-stream": "3.2.1",
+		"obj-codec": "workspace:*"
+	},
+	"devDependencies": {
+		"@types/node": "^22.15.29",
+		"esbuild": "0.25.5",
+		"tinybench": "2.9.0",
+		"tsx": "^4.19.0",
+		"typescript": "^5.8.3"
+	}
+}

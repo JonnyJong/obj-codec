@@ -1,0 +1,6510 @@
+{
+  "meta": {
+    "startedAt": "2026-10-27T08:10:23.919Z",
+    "node": "v24.16.0",
+    "platform": "linux 7.2.11-arch1-1 x64",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
+    "gitSha": "80c08ae",
+    "seed": 1,
+    "benchTimeMs": 250,
+    "warmupTimeMs": 100,
+    "iterations": 2,
+    "warmupIterations": 1,
+    "caseTimeoutMs": 45000,
+    "suites": [
+      "S5"
+    ],
+    "adapters": {
+      "json": {
+        "version": "v24.16.0",
+        "wire": "text",
+        "config": {
+          "api": "JSON.stringify/parse"
+        }
+      },
+      "v8": {
+        "version": "v24.16.0",
+        "wire": "binary",
+        "config": {
+          "api": "v8.serialize/deserialize",
+          "nodeOnly": true
+        }
+      },
+      "structuredClone": {
+        "version": "v24.16.0",
+        "wire": "memory",
+        "config": {
+          "api": "structuredClone",
+          "inMemoryOnly": true
+        }
+      },
+      "superjson": {
+        "version": "2.2.6",
+        "wire": "text",
+        "config": {}
+      },
+      "cbor-x": {
+        "version": "1.6.8",
+        "wire": "binary",
+        "config": {
+          "useRecords": "default (true)"
+        }
+      },
+      "msgpackr": {
+        "version": "2.1.2",
+        "wire": "binary",
+        "config": {
+          "structuredClone": true,
+          "nativeAddon": true
+        }
+      },
+      "msgpack": {
+        "version": "3.1.3",
+        "wire": "binary",
+        "config": {
+          "useBigInt64": true,
+          "spec": "MessagePack"
+        }
+      },
+      "devalue": {
+        "version": "6.0.3",
+        "wire": "js-expression",
+        "config": {}
+      },
+      "seroval": {
+        "version": "1.7.2",
+        "wire": "js-expression",
+        "config": {
+          "note": "serialize() refuses typed arrays above ~1e6 bytes (DEFAULT_MAX_BASE64_LENGTH); the encode side is not configurable"
+        }
+      },
+      "turbo-stream": {
+        "version": "3.2.1",
+        "wire": "text",
+        "config": {
+          "transport": "ReadableStream of string chunks",
+          "symbolSupport": false
+        }
+      },
+      "flatted": {
+        "version": "3.4.4",
+        "wire": "text",
+        "config": {}
+      },
+      "ungap-structured-clone": {
+        "version": "1.4.0",
+        "wire": "text",
+        "config": {
+          "entry": "@ungap/structured-clone/json",
+          "note": "the base entry returns a JS structure, not a wire format; the /json entry is the transport form, and it maps NaN/Infinity to null"
+        }
+      },
+      "bson": {
+        "version": "7.3.3",
+        "wire": "binary",
+        "config": {
+          "api": "bson.serialize({v})",
+          "spec": "BSON"
+        }
+      },
+      "ion-js": {
+        "version": "5.2.1",
+        "wire": "binary",
+        "config": {
+          "spec": "Ion binary"
+        }
+      },
+      "obj-codec": {
+        "version": "1.0.1",
+        "wire": "binary",
+        "config": {
+          "api": "ObjCodec.encode/decode",
+          "build": "dist/index.esm.js"
+        }
+      }
+    },
+    "datasets": [
+      {
+        "id": "S5-ints-1e3",
+        "suite": "S5",
+        "name": "整数数组 1,000",
+        "requires": [],
+        "meta": {
+          "shape": "ints",
+          "n": 1000
+        }
+      },
+      {
+        "id": "S5-records-1e3",
+        "suite": "S5",
+        "name": "短字符串记录数组 1,000",
+        "requires": [],
+        "meta": {
+          "shape": "records",
+          "n": 1000
+        }
+      },
+      {
+        "id": "S5-objects-1e3",
+        "suite": "S5",
+        "name": "简单对象数组 1,000",
+        "requires": [],
+        "meta": {
+          "shape": "objects",
+          "n": 1000
+        }
+      },
+      {
+        "id": "S5-ints-10e3",
+        "suite": "S5",
+        "name": "整数数组 10,000",
+        "requires": [],
+        "meta": {
+          "shape": "ints",
+          "n": 10000
+        }
+      },
+      {
+        "id": "S5-records-10e3",
+        "suite": "S5",
+        "name": "短字符串记录数组 10,000",
+        "requires": [],
+        "meta": {
+          "shape": "records",
+          "n": 10000
+        }
+      },
+      {
+        "id": "S5-objects-10e3",
+        "suite": "S5",
+        "name": "简单对象数组 10,000",
+        "requires": [],
+        "meta": {
+          "shape": "objects",
+          "n": 10000
+        }
+      },
+      {
+        "id": "S5-ints-30e3",
+        "suite": "S5",
+        "name": "整数数组 30,000",
+        "requires": [],
+        "meta": {
+          "shape": "ints",
+          "n": 30000
+        }
+      },
+      {
+        "id": "S5-records-30e3",
+        "suite": "S5",
+        "name": "短字符串记录数组 30,000",
+        "requires": [],
+        "meta": {
+          "shape": "records",
+          "n": 30000
+        }
+      },
+      {
+        "id": "S5-objects-30e3",
+        "suite": "S5",
+        "name": "简单对象数组 30,000",
+        "requires": [],
+        "meta": {
+          "shape": "objects",
+          "n": 30000
+        }
+      },
+      {
+        "id": "S5-ints-100e3",
+        "suite": "S5",
+        "name": "整数数组 100,000",
+        "requires": [],
+        "meta": {
+          "shape": "ints",
+          "n": 100000
+        }
+      },
+      {
+        "id": "S5-records-100e3",
+        "suite": "S5",
+        "name": "短字符串记录数组 100,000",
+        "requires": [],
+        "meta": {
+          "shape": "records",
+          "n": 100000
+        }
+      },
+      {
+        "id": "S5-objects-100e3",
+        "suite": "S5",
+        "name": "简单对象数组 100,000",
+        "requires": [],
+        "meta": {
+          "shape": "objects",
+          "n": 100000
+        }
+      },
+      {
+        "id": "S5-ints-1e6",
+        "suite": "S5",
+        "name": "整数数组 1e6",
+        "requires": [],
+        "meta": {
+          "shape": "ints",
+          "n": 1000000
+        }
+      }
+    ]
+  },
+  "results": [
+    {
+      "lib": "json",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 3891,
+      "gzipBytes": 1764,
+      "encode": {
+        "meanMs": 0.021954999999991287,
+        "p75Ms": 0.021954999999991287,
+        "p99Ms": 0.021954999999991287,
+        "hz": 45547.7112275289,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.049853000000013026,
+        "p75Ms": 0.049853000000013026,
+        "p99Ms": 0.049853000000013026,
+        "hz": 20058.97338173708,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 118384,
+        "decodePeakBytes": 12584,
+        "retainedBytes": 97360,
+        "maxRssBytes": 117526528
+      },
+      "wallMs": 215,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2945,
+      "gzipBytes": 1952,
+      "encode": {
+        "meanMs": 0.04337900000001582,
+        "p75Ms": 0.04337900000001582,
+        "p99Ms": 0.04337900000001582,
+        "hz": 23052.629152346417,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.060622999999992544,
+        "p75Ms": 0.060622999999992544,
+        "p99Ms": 0.060622999999992544,
+        "hz": 16495.389538625983,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 115904,
+        "decodePeakBytes": 14128,
+        "retainedBytes": 95864,
+        "maxRssBytes": 113311744
+      },
+      "wallMs": 210,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 0.03868700000001013,
+        "p75Ms": 0.03868700000001013,
+        "p99Ms": 0.03868700000001013,
+        "hz": 25848.476232319335,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 123184,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 79344,
+        "maxRssBytes": 113954816
+      },
+      "wallMs": 215,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 3900,
+      "gzipBytes": 1783,
+      "encode": {
+        "meanMs": 3.097398999999996,
+        "p75Ms": 3.097398999999996,
+        "p99Ms": 3.097398999999996,
+        "hz": 322.85152800785477,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.14194200000000023,
+        "p75Ms": 0.14194200000000023,
+        "p99Ms": 0.14194200000000023,
+        "hz": 7045.131109889943,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1397768,
+        "decodePeakBytes": 15176,
+        "retainedBytes": 201776,
+        "maxRssBytes": 117776384
+      },
+      "wallMs": 228,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2723,
+      "gzipBytes": 1854,
+      "encode": {
+        "meanMs": 0.7510489999999947,
+        "p75Ms": 0.7510489999999947,
+        "p99Ms": 0.7510489999999947,
+        "hz": 1331.4710491592518,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.4939650000000029,
+        "p75Ms": 0.4939650000000029,
+        "p99Ms": 0.4939650000000029,
+        "hz": 2024.4349296002636,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 245904,
+        "decodePeakBytes": 56584,
+        "retainedBytes": 204880,
+        "maxRssBytes": 117141504
+      },
+      "wallMs": 221,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2683,
+      "gzipBytes": 1832,
+      "encode": {
+        "meanMs": 0.7400620000000231,
+        "p75Ms": 0.7400620000000231,
+        "p99Ms": 0.7400620000000231,
+        "hz": 1351.2381395071884,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.4375349999999969,
+        "p75Ms": 0.4375349999999969,
+        "p99Ms": 0.4375349999999969,
+        "hz": 2285.531443198846,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 438616,
+        "decodePeakBytes": 45160,
+        "retainedBytes": 201032,
+        "maxRssBytes": 115712000
+      },
+      "wallMs": 218,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2619,
+      "gzipBytes": 1800,
+      "encode": {
+        "meanMs": 0.5137929999999926,
+        "p75Ms": 0.5137929999999926,
+        "p99Ms": 0.5137929999999926,
+        "hz": 1946.3091167065616,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.7062679999999943,
+        "p75Ms": 0.7062679999999943,
+        "p99Ms": 0.7062679999999943,
+        "hz": 1415.8931170603908,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 323248,
+        "decodePeakBytes": 66600,
+        "retainedBytes": 170120,
+        "maxRssBytes": 113590272
+      },
+      "wallMs": 216,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 7786,
+      "gzipBytes": 1810,
+      "encode": {
+        "meanMs": 0.7869820000000232,
+        "p75Ms": 0.7869820000000232,
+        "p99Ms": 0.7869820000000232,
+        "hz": 1270.6770929957363,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.4819170000000099,
+        "p75Ms": 0.4819170000000099,
+        "p99Ms": 0.4819170000000099,
+        "hz": 2075.0461178999276,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 673864,
+        "decodePeakBytes": 67992,
+        "retainedBytes": 200496,
+        "maxRssBytes": 114593792
+      },
+      "wallMs": 212,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 3891,
+      "gzipBytes": 1764,
+      "encode": {
+        "meanMs": 0.8191640000000007,
+        "p75Ms": 0.8191640000000007,
+        "p99Ms": 0.8191640000000007,
+        "hz": 1220.7567715378107,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.1536739999999952,
+        "p75Ms": 0.1536739999999952,
+        "p99Ms": 0.1536739999999952,
+        "hz": 6507.281648164499,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 323208,
+        "decodePeakBytes": 17320,
+        "retainedBytes": 134752,
+        "maxRssBytes": 114618368
+      },
+      "wallMs": 211,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 3892,
+      "gzipBytes": 1766,
+      "encode": {
+        "meanMs": 23.709562000000005,
+        "p75Ms": 23.709562000000005,
+        "p99Ms": 23.709562000000005,
+        "hz": 42.177076067453285,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.504842999999994,
+        "p75Ms": 1.504842999999994,
+        "p99Ms": 1.504842999999994,
+        "hz": 664.5211493823635,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3611048,
+        "decodePeakBytes": 188272,
+        "retainedBytes": 2548680,
+        "maxRssBytes": 119869440
+      },
+      "wallMs": 241,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 3893,
+      "gzipBytes": 1766,
+      "encode": {
+        "meanMs": 0.24233700000002045,
+        "p75Ms": 0.24233700000002045,
+        "p99Ms": 0.24233700000002045,
+        "hz": 4126.485018795791,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.6227580000000046,
+        "p75Ms": 0.6227580000000046,
+        "p99Ms": 0.6227580000000046,
+        "hz": 1605.7601829281882,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 155024,
+        "decodePeakBytes": 148432,
+        "retainedBytes": 236392,
+        "maxRssBytes": 115068928
+      },
+      "wallMs": 200,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 11790,
+      "gzipBytes": 4042,
+      "encode": {
+        "meanMs": 0.5449569999999824,
+        "p75Ms": 0.5449569999999824,
+        "p99Ms": 0.5449569999999824,
+        "hz": 1835.0071657030414,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.47623799999999505,
+        "p75Ms": 0.47623799999999505,
+        "p99Ms": 0.47623799999999505,
+        "hz": 2099.7904409140187,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 602448,
+        "decodePeakBytes": 366360,
+        "retainedBytes": 484864,
+        "maxRssBytes": 113205248
+      },
+      "wallMs": 203,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 8903,
+      "gzipBytes": 3055,
+      "encode": {
+        "meanMs": 0.7970249999999908,
+        "p75Ms": 0.7970249999999908,
+        "p99Ms": 0.7970249999999908,
+        "hz": 1254.6657884006293,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.8207610000000045,
+        "p75Ms": 0.8207610000000045,
+        "p99Ms": 0.8207610000000045,
+        "hz": 1218.381477677417,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 344456,
+        "decodePeakBytes": 115296,
+        "retainedBytes": 253320,
+        "maxRssBytes": 113250304
+      },
+      "wallMs": 207,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2750,
+      "gzipBytes": 1868,
+      "encode": {
+        "meanMs": 4.561718000000013,
+        "p75Ms": 4.561718000000013,
+        "p99Ms": 4.561718000000013,
+        "hz": 219.21565515448282,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.949342999999999,
+        "p75Ms": 2.949342999999999,
+        "p99Ms": 2.949342999999999,
+        "hz": 339.0585632122138,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3313368,
+        "decodePeakBytes": 868136,
+        "retainedBytes": 1128768,
+        "maxRssBytes": 116953088
+      },
+      "wallMs": 213,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-ints-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 9022,
+      "gzipBytes": 2148,
+      "encode": {
+        "meanMs": 1.2304200000000094,
+        "p75Ms": 1.2304200000000094,
+        "p99Ms": 1.2304200000000094,
+        "hz": 812.7306123112371,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 4.232240999999988,
+        "p75Ms": 4.232240999999988,
+        "p99Ms": 4.232240999999988,
+        "hz": 236.28144049452828,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1316440,
+        "decodePeakBytes": 1293608,
+        "retainedBytes": 1412432,
+        "maxRssBytes": 121999360
+      },
+      "wallMs": 214,
+      "metaShape": "ints",
+      "metaN": 1000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 57281,
+      "gzipBytes": 5237,
+      "encode": {
+        "meanMs": 0.09767800000000193,
+        "p75Ms": 0.09767800000000193,
+        "p99Ms": 0.09767800000000193,
+        "hz": 10237.719855033685,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.2639819999999986,
+        "p75Ms": 0.2639819999999986,
+        "p99Ms": 0.2639819999999986,
+        "hz": 3788.1370699517593,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 172528,
+        "decodePeakBytes": 92584,
+        "retainedBytes": 279392,
+        "maxRssBytes": 115601408
+      },
+      "wallMs": 204,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 46835,
+      "gzipBytes": 3857,
+      "encode": {
+        "meanMs": 0.17987300000001483,
+        "p75Ms": 0.17987300000001483,
+        "p99Ms": 0.17987300000001483,
+        "hz": 5559.478076197748,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.30563699999999017,
+        "p75Ms": 0.30563699999999017,
+        "p99Ms": 0.30563699999999017,
+        "hz": 3271.8551746026565,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 116656,
+        "decodePeakBytes": 216544,
+        "retainedBytes": 349704,
+        "maxRssBytes": 115134464
+      },
+      "wallMs": 214,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 0.4007580000000246,
+        "p75Ms": 0.4007580000000246,
+        "p99Ms": 0.4007580000000246,
+        "hz": 2495.271460582044,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 326280,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 232312,
+        "maxRssBytes": 115277824
+      },
+      "wallMs": 203,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 57290,
+      "gzipBytes": 5250,
+      "encode": {
+        "meanMs": 4.448781999999994,
+        "p75Ms": 4.448781999999994,
+        "p99Ms": 4.448781999999994,
+        "hz": 224.78062534869125,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.3102089999999862,
+        "p75Ms": 0.3102089999999862,
+        "p99Ms": 0.3102089999999862,
+        "hz": 3223.6330989753505,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6848024,
+        "decodePeakBytes": 95176,
+        "retainedBytes": 395080,
+        "maxRssBytes": 118603776
+      },
+      "wallMs": 212,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 40613,
+      "gzipBytes": 4299,
+      "encode": {
+        "meanMs": 2.3008859999999913,
+        "p75Ms": 2.3008859999999913,
+        "p99Ms": 2.3008859999999913,
+        "hz": 434.61518736695507,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.3188530000000185,
+        "p75Ms": 1.3188530000000185,
+        "p99Ms": 1.3188530000000185,
+        "hz": 758.2346175047454,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 593072,
+        "decodePeakBytes": 316440,
+        "retainedBytes": 538056,
+        "maxRssBytes": 116080640
+      },
+      "wallMs": 217,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 20594,
+      "gzipBytes": 3811,
+      "encode": {
+        "meanMs": 1.758069000000006,
+        "p75Ms": 1.758069000000006,
+        "p99Ms": 1.758069000000006,
+        "hz": 568.805888733603,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.1746559999999988,
+        "p75Ms": 1.1746559999999988,
+        "p99Ms": 1.1746559999999988,
+        "hz": 851.3130652718762,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 328168,
+        "decodePeakBytes": 198584,
+        "retainedBytes": 491720,
+        "maxRssBytes": 117071872
+      },
+      "wallMs": 221,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 38509,
+      "gzipBytes": 4252,
+      "encode": {
+        "meanMs": 1.9491280000000017,
+        "p75Ms": 1.9491280000000017,
+        "p99Ms": 1.9491280000000017,
+        "hz": 513.049938228787,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.476034999999996,
+        "p75Ms": 2.476034999999996,
+        "p99Ms": 2.476034999999996,
+        "hz": 403.8715123170721,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 578984,
+        "decodePeakBytes": 1081528,
+        "retainedBytes": 1291136,
+        "maxRssBytes": 116383744
+      },
+      "wallMs": 217,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 60705,
+      "gzipBytes": 12876,
+      "encode": {
+        "meanMs": 2.3537780000000055,
+        "p75Ms": 2.3537780000000055,
+        "p99Ms": 2.3537780000000055,
+        "hz": 424.8489024878292,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.3617649999999912,
+        "p75Ms": 1.3617649999999912,
+        "p99Ms": 1.3617649999999912,
+        "hz": 734.3410940948008,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2590080,
+        "decodePeakBytes": 573112,
+        "retainedBytes": 834640,
+        "maxRssBytes": 116559872
+      },
+      "wallMs": 211,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 46781,
+      "gzipBytes": 5142,
+      "encode": {
+        "meanMs": 2.624404999999996,
+        "p75Ms": 2.624404999999996,
+        "p99Ms": 2.624404999999996,
+        "hz": 381.03874973565496,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.9114859999999965,
+        "p75Ms": 0.9114859999999965,
+        "p99Ms": 0.9114859999999965,
+        "hz": 1097.109555165964,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1565296,
+        "decodePeakBytes": 201368,
+        "retainedBytes": 512368,
+        "maxRssBytes": 119848960
+      },
+      "wallMs": 211,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 57282,
+      "gzipBytes": 5240,
+      "encode": {
+        "meanMs": 24.751287999999988,
+        "p75Ms": 24.751287999999988,
+        "p99Ms": 24.751287999999988,
+        "hz": 40.40193787086961,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.840305999999998,
+        "p75Ms": 2.840305999999998,
+        "p99Ms": 2.840305999999998,
+        "hz": 352.0747412426691,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 5574480,
+        "decodePeakBytes": 845904,
+        "retainedBytes": 3314440,
+        "maxRssBytes": 122544128
+      },
+      "wallMs": 248,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 68185,
+      "gzipBytes": 10307,
+      "encode": {
+        "meanMs": 1.0460410000000024,
+        "p75Ms": 1.0460410000000024,
+        "p99Ms": 1.0460410000000024,
+        "hz": 955.9854728447524,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.8933759999999893,
+        "p75Ms": 2.8933759999999893,
+        "p99Ms": 2.8933759999999893,
+        "hz": 345.6170231591068,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 742976,
+        "decodePeakBytes": 1430608,
+        "retainedBytes": 1627432,
+        "maxRssBytes": 111693824
+      },
+      "wallMs": 216,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 63274,
+      "gzipBytes": 13005,
+      "encode": {
+        "meanMs": 2.060576999999995,
+        "p75Ms": 2.060576999999995,
+        "p99Ms": 2.060576999999995,
+        "hz": 485.3009618179774,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.7922619999999938,
+        "p75Ms": 1.7922619999999938,
+        "p99Ms": 1.7922619999999938,
+        "hz": 557.9541384016419,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3223680,
+        "decodePeakBytes": 2144680,
+        "retainedBytes": 2380472,
+        "maxRssBytes": 114130944
+      },
+      "wallMs": 208,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 60793,
+      "gzipBytes": 6870,
+      "encode": {
+        "meanMs": 2.2829849999999965,
+        "p75Ms": 2.2829849999999965,
+        "p99Ms": 2.2829849999999965,
+        "hz": 438.02302687052327,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.3556839999999966,
+        "p75Ms": 2.3556839999999966,
+        "p99Ms": 2.3556839999999966,
+        "hz": 424.5051543415846,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 515576,
+        "decodePeakBytes": 1421864,
+        "retainedBytes": 1635544,
+        "maxRssBytes": 118247424
+      },
+      "wallMs": 218,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 25662,
+      "gzipBytes": 3993,
+      "encode": {
+        "meanMs": 33.709317,
+        "p75Ms": 33.709317,
+        "p99Ms": 33.709317,
+        "hz": 29.66538894869926,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 11.760490000000033,
+        "p75Ms": 11.760490000000033,
+        "p99Ms": 11.760490000000033,
+        "hz": 85.03047066916406,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 8959200,
+        "decodePeakBytes": 9232280,
+        "retainedBytes": 9695160,
+        "maxRssBytes": 147992576
+      },
+      "wallMs": 268,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-records-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 42815,
+      "gzipBytes": 9700,
+      "encode": {
+        "meanMs": 14.216914000000003,
+        "p75Ms": 14.216914000000003,
+        "p99Ms": 14.216914000000003,
+        "hz": 70.33875284045467,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 31.877035000000006,
+        "p75Ms": 31.877035000000006,
+        "p99Ms": 31.877035000000006,
+        "hz": 31.3705462255194,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6022528,
+        "decodePeakBytes": 2820808,
+        "retainedBytes": 3084368,
+        "maxRssBytes": 164179968
+      },
+      "wallMs": 255,
+      "metaShape": "records",
+      "metaN": 1000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 20150,
+      "gzipBytes": 5052,
+      "encode": {
+        "meanMs": 0.07898700000001213,
+        "p75Ms": 0.07898700000001213,
+        "p99Ms": 0.07898700000001213,
+        "hz": 12660.311190447117,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.13210399999999822,
+        "p75Ms": 0.13210399999999822,
+        "p99Ms": 0.13210399999999822,
+        "hz": 7569.79349603353,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 134912,
+        "decodePeakBytes": 76584,
+        "retainedBytes": 210336,
+        "maxRssBytes": 115519488
+      },
+      "wallMs": 209,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 21945,
+      "gzipBytes": 3675,
+      "encode": {
+        "meanMs": 0.11427500000002055,
+        "p75Ms": 0.11427500000002055,
+        "p99Ms": 0.11427500000002055,
+        "hz": 8750.820389409933,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.3001880000000199,
+        "p75Ms": 0.3001880000000199,
+        "p99Ms": 0.3001880000000199,
+        "hz": 3331.245752661445,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 116176,
+        "decodePeakBytes": 194960,
+        "retainedBytes": 305888,
+        "maxRssBytes": 114302976
+      },
+      "wallMs": 205,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 0.30528300000000286,
+        "p75Ms": 0.30528300000000286,
+        "p99Ms": 0.30528300000000286,
+        "hz": 3275.6491517706213,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 302192,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 182888,
+        "maxRssBytes": 115040256
+      },
+      "wallMs": 210,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 20159,
+      "gzipBytes": 5068,
+      "encode": {
+        "meanMs": 3.475116999999983,
+        "p75Ms": 3.475116999999983,
+        "p99Ms": 3.475116999999983,
+        "hz": 287.76009555937395,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.16019299999999248,
+        "p75Ms": 0.16019299999999248,
+        "p99Ms": 0.16019299999999248,
+        "hz": 6242.4700205380195,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4497856,
+        "decodePeakBytes": 79176,
+        "retainedBytes": 338840,
+        "maxRssBytes": 117153792
+      },
+      "wallMs": 210,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 16629,
+      "gzipBytes": 5427,
+      "encode": {
+        "meanMs": 1.3969979999999964,
+        "p75Ms": 1.3969979999999964,
+        "p99Ms": 1.3969979999999964,
+        "hz": 715.8206382543158,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.9555259999999919,
+        "p75Ms": 0.9555259999999919,
+        "p99Ms": 0.9555259999999919,
+        "hz": 1046.5439977562185,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 432560,
+        "decodePeakBytes": 188328,
+        "retainedBytes": 392552,
+        "maxRssBytes": 116842496
+      },
+      "wallMs": 208,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 9583,
+      "gzipBytes": 5068,
+      "encode": {
+        "meanMs": 1.253518999999983,
+        "p75Ms": 1.253518999999983,
+        "p99Ms": 1.253518999999983,
+        "hz": 797.7541624817922,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.8650849999999934,
+        "p75Ms": 0.8650849999999934,
+        "p99Ms": 0.8650849999999934,
+        "hz": 1155.9557731321288,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 330024,
+        "decodePeakBytes": 143344,
+        "retainedBytes": 408912,
+        "maxRssBytes": 114630656
+      },
+      "wallMs": 212,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 14490,
+      "gzipBytes": 5139,
+      "encode": {
+        "meanMs": 1.4525170000000003,
+        "p75Ms": 1.4525170000000003,
+        "p99Ms": 1.4525170000000003,
+        "hz": 688.4601006390974,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.9204489999999907,
+        "p75Ms": 1.9204489999999907,
+        "p99Ms": 1.9204489999999907,
+        "hz": 520.7115627647518,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 504408,
+        "decodePeakBytes": 371240,
+        "retainedBytes": 563816,
+        "maxRssBytes": 116215808
+      },
+      "wallMs": 208,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 32539,
+      "gzipBytes": 11741,
+      "encode": {
+        "meanMs": 2.213099999999997,
+        "p75Ms": 2.213099999999997,
+        "p99Ms": 2.213099999999997,
+        "hz": 451.85486421761385,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.9260429999999928,
+        "p75Ms": 0.9260429999999928,
+        "p99Ms": 0.9260429999999928,
+        "hz": 1079.863462063865,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1983816,
+        "decodePeakBytes": 496032,
+        "retainedBytes": 716912,
+        "maxRssBytes": 113483776
+      },
+      "wallMs": 213,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 16150,
+      "gzipBytes": 4851,
+      "encode": {
+        "meanMs": 2.486190999999991,
+        "p75Ms": 2.486190999999991,
+        "p99Ms": 2.486190999999991,
+        "hz": 402.22171184756263,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.5959559999999726,
+        "p75Ms": 0.5959559999999726,
+        "p99Ms": 0.5959559999999726,
+        "hz": 1677.976226432901,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1206272,
+        "decodePeakBytes": 153384,
+        "retainedBytes": 411120,
+        "maxRssBytes": 114237440
+      },
+      "wallMs": 206,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 20151,
+      "gzipBytes": 5055,
+      "encode": {
+        "meanMs": 23.80430099999998,
+        "p75Ms": 23.80430099999998,
+        "p99Ms": 23.80430099999998,
+        "hz": 42.009215057396595,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.1734150000000056,
+        "p75Ms": 2.1734150000000056,
+        "p99Ms": 2.1734150000000056,
+        "hz": 460.10541014946403,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4729712,
+        "decodePeakBytes": 442848,
+        "retainedBytes": 2849976,
+        "maxRssBytes": 120639488
+      },
+      "wallMs": 236,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 26045,
+      "gzipBytes": 7526,
+      "encode": {
+        "meanMs": 0.7202699999999993,
+        "p75Ms": 0.7202699999999993,
+        "p99Ms": 0.7202699999999993,
+        "hz": 1388.3682507948422,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.8178259999999966,
+        "p75Ms": 1.8178259999999966,
+        "p99Ms": 1.8178259999999966,
+        "hz": 550.1076560682936,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 423840,
+        "decodePeakBytes": 968824,
+        "retainedBytes": 1125184,
+        "maxRssBytes": 113934336
+      },
+      "wallMs": 207,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 42232,
+      "gzipBytes": 12375,
+      "encode": {
+        "meanMs": 1.768747000000019,
+        "p75Ms": 1.768747000000019,
+        "p99Ms": 1.768747000000019,
+        "hz": 565.3719836697895,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.278125999999986,
+        "p75Ms": 1.278125999999986,
+        "p99Ms": 1.278125999999986,
+        "hz": 782.3954758764088,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2428072,
+        "decodePeakBytes": 1671480,
+        "retainedBytes": 1887800,
+        "maxRssBytes": 116502528
+      },
+      "wallMs": 219,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 26903,
+      "gzipBytes": 6329,
+      "encode": {
+        "meanMs": 1.7210900000000038,
+        "p75Ms": 1.7210900000000038,
+        "p99Ms": 1.7210900000000038,
+        "hz": 581.0271397776977,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.5204459999999926,
+        "p75Ms": 1.5204459999999926,
+        "p99Ms": 1.5204459999999926,
+        "hz": 657.7017533013371,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 502024,
+        "decodePeakBytes": 581488,
+        "retainedBytes": 543656,
+        "maxRssBytes": 116871168
+      },
+      "wallMs": 211,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 12046,
+      "gzipBytes": 5505,
+      "encode": {
+        "meanMs": 22.131473,
+        "p75Ms": 22.131473,
+        "p99Ms": 22.131473,
+        "hz": 45.1845207049707,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 8.187408000000005,
+        "p75Ms": 8.187408000000005,
+        "p99Ms": 8.187408000000005,
+        "hz": 122.13877700976907,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 7497984,
+        "decodePeakBytes": 5655128,
+        "retainedBytes": 6088296,
+        "maxRssBytes": 135602176
+      },
+      "wallMs": 236,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-objects-1e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 28902,
+      "gzipBytes": 7546,
+      "encode": {
+        "meanMs": 7.8179700000000025,
+        "p75Ms": 7.8179700000000025,
+        "p99Ms": 7.8179700000000025,
+        "hz": 127.91044222477186,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 19.430225000000007,
+        "p75Ms": 19.430225000000007,
+        "p99Ms": 19.430225000000007,
+        "hz": 51.46620793119995,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1918920,
+        "decodePeakBytes": 6122344,
+        "retainedBytes": 6334832,
+        "maxRssBytes": 145592320
+      },
+      "wallMs": 245,
+      "metaShape": "objects",
+      "metaN": 1000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 46671,
+      "gzipBytes": 9197,
+      "encode": {
+        "meanMs": 0.08544100000000299,
+        "p75Ms": 0.08544100000000299,
+        "p99Ms": 0.08544100000000299,
+        "hz": 11703.982865368676,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.08484500000000139,
+        "p75Ms": 0.08484500000000139,
+        "p99Ms": 0.08484500000000139,
+        "hz": 11786.198361718234,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 160256,
+        "decodePeakBytes": 84584,
+        "retainedBytes": 212896,
+        "maxRssBytes": 114614272
+      },
+      "wallMs": 209,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 29817,
+      "gzipBytes": 8954,
+      "encode": {
+        "meanMs": 0.09055800000001568,
+        "p75Ms": 0.09055800000001568,
+        "p99Ms": 0.09055800000001568,
+        "hz": 11042.646701559517,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.15174200000001292,
+        "p75Ms": 0.15174200000001292,
+        "p99Ms": 0.15174200000001292,
+        "hz": 6590.133252493804,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 115000,
+        "decodePeakBytes": 86128,
+        "retainedBytes": 173320,
+        "maxRssBytes": 115417088
+      },
+      "wallMs": 210,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 0.16838500000000067,
+        "p75Ms": 0.16838500000000067,
+        "p99Ms": 0.16838500000000067,
+        "hz": 5938.771268224581,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 194208,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 158904,
+        "maxRssBytes": 115019776
+      },
+      "wallMs": 208,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 46680,
+      "gzipBytes": 9218,
+      "encode": {
+        "meanMs": 6.199447000000021,
+        "p75Ms": 6.199447000000021,
+        "p99Ms": 6.199447000000021,
+        "hz": 161.30470992009396,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.13325600000001714,
+        "p75Ms": 0.13325600000001714,
+        "p99Ms": 0.13325600000001714,
+        "hz": 7504.352524463224,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4199136,
+        "decodePeakBytes": 87176,
+        "retainedBytes": 320480,
+        "maxRssBytes": 118046720
+      },
+      "wallMs": 213,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 29163,
+      "gzipBytes": 8672,
+      "encode": {
+        "meanMs": 1.1797459999999944,
+        "p75Ms": 1.1797459999999944,
+        "p99Ms": 1.1797459999999944,
+        "hz": 847.640085238691,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.8839000000000112,
+        "p75Ms": 0.8839000000000112,
+        "p99Ms": 0.8839000000000112,
+        "hz": 1131.3497001923151,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 598624,
+        "decodePeakBytes": 126920,
+        "retainedBytes": 284952,
+        "maxRssBytes": 114180096
+      },
+      "wallMs": 207,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 29043,
+      "gzipBytes": 8643,
+      "encode": {
+        "meanMs": 1.2031790000000058,
+        "p75Ms": 1.2031790000000058,
+        "p99Ms": 1.2031790000000058,
+        "hz": 831.1315273953378,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.1109830000000045,
+        "p75Ms": 1.1109830000000045,
+        "p99Ms": 1.1109830000000045,
+        "hz": 900.103781966057,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 197568,
+        "decodePeakBytes": 129984,
+        "retainedBytes": 285888,
+        "maxRssBytes": 116428800
+      },
+      "wallMs": 210,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 28851,
+      "gzipBytes": 8593,
+      "encode": {
+        "meanMs": 1.0624480000000176,
+        "p75Ms": 1.0624480000000176,
+        "p99Ms": 1.0624480000000176,
+        "hz": 941.2225351264094,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.0851190000000202,
+        "p75Ms": 1.0851190000000202,
+        "p99Ms": 1.0851190000000202,
+        "hz": 921.5579120815149,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 559064,
+        "decodePeakBytes": 131560,
+        "retainedBytes": 242856,
+        "maxRssBytes": 115011584
+      },
+      "wallMs": 204,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 66052,
+      "gzipBytes": 9438,
+      "encode": {
+        "meanMs": 2.8421909999999855,
+        "p75Ms": 2.8421909999999855,
+        "p99Ms": 2.8421909999999855,
+        "hz": 351.8412379745081,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.029469000000006,
+        "p75Ms": 1.029469000000006,
+        "p99Ms": 1.029469000000006,
+        "hz": 971.3745630028628,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4099952,
+        "decodePeakBytes": 265712,
+        "retainedBytes": 465504,
+        "maxRssBytes": 113205248
+      },
+      "wallMs": 204,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 46671,
+      "gzipBytes": 9197,
+      "encode": {
+        "meanMs": 1.4582430000000102,
+        "p75Ms": 1.4582430000000102,
+        "p99Ms": 1.4582430000000102,
+        "hz": 685.7567634475139,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.5158870000000206,
+        "p75Ms": 0.5158870000000206,
+        "p99Ms": 0.5158870000000206,
+        "hz": 1938.4089926669212,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1455184,
+        "decodePeakBytes": 89320,
+        "retainedBytes": 265696,
+        "maxRssBytes": 115613696
+      },
+      "wallMs": 205,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 46672,
+      "gzipBytes": 9201,
+      "encode": {
+        "meanMs": 24.181183000000004,
+        "p75Ms": 24.181183000000004,
+        "p99Ms": 24.181183000000004,
+        "hz": 41.35446971308227,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.5085479999999905,
+        "p75Ms": 2.5085479999999905,
+        "p99Ms": 2.5085479999999905,
+        "hz": 398.63698043649305,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6605336,
+        "decodePeakBytes": 987960,
+        "retainedBytes": 3392176,
+        "maxRssBytes": 119738368
+      },
+      "wallMs": 237,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 46673,
+      "gzipBytes": 9200,
+      "encode": {
+        "meanMs": 0.7864759999999933,
+        "p75Ms": 0.7864759999999933,
+        "p99Ms": 0.7864759999999933,
+        "hz": 1271.4946164918047,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 3.8449139999999886,
+        "p75Ms": 3.8449139999999886,
+        "p99Ms": 3.8449139999999886,
+        "hz": 260.08384062686525,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 413360,
+        "decodePeakBytes": 1404776,
+        "retainedBytes": 1535256,
+        "maxRssBytes": 116301824
+      },
+      "wallMs": 219,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 82440,
+      "gzipBytes": 20347,
+      "encode": {
+        "meanMs": 1.8651250000000061,
+        "p75Ms": 1.8651250000000061,
+        "p99Ms": 1.8651250000000061,
+        "hz": 536.1570940285486,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.5597530000000006,
+        "p75Ms": 1.5597530000000006,
+        "p99Ms": 1.5597530000000006,
+        "hz": 641.127152824838,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2783560,
+        "decodePeakBytes": 2056312,
+        "retainedBytes": 2248632,
+        "maxRssBytes": 112529408
+      },
+      "wallMs": 208,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 98903,
+      "gzipBytes": 29842,
+      "encode": {
+        "meanMs": 1.5802790000000186,
+        "p75Ms": 1.5802790000000186,
+        "p99Ms": 1.5802790000000186,
+        "hz": 632.7996512008248,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.602008000000012,
+        "p75Ms": 1.602008000000012,
+        "p99Ms": 1.602008000000012,
+        "hz": 624.2166081567585,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 421232,
+        "decodePeakBytes": 326664,
+        "retainedBytes": 460368,
+        "maxRssBytes": 115589120
+      },
+      "wallMs": 219,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 29237,
+      "gzipBytes": 8686,
+      "encode": {
+        "meanMs": 29.46072699999999,
+        "p75Ms": 29.46072699999999,
+        "p99Ms": 29.46072699999999,
+        "hz": 33.94349365512943,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 10.911207999999988,
+        "p75Ms": 10.911207999999988,
+        "p99Ms": 10.911207999999988,
+        "hz": 91.64888067389066,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 12860784,
+        "decodePeakBytes": 7170224,
+        "retainedBytes": 7450864,
+        "maxRssBytes": 130785280
+      },
+      "wallMs": 243,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-ints-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 90023,
+      "gzipBytes": 22979,
+      "encode": {
+        "meanMs": 9.167801999999995,
+        "p75Ms": 9.167801999999995,
+        "p99Ms": 9.167801999999995,
+        "hz": 109.07739935919216,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 127.79673500000001,
+        "p75Ms": 127.79673500000001,
+        "p99Ms": 127.79673500000001,
+        "hz": 7.824926043689613,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3805080,
+        "decodePeakBytes": 956816,
+        "retainedBytes": 1083456,
+        "maxRssBytes": 231792640
+      },
+      "wallMs": 396,
+      "metaShape": "ints",
+      "metaN": 10000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 592781,
+      "gzipBytes": 50913,
+      "encode": {
+        "meanMs": 1.450977999999992,
+        "p75Ms": 1.450977999999992,
+        "p99Ms": 1.450977999999992,
+        "hz": 689.1903254218917,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.4199429999999893,
+        "p75Ms": 2.4199429999999893,
+        "p99Ms": 2.4199429999999893,
+        "hz": 413.23287366686094,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 706400,
+        "decodePeakBytes": 955912,
+        "retainedBytes": 2189592,
+        "maxRssBytes": 116580352
+      },
+      "wallMs": 216,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 480643,
+      "gzipBytes": 34008,
+      "encode": {
+        "meanMs": 1.3880240000000015,
+        "p75Ms": 1.3880240000000015,
+        "p99Ms": 1.3880240000000015,
+        "hz": 720.4486377757149,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.558886000000001,
+        "p75Ms": 2.558886000000001,
+        "p99Ms": 2.558886000000001,
+        "hz": 390.795056911484,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 115032,
+        "decodePeakBytes": 2342712,
+        "retainedBytes": 2984344,
+        "maxRssBytes": 117063680
+      },
+      "wallMs": 229,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 3.9971199999999953,
+        "p75Ms": 3.9971199999999953,
+        "p99Ms": 3.9971199999999953,
+        "hz": 250.1801296933795,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2405784,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 1831032,
+        "maxRssBytes": 115814400
+      },
+      "wallMs": 213,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 592790,
+      "gzipBytes": 50926,
+      "encode": {
+        "meanMs": 28.972831000000014,
+        "p75Ms": 28.972831000000014,
+        "p99Ms": 28.972831000000014,
+        "hz": 34.515094503536766,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.4249790000000075,
+        "p75Ms": 2.4249790000000075,
+        "p99Ms": 2.4249790000000075,
+        "hz": 412.3747051005377,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 10955176,
+        "decodePeakBytes": 959256,
+        "retainedBytes": 2306656,
+        "maxRssBytes": 133632000
+      },
+      "wallMs": 247,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 418613,
+      "gzipBytes": 40649,
+      "encode": {
+        "meanMs": 4.837136000000015,
+        "p75Ms": 4.837136000000015,
+        "p99Ms": 4.837136000000015,
+        "hz": 206.73390204451493,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 4.017809999999997,
+        "p75Ms": 4.017809999999997,
+        "p99Ms": 4.017809999999997,
+        "hz": 248.89180921945058,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3819112,
+        "decodePeakBytes": 2643680,
+        "retainedBytes": 3378216,
+        "maxRssBytes": 115433472
+      },
+      "wallMs": 277,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 218594,
+      "gzipBytes": 36619,
+      "encode": {
+        "meanMs": 4.654867999999993,
+        "p75Ms": 4.654867999999993,
+        "p99Ms": 4.654867999999993,
+        "hz": 214.82886303113244,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.023340000000019,
+        "p75Ms": 2.023340000000019,
+        "p99Ms": 2.023340000000019,
+        "hz": 494.2323089544964,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1522864,
+        "decodePeakBytes": 1504776,
+        "retainedBytes": 3030664,
+        "maxRssBytes": 115421184
+      },
+      "wallMs": 269,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 398509,
+      "gzipBytes": 40267,
+      "encode": {
+        "meanMs": 8.611756999999983,
+        "p75Ms": 8.611756999999983,
+        "p99Ms": 8.611756999999983,
+        "hz": 116.12032248471502,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 6.711756999999977,
+        "p75Ms": 6.711756999999977,
+        "p99Ms": 6.711756999999977,
+        "hz": 148.99228324267452,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3938696,
+        "decodePeakBytes": 6775176,
+        "retainedBytes": 7506080,
+        "maxRssBytes": 120635392
+      },
+      "wallMs": 297,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 656709,
+      "gzipBytes": 122373,
+      "encode": {
+        "meanMs": 15.842953000000023,
+        "p75Ms": 15.842953000000023,
+        "p99Ms": 15.842953000000023,
+        "hz": 63.119545958382794,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 5.376652000000007,
+        "p75Ms": 5.376652000000007,
+        "p99Ms": 5.376652000000007,
+        "hz": 185.98934801806007,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 9592440,
+        "decodePeakBytes": 5399816,
+        "retainedBytes": 6769480,
+        "maxRssBytes": 132263936
+      },
+      "wallMs": 240,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 487781,
+      "gzipBytes": 49496,
+      "encode": {
+        "meanMs": 17.651448999999985,
+        "p75Ms": 17.651448999999985,
+        "p99Ms": 17.651448999999985,
+        "hz": 56.65257282844036,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 10.785172999999986,
+        "p75Ms": 10.785172999999986,
+        "p99Ms": 10.785172999999986,
+        "hz": 92.71988497541962,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 11234208,
+        "decodePeakBytes": 2000480,
+        "retainedBytes": 3285752,
+        "maxRssBytes": 141053952
+      },
+      "wallMs": 245,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 592782,
+      "gzipBytes": 50916,
+      "encode": {
+        "meanMs": 38.444721000000015,
+        "p75Ms": 38.444721000000015,
+        "p99Ms": 38.444721000000015,
+        "hz": 26.011373577142088,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 11.085142999999988,
+        "p75Ms": 11.085142999999988,
+        "p99Ms": 11.085142999999988,
+        "hz": 90.21083444751241,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4324376,
+        "decodePeakBytes": 8248032,
+        "retainedBytes": 11792080,
+        "maxRssBytes": 136368128
+      },
+      "wallMs": 265,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 731686,
+      "gzipBytes": 99325,
+      "encode": {
+        "meanMs": 8.007776000000007,
+        "p75Ms": 8.007776000000007,
+        "p99Ms": 8.007776000000007,
+        "hz": 124.87861798332011,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 33.21983100000003,
+        "p75Ms": 33.21983100000003,
+        "p99Ms": 33.21983100000003,
+        "hz": 30.102501123500573,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6863440,
+        "decodePeakBytes": 7991216,
+        "retainedBytes": 9144512,
+        "maxRssBytes": 135770112
+      },
+      "wallMs": 266,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 681782,
+      "gzipBytes": 124548,
+      "encode": {
+        "meanMs": 16.869643999999994,
+        "p75Ms": 16.869643999999994,
+        "p99Ms": 16.869643999999994,
+        "hz": 59.27807368074871,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 13.217453000000006,
+        "p75Ms": 13.217453000000006,
+        "p99Ms": 13.217453000000006,
+        "hz": 75.65754158535684,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 9535352,
+        "decodePeakBytes": 8953224,
+        "retainedBytes": 10316840,
+        "maxRssBytes": 141623296
+      },
+      "wallMs": 269,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 627793,
+      "gzipBytes": 65866,
+      "encode": {
+        "meanMs": 8.530000000000001,
+        "p75Ms": 8.530000000000001,
+        "p99Ms": 8.530000000000001,
+        "hz": 117.23329425556857,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 9.210815000000025,
+        "p75Ms": 9.210815000000025,
+        "p99Ms": 9.210815000000025,
+        "hz": 108.56802573930725,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3045240,
+        "decodePeakBytes": 5248376,
+        "retainedBytes": 5976848,
+        "maxRssBytes": 122712064
+      },
+      "wallMs": 270,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 268662,
+      "gzipBytes": 37883,
+      "encode": {
+        "meanMs": 258.527775,
+        "p75Ms": 258.527775,
+        "p99Ms": 258.527775,
+        "hz": 3.868056343269113,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 77.48192,
+        "p75Ms": 77.48192,
+        "p99Ms": 77.48192,
+        "hz": 12.906236706576191,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 84498488,
+        "decodePeakBytes": 22430112,
+        "retainedBytes": 23230928,
+        "maxRssBytes": 380575744
+      },
+      "wallMs": 603,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-records-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 442438,
+      "gzipBytes": 97081,
+      "encode": {
+        "meanMs": 945.8803189999999,
+        "p75Ms": 945.8803189999999,
+        "p99Ms": 945.8803189999999,
+        "hz": 1.0572162036918331,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1217.60557,
+        "p75Ms": 1217.60557,
+        "p99Ms": 1217.60557,
+        "hz": 0.8212840222141888,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 11938824,
+        "decodePeakBytes": 17190280,
+        "retainedBytes": 17978704,
+        "maxRssBytes": 257908736
+      },
+      "wallMs": 2477,
+      "metaShape": "records",
+      "metaN": 10000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 221483,
+      "gzipBytes": 52079,
+      "encode": {
+        "meanMs": 0.7405430000000024,
+        "p75Ms": 0.7405430000000024,
+        "p99Ms": 0.7405430000000024,
+        "hz": 1350.3604787297925,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.9828039999999874,
+        "p75Ms": 0.9828039999999874,
+        "p99Ms": 0.9828039999999874,
+        "hz": 1017.4968762846029,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 335088,
+        "decodePeakBytes": 724592,
+        "retainedBytes": 1351176,
+        "maxRssBytes": 115429376
+      },
+      "wallMs": 213,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 221753,
+      "gzipBytes": 38981,
+      "encode": {
+        "meanMs": 1.3731420000000014,
+        "p75Ms": 1.3731420000000014,
+        "p99Ms": 1.3731420000000014,
+        "hz": 728.2568008261337,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.0534079999999904,
+        "p75Ms": 2.0534079999999904,
+        "p99Ms": 2.0534079999999904,
+        "hz": 486.9952780937859,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 115016,
+        "decodePeakBytes": 1939800,
+        "retainedBytes": 2342296,
+        "maxRssBytes": 116547584
+      },
+      "wallMs": 249,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 2.843201000000022,
+        "p75Ms": 2.843201000000022,
+        "p99Ms": 2.843201000000022,
+        "hz": 351.7162522100943,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2120872,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 1200968,
+        "maxRssBytes": 117497856
+      },
+      "wallMs": 203,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 221492,
+      "gzipBytes": 52097,
+      "encode": {
+        "meanMs": 23.321987000000007,
+        "p75Ms": 23.321987000000007,
+        "p99Ms": 23.321987000000007,
+        "hz": 42.877993200150556,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.0306690000000174,
+        "p75Ms": 1.0306690000000174,
+        "p99Ms": 1.0306690000000174,
+        "hz": 970.2435990603998,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 7650424,
+        "decodePeakBytes": 727184,
+        "retainedBytes": 1494304,
+        "maxRssBytes": 131280896
+      },
+      "wallMs": 250,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 169629,
+      "gzipBytes": 56896,
+      "encode": {
+        "meanMs": 2.839416,
+        "p75Ms": 2.839416,
+        "p99Ms": 2.839416,
+        "hz": 352.18509721717425,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.351493000000005,
+        "p75Ms": 2.351493000000005,
+        "p99Ms": 2.351493000000005,
+        "hz": 425.26173796817505,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2397248,
+        "decodePeakBytes": 1374120,
+        "retainedBytes": 1872664,
+        "maxRssBytes": 116252672
+      },
+      "wallMs": 264,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 99583,
+      "gzipBytes": 54530,
+      "encode": {
+        "meanMs": 2.845442999999989,
+        "p75Ms": 2.845442999999989,
+        "p99Ms": 2.845442999999989,
+        "hz": 351.43912564757187,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.4565249999999992,
+        "p75Ms": 1.4565249999999992,
+        "p99Ms": 1.4565249999999992,
+        "hz": 686.5656270918801,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1686792,
+        "decodePeakBytes": 806896,
+        "retainedBytes": 2059592,
+        "maxRssBytes": 117456896
+      },
+      "wallMs": 220,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 149490,
+      "gzipBytes": 54031,
+      "encode": {
+        "meanMs": 3.620903999999996,
+        "p75Ms": 3.620903999999996,
+        "p99Ms": 3.620903999999996,
+        "hz": 276.1741266821769,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 3.3826150000000155,
+        "p75Ms": 3.3826150000000155,
+        "p99Ms": 3.3826150000000155,
+        "hz": 295.62926907141235,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3113600,
+        "decodePeakBytes": 2749136,
+        "retainedBytes": 3249688,
+        "maxRssBytes": 116109312
+      },
+      "wallMs": 240,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 371998,
+      "gzipBytes": 124788,
+      "encode": {
+        "meanMs": 12.982440000000025,
+        "p75Ms": 12.982440000000025,
+        "p99Ms": 12.982440000000025,
+        "hz": 77.02712279047684,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 3.964337999999998,
+        "p75Ms": 3.964337999999998,
+        "p99Ms": 3.964337999999998,
+        "hz": 252.2489252934539,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 9710656,
+        "decodePeakBytes": 4637632,
+        "retainedBytes": 5322136,
+        "maxRssBytes": 126484480
+      },
+      "wallMs": 259,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 181483,
+      "gzipBytes": 50642,
+      "encode": {
+        "meanMs": 10.982979999999998,
+        "p75Ms": 10.982979999999998,
+        "p99Ms": 10.982979999999998,
+        "hz": 91.04997004455987,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 5.851444999999984,
+        "p75Ms": 5.851444999999984,
+        "p99Ms": 5.851444999999984,
+        "hz": 170.89795768395717,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 7539208,
+        "decodePeakBytes": 1448440,
+        "retainedBytes": 2202952,
+        "maxRssBytes": 128958464
+      },
+      "wallMs": 236,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 221484,
+      "gzipBytes": 52082,
+      "encode": {
+        "meanMs": 35.82036200000002,
+        "p75Ms": 35.82036200000002,
+        "p99Ms": 35.82036200000002,
+        "hz": 27.917082468345782,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 6.941172999999992,
+        "p75Ms": 6.941172999999992,
+        "p99Ms": 6.941172999999992,
+        "hz": 144.06786864410398,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 10558960,
+        "decodePeakBytes": 4129312,
+        "retainedBytes": 7004120,
+        "maxRssBytes": 133947392
+      },
+      "wallMs": 272,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 290379,
+      "gzipBytes": 75449,
+      "encode": {
+        "meanMs": 4.530687,
+        "p75Ms": 4.530687,
+        "p99Ms": 4.530687,
+        "hz": 220.71707888891905,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 15.733216999999996,
+        "p75Ms": 15.733216999999996,
+        "p99Ms": 15.733216999999996,
+        "hz": 63.5597919993095,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3515752,
+        "decodePeakBytes": 9680352,
+        "retainedBytes": 2754792,
+        "maxRssBytes": 124178432
+      },
+      "wallMs": 240,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 468693,
+      "gzipBytes": 125870,
+      "encode": {
+        "meanMs": 13.649702999999988,
+        "p75Ms": 13.649702999999988,
+        "p99Ms": 13.649702999999988,
+        "hz": 73.26166730514215,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 8.114060999999992,
+        "p75Ms": 8.114060999999992,
+        "p99Ms": 8.114060999999992,
+        "hz": 123.2428496655375,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 9428104,
+        "decodePeakBytes": 15148480,
+        "retainedBytes": 15895408,
+        "maxRssBytes": 135737344
+      },
+      "wallMs": 264,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 278903,
+      "gzipBytes": 62589,
+      "encode": {
+        "meanMs": 5.1147689999999955,
+        "p75Ms": 5.1147689999999955,
+        "p99Ms": 5.1147689999999955,
+        "hz": 195.51225089539741,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 3.9362390000000005,
+        "p75Ms": 3.9362390000000005,
+        "p99Ms": 3.9362390000000005,
+        "hz": 254.04961436538784,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2993040,
+        "decodePeakBytes": 2615552,
+        "retainedBytes": 3102240,
+        "maxRssBytes": 119414784
+      },
+      "wallMs": 240,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 124547,
+      "gzipBytes": 55666,
+      "encode": {
+        "meanMs": 160.75676300000003,
+        "p75Ms": 160.75676300000003,
+        "p99Ms": 160.75676300000003,
+        "hz": 6.220578104076404,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 49.515075999999965,
+        "p75Ms": 49.515075999999965,
+        "p99Ms": 49.515075999999965,
+        "hz": 20.195869233847095,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 50233632,
+        "decodePeakBytes": 21572872,
+        "retainedBytes": 22223616,
+        "maxRssBytes": 285671424
+      },
+      "wallMs": 460,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-objects-10e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 289903,
+      "gzipBytes": 76809,
+      "encode": {
+        "meanMs": 179.24014100000002,
+        "p75Ms": 179.24014100000002,
+        "p99Ms": 179.24014100000002,
+        "hz": 5.5791074165691485,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 539.771576,
+        "p75Ms": 539.771576,
+        "p99Ms": 539.771576,
+        "hz": 1.852635530404439,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 5691960,
+        "decodePeakBytes": 5399760,
+        "retainedBytes": 5696216,
+        "maxRssBytes": 241664000
+      },
+      "wallMs": 1014,
+      "metaShape": "objects",
+      "metaN": 10000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 141121,
+      "gzipBytes": 10168,
+      "encode": {
+        "meanMs": 0.3105429999999956,
+        "p75Ms": 0.3105429999999956,
+        "p99Ms": 0.3105429999999956,
+        "hz": 3220.1659673540034,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.29566500000001383,
+        "p75Ms": 0.29566500000001383,
+        "p99Ms": 0.29566500000001383,
+        "hz": 3382.2062131126554,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 254712,
+        "decodePeakBytes": 244584,
+        "retainedBytes": 470144,
+        "maxRssBytes": 115118080
+      },
+      "wallMs": 231,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 89499,
+      "gzipBytes": 9510,
+      "encode": {
+        "meanMs": 0.2076629999999966,
+        "p75Ms": 0.2076629999999966,
+        "p99Ms": 0.2076629999999966,
+        "hz": 4815.494334570994,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.42939400000000205,
+        "p75Ms": 0.42939400000000205,
+        "p99Ms": 0.42939400000000205,
+        "hz": 2328.863468050311,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 115784,
+        "decodePeakBytes": 246128,
+        "retainedBytes": 330680,
+        "maxRssBytes": 114962432
+      },
+      "wallMs": 207,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 0.5336779999999806,
+        "p75Ms": 0.5336779999999806,
+        "p99Ms": 0.5336779999999806,
+        "hz": 1873.789063817576,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 354992,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 321992,
+        "maxRssBytes": 115544064
+      },
+      "wallMs": 213,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 141130,
+      "gzipBytes": 10189,
+      "encode": {
+        "meanMs": 16.595219000000014,
+        "p75Ms": 16.595219000000014,
+        "p99Ms": 16.595219000000014,
+        "hz": 60.25831897729094,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.36826399999998216,
+        "p75Ms": 0.36826399999998216,
+        "p99Ms": 0.36826399999998216,
+        "hz": 2715.4432689593564,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 11859120,
+        "decodePeakBytes": 265304,
+        "retainedBytes": 598608,
+        "maxRssBytes": 129187840
+      },
+      "wallMs": 230,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 87763,
+      "gzipBytes": 9201,
+      "encode": {
+        "meanMs": 1.8299810000000036,
+        "p75Ms": 1.8299810000000036,
+        "p99Ms": 1.8299810000000036,
+        "hz": 546.4537609953317,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.361754999999988,
+        "p75Ms": 1.361754999999988,
+        "p99Ms": 1.361754999999988,
+        "hz": 734.3464867028274,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1407056,
+        "decodePeakBytes": 291744,
+        "retainedBytes": 450728,
+        "maxRssBytes": 115007488
+      },
+      "wallMs": 210,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 87443,
+      "gzipBytes": 9169,
+      "encode": {
+        "meanMs": 1.7662679999999966,
+        "p75Ms": 1.7662679999999966,
+        "p99Ms": 1.7662679999999966,
+        "hz": 566.165496968751,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.3638909999999953,
+        "p75Ms": 1.3638909999999953,
+        "p99Ms": 1.3638909999999953,
+        "hz": 733.1964211216317,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 208912,
+        "decodePeakBytes": 302488,
+        "retainedBytes": 462088,
+        "maxRssBytes": 114913280
+      },
+      "wallMs": 208,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 86931,
+      "gzipBytes": 9116,
+      "encode": {
+        "meanMs": 1.7513639999999953,
+        "p75Ms": 1.7513639999999953,
+        "p99Ms": 1.7513639999999953,
+        "hz": 570.9835305510463,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.8936290000000042,
+        "p75Ms": 1.8936290000000042,
+        "p99Ms": 1.8936290000000042,
+        "hz": 528.0865470480214,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1365456,
+        "decodePeakBytes": 302688,
+        "retainedBytes": 431496,
+        "maxRssBytes": 116416512
+      },
+      "wallMs": 207,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 160517,
+      "gzipBytes": 10391,
+      "encode": {
+        "meanMs": 7.34629000000001,
+        "p75Ms": 7.34629000000001,
+        "p99Ms": 7.34629000000001,
+        "hz": 136.1231315398655,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.09282300000001,
+        "p75Ms": 2.09282300000001,
+        "p99Ms": 2.09282300000001,
+        "hz": 477.8234948679345,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2975520,
+        "decodePeakBytes": 591504,
+        "retainedBytes": 880680,
+        "maxRssBytes": 121597952
+      },
+      "wallMs": 217,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 141121,
+      "gzipBytes": 10168,
+      "encode": {
+        "meanMs": 2.325851,
+        "p75Ms": 2.325851,
+        "p99Ms": 2.325851,
+        "hz": 429.950155878429,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.389429000000007,
+        "p75Ms": 1.389429000000007,
+        "p99Ms": 1.389429000000007,
+        "hz": 719.7201152415813,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3708440,
+        "decodePeakBytes": 254352,
+        "retainedBytes": 522800,
+        "maxRssBytes": 117301248
+      },
+      "wallMs": 219,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 141122,
+      "gzipBytes": 10171,
+      "encode": {
+        "meanMs": 27.806299000000024,
+        "p75Ms": 27.806299000000024,
+        "p99Ms": 27.806299000000024,
+        "hz": 35.9630744098666,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 5.148434999999978,
+        "p75Ms": 5.148434999999978,
+        "p99Ms": 5.148434999999978,
+        "hz": 194.23378172201927,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 5732464,
+        "decodePeakBytes": 2893560,
+        "retainedBytes": 5410784,
+        "maxRssBytes": 126976000
+      },
+      "wallMs": 244,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 141123,
+      "gzipBytes": 10170,
+      "encode": {
+        "meanMs": 2.3460139999999967,
+        "p75Ms": 2.3460139999999967,
+        "p99Ms": 2.3460139999999967,
+        "hz": 426.2549157848169,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 11.878509999999977,
+        "p75Ms": 11.878509999999977,
+        "p99Ms": 11.878509999999977,
+        "hz": 84.1856428121037,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 990784,
+        "decodePeakBytes": 4739944,
+        "retainedBytes": 4964888,
+        "maxRssBytes": 119197696
+      },
+      "wallMs": 222,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 176905,
+      "gzipBytes": 21295,
+      "encode": {
+        "meanMs": 3.4544959999999776,
+        "p75Ms": 3.4544959999999776,
+        "p99Ms": 3.4544959999999776,
+        "hz": 289.47782831417567,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 3.135775999999993,
+        "p75Ms": 3.135775999999993,
+        "p99Ms": 3.135775999999993,
+        "hz": 318.90032961538145,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4259832,
+        "decodePeakBytes": 3586456,
+        "retainedBytes": 3874176,
+        "maxRssBytes": 117530624
+      },
+      "wallMs": 217,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 318903,
+      "gzipBytes": 89199,
+      "encode": {
+        "meanMs": 3.050735000000003,
+        "p75Ms": 3.050735000000003,
+        "p99Ms": 3.050735000000003,
+        "hz": 327.78986047624556,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.343685999999991,
+        "p75Ms": 2.343685999999991,
+        "p99Ms": 2.343685999999991,
+        "hz": 426.67831782926714,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 906840,
+        "decodePeakBytes": 921168,
+        "retainedBytes": 1057432,
+        "maxRssBytes": 116875264
+      },
+      "wallMs": 301,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 87952,
+      "gzipBytes": 9225,
+      "encode": {
+        "meanMs": 82.73372700000002,
+        "p75Ms": 82.73372700000002,
+        "p99Ms": 82.73372700000002,
+        "hz": 12.08696907852344,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 26.280827999999985,
+        "p75Ms": 26.280827999999985,
+        "p99Ms": 26.280827999999985,
+        "hz": 38.05055152752419,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 37208160,
+        "decodePeakBytes": 20324288,
+        "retainedBytes": 20619032,
+        "maxRssBytes": 174751744
+      },
+      "wallMs": 317,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-ints-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 270023,
+      "gzipBytes": 69641,
+      "encode": {
+        "meanMs": 26.852450000000005,
+        "p75Ms": 26.852450000000005,
+        "p99Ms": 26.852450000000005,
+        "hz": 37.24054974499533,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 901.000943,
+        "p75Ms": 901.000943,
+        "p99Ms": 901.000943,
+        "hz": 1.1098767518160078,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 8466256,
+        "decodePeakBytes": 810304,
+        "retainedBytes": 941888,
+        "maxRssBytes": 246366208
+      },
+      "wallMs": 1309,
+      "metaShape": "ints",
+      "metaN": 30000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1822781,
+      "gzipBytes": 152198,
+      "encode": {
+        "meanMs": 4.976573000000002,
+        "p75Ms": 4.976573000000002,
+        "p99Ms": 4.976573000000002,
+        "hz": 200.94149126316435,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 6.5328250000000025,
+        "p75Ms": 6.5328250000000025,
+        "p99Ms": 6.5328250000000025,
+        "hz": 153.07313451684374,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 1937752,
+        "decodePeakBytes": 2876496,
+        "retainedBytes": 6463688,
+        "maxRssBytes": 127807488
+      },
+      "wallMs": 249,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1480645,
+      "gzipBytes": 102276,
+      "encode": {
+        "meanMs": 4.827234000000004,
+        "p75Ms": 4.827234000000004,
+        "p99Ms": 4.827234000000004,
+        "hz": 207.15797079652637,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 8.831259000000045,
+        "p75Ms": 8.831259000000045,
+        "p99Ms": 8.831259000000045,
+        "hz": 113.23413796379371,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 116384,
+        "decodePeakBytes": 6541992,
+        "retainedBytes": 8308784,
+        "maxRssBytes": 125825024
+      },
+      "wallMs": 387,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 13.699280999999985,
+        "p75Ms": 13.699280999999985,
+        "p99Ms": 13.699280999999985,
+        "hz": 72.99653171578866,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6616888,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 5351136,
+        "maxRssBytes": 121065472
+      },
+      "wallMs": 247,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1822790,
+      "gzipBytes": 152210,
+      "encode": {
+        "meanMs": 86.54747799999998,
+        "p75Ms": 86.54747799999998,
+        "p99Ms": 86.54747799999998,
+        "hz": 11.554351705083771,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 5.844855999999993,
+        "p75Ms": 5.844855999999993,
+        "p99Ms": 5.844855999999993,
+        "hz": 171.0906136951879,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 22707784,
+        "decodePeakBytes": 2878400,
+        "retainedBytes": 6576952,
+        "maxRssBytes": 163090432
+      },
+      "wallMs": 335,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1278613,
+      "gzipBytes": 122522,
+      "encode": {
+        "meanMs": 13.90794200000002,
+        "p75Ms": 13.90794200000002,
+        "p99Ms": 13.90794200000002,
+        "hz": 71.90136398325494,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 9.59567800000002,
+        "p75Ms": 9.59567800000002,
+        "p99Ms": 9.59567800000002,
+        "hz": 104.21358449085076,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2726720,
+        "decodePeakBytes": 7849080,
+        "retainedBytes": 6414072,
+        "maxRssBytes": 127242240
+      },
+      "wallMs": 348,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 678594,
+      "gzipBytes": 109129,
+      "encode": {
+        "meanMs": 10.202664999999996,
+        "p75Ms": 10.202664999999996,
+        "p99Ms": 10.202664999999996,
+        "hz": 98.01360722909165,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 4.162949000000026,
+        "p75Ms": 4.162949000000026,
+        "p99Ms": 4.162949000000026,
+        "hz": 240.21432883275625,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3106968,
+        "decodePeakBytes": 4373968,
+        "retainedBytes": 8128368,
+        "maxRssBytes": 122675200
+      },
+      "wallMs": 572,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1218509,
+      "gzipBytes": 121702,
+      "encode": {
+        "meanMs": 21.74648499999998,
+        "p75Ms": 21.74648499999998,
+        "p99Ms": 21.74648499999998,
+        "hz": 45.98444300308767,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 15.443014000000005,
+        "p75Ms": 15.443014000000005,
+        "p99Ms": 15.443014000000005,
+        "hz": 64.75419888889563,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6591640,
+        "decodePeakBytes": 4528464,
+        "retainedBytes": 6385720,
+        "maxRssBytes": 133169152
+      },
+      "wallMs": 375,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2036709,
+      "gzipBytes": 357521,
+      "encode": {
+        "meanMs": 39.84004200000001,
+        "p75Ms": 39.84004200000001,
+        "p99Ms": 39.84004200000001,
+        "hz": 25.100375145186838,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 12.590784999999983,
+        "p75Ms": 12.590784999999983,
+        "p99Ms": 12.590784999999983,
+        "hz": 79.42316543408543,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 31006320,
+        "decodePeakBytes": 13463280,
+        "retainedBytes": 17340648,
+        "maxRssBytes": 159514624
+      },
+      "wallMs": 327,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1507781,
+      "gzipBytes": 147337,
+      "encode": {
+        "meanMs": 45.151520000000005,
+        "p75Ms": 45.151520000000005,
+        "p99Ms": 45.151520000000005,
+        "hz": 22.147648628440415,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 33.94321600000001,
+        "p75Ms": 33.94321600000001,
+        "p99Ms": 33.94321600000001,
+        "hz": 29.46096798841924,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 33735360,
+        "decodePeakBytes": 6000640,
+        "retainedBytes": 9430448,
+        "maxRssBytes": 194998272
+      },
+      "wallMs": 332,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1822782,
+      "gzipBytes": 152200,
+      "encode": {
+        "meanMs": 63.63428499999998,
+        "p75Ms": 63.63428499999998,
+        "p99Ms": 63.63428499999998,
+        "hz": 15.714799026971079,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 31.367170999999985,
+        "p75Ms": 31.367170999999985,
+        "p99Ms": 31.367170999999985,
+        "hz": 31.880465088802573,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 18607640,
+        "decodePeakBytes": 9723688,
+        "retainedBytes": 15623648,
+        "maxRssBytes": 160190464
+      },
+      "wallMs": 343,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2261686,
+      "gzipBytes": 289352,
+      "encode": {
+        "meanMs": 29.18573699999999,
+        "p75Ms": 29.18573699999999,
+        "p99Ms": 29.18573699999999,
+        "hz": 34.26331156208255,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 88.55428700000004,
+        "p75Ms": 88.55428700000004,
+        "p99Ms": 88.55428700000004,
+        "hz": 11.292508063443607,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 12356032,
+        "decodePeakBytes": 41197160,
+        "retainedBytes": 26571448,
+        "maxRssBytes": 190078976
+      },
+      "wallMs": 388,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2111782,
+      "gzipBytes": 368390,
+      "encode": {
+        "meanMs": 51.823612999999966,
+        "p75Ms": 51.823612999999966,
+        "p99Ms": 51.823612999999966,
+        "hz": 19.296223132879614,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 29.607531999999992,
+        "p75Ms": 29.607531999999992,
+        "p99Ms": 29.607531999999992,
+        "hz": 33.77518936735424,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 40131864,
+        "decodePeakBytes": 41442912,
+        "retainedBytes": 26728328,
+        "maxRssBytes": 194871296
+      },
+      "wallMs": 415,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1927793,
+      "gzipBytes": 200010,
+      "encode": {
+        "meanMs": 22.476371,
+        "p75Ms": 22.476371,
+        "p99Ms": 22.476371,
+        "hz": 44.491168080469926,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 18.828596000000005,
+        "p75Ms": 18.828596000000005,
+        "p99Ms": 18.828596000000005,
+        "hz": 53.11070458997579,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 8581200,
+        "decodePeakBytes": 9681552,
+        "retainedBytes": 5082776,
+        "maxRssBytes": 133734400
+      },
+      "wallMs": 389,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 828662,
+      "gzipBytes": 114911,
+      "encode": {
+        "meanMs": 907.4771140000001,
+        "p75Ms": 907.4771140000001,
+        "p99Ms": 907.4771140000001,
+        "hz": 1.1019561645937,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 188.65341599999988,
+        "p75Ms": 188.65341599999988,
+        "p99Ms": 188.65341599999988,
+        "hz": 5.30072564389717,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 149129536,
+        "decodePeakBytes": 78396216,
+        "retainedBytes": 79132672,
+        "maxRssBytes": 572301312
+      },
+      "wallMs": 1473,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-records-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1532433,
+      "gzipBytes": 296977,
+      "encode": {
+        "meanMs": 8453.808976,
+        "p75Ms": 8453.808976,
+        "p99Ms": 8453.808976,
+        "hz": 0.11828987416665754,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 13103.753025999998,
+        "p75Ms": 13103.753025999998,
+        "p99Ms": 13103.753025999998,
+        "hz": 0.07631401461976853,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 54661624,
+        "decodePeakBytes": 46302976,
+        "retainedBytes": 48226752,
+        "maxRssBytes": 399757312
+      },
+      "wallMs": 21941,
+      "metaShape": "records",
+      "metaN": 30000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 701483,
+      "gzipBytes": 152902,
+      "encode": {
+        "meanMs": 2.419148999999976,
+        "p75Ms": 2.419148999999976,
+        "p99Ms": 2.419148999999976,
+        "hz": 413.3685027255493,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.9981319999999982,
+        "p75Ms": 2.9981319999999982,
+        "p99Ms": 2.9981319999999982,
+        "hz": 333.5410182073373,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 815960,
+        "decodePeakBytes": 2164680,
+        "retainedBytes": 3265152,
+        "maxRssBytes": 116498432
+      },
+      "wallMs": 280,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 681755,
+      "gzipBytes": 110186,
+      "encode": {
+        "meanMs": 3.151916,
+        "p75Ms": 3.151916,
+        "p99Ms": 3.151916,
+        "hz": 317.2673383427731,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 6.726386000000048,
+        "p75Ms": 6.726386000000048,
+        "p99Ms": 6.726386000000048,
+        "hz": 148.66824473052733,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 115888,
+        "decodePeakBytes": 5558928,
+        "retainedBytes": 5943856,
+        "maxRssBytes": 120995840
+      },
+      "wallMs": 415,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 9.513035000000002,
+        "p75Ms": 9.513035000000002,
+        "p99Ms": 9.513035000000002,
+        "hz": 105.11892366631677,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 5684000,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 2789104,
+        "maxRssBytes": 117161984
+      },
+      "wallMs": 237,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 701492,
+      "gzipBytes": 152919,
+      "encode": {
+        "meanMs": 58.51119200000002,
+        "p75Ms": 58.51119200000002,
+        "p99Ms": 58.51119200000002,
+        "hz": 17.090747356505737,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.9298089999999775,
+        "p75Ms": 2.9298089999999775,
+        "p99Ms": 2.9298089999999775,
+        "hz": 341.31917814438,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 20288424,
+        "decodePeakBytes": 2167272,
+        "retainedBytes": 3484792,
+        "maxRssBytes": 160931840
+      },
+      "wallMs": 316,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 509629,
+      "gzipBytes": 166595,
+      "encode": {
+        "meanMs": 5.375966000000005,
+        "p75Ms": 5.375966000000005,
+        "p99Ms": 5.375966000000005,
+        "hz": 186.013081183921,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 5.5024139999999875,
+        "p75Ms": 5.5024139999999875,
+        "p99Ms": 5.5024139999999875,
+        "hz": 181.73841517559424,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6723528,
+        "decodePeakBytes": 3966976,
+        "retainedBytes": 4394328,
+        "maxRssBytes": 118693888
+      },
+      "wallMs": 383,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 299583,
+      "gzipBytes": 158782,
+      "encode": {
+        "meanMs": 4.769088000000011,
+        "p75Ms": 4.769088000000011,
+        "p99Ms": 4.769088000000011,
+        "hz": 209.68369633774796,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.3189840000000004,
+        "p75Ms": 2.3189840000000004,
+        "p99Ms": 2.3189840000000004,
+        "hz": 431.22332883711135,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3552040,
+        "decodePeakBytes": 2254328,
+        "retainedBytes": 4548792,
+        "maxRssBytes": 119197696
+      },
+      "wallMs": 264,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 449490,
+      "gzipBytes": 158124,
+      "encode": {
+        "meanMs": 8.444006000000002,
+        "p75Ms": 8.444006000000002,
+        "p99Ms": 8.444006000000002,
+        "hz": 118.42720149654083,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 6.135705999999971,
+        "p75Ms": 6.135705999999971,
+        "p99Ms": 6.135705999999971,
+        "hz": 162.98042963597095,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 8591864,
+        "decodePeakBytes": 4657696,
+        "retainedBytes": 5072088,
+        "maxRssBytes": 126537728
+      },
+      "wallMs": 312,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1172002,
+      "gzipBytes": 372929,
+      "encode": {
+        "meanMs": 32.356415999999996,
+        "p75Ms": 32.356415999999996,
+        "p99Ms": 32.356415999999996,
+        "hz": 30.90577151684538,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 10.515952999999968,
+        "p75Ms": 10.515952999999968,
+        "p99Ms": 10.515952999999968,
+        "hz": 95.0936163370075,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 23296736,
+        "decodePeakBytes": 12326288,
+        "retainedBytes": 13887440,
+        "maxRssBytes": 143261696
+      },
+      "wallMs": 350,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 581483,
+      "gzipBytes": 148129,
+      "encode": {
+        "meanMs": 24.37458699999999,
+        "p75Ms": 24.37458699999999,
+        "p99Ms": 24.37458699999999,
+        "hz": 41.0263361590496,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 18.264134000000013,
+        "p75Ms": 18.264134000000013,
+        "p99Ms": 18.264134000000013,
+        "hz": 54.752116908472054,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 25540352,
+        "decodePeakBytes": 4328552,
+        "retainedBytes": 5612440,
+        "maxRssBytes": 165556224
+      },
+      "wallMs": 298,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 701484,
+      "gzipBytes": 152904,
+      "encode": {
+        "meanMs": 48.886821999999995,
+        "p75Ms": 48.886821999999995,
+        "p99Ms": 48.886821999999995,
+        "hz": 20.45541025350349,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 18.342583999999988,
+        "p75Ms": 18.342583999999988,
+        "p99Ms": 18.342583999999988,
+        "hz": 54.51794578124874,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 11413152,
+        "decodePeakBytes": 4623648,
+        "retainedBytes": 8036872,
+        "maxRssBytes": 137494528
+      },
+      "wallMs": 312,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 930379,
+      "gzipBytes": 218923,
+      "encode": {
+        "meanMs": 13.049390999999986,
+        "p75Ms": 13.049390999999986,
+        "p99Ms": 13.049390999999986,
+        "hz": 76.63192864709174,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 52.899891999999994,
+        "p75Ms": 52.899891999999994,
+        "p99Ms": 52.899891999999994,
+        "hz": 18.90363027584253,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 9633136,
+        "decodePeakBytes": 21612888,
+        "retainedBytes": 22922312,
+        "maxRssBytes": 154050560
+      },
+      "wallMs": 318,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1462033,
+      "gzipBytes": 375601,
+      "encode": {
+        "meanMs": 40.55256499999999,
+        "p75Ms": 40.55256499999999,
+        "p99Ms": 40.55256499999999,
+        "hz": 24.6593526204816,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 27.823392000000013,
+        "p75Ms": 27.823392000000013,
+        "p99Ms": 27.823392000000013,
+        "hz": 35.9409808839986,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 29719376,
+        "decodePeakBytes": 34821080,
+        "retainedBytes": 36652928,
+        "maxRssBytes": 169156608
+      },
+      "wallMs": 397,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 858903,
+      "gzipBytes": 187120,
+      "encode": {
+        "meanMs": 12.675252,
+        "p75Ms": 12.675252,
+        "p99Ms": 12.675252,
+        "hz": 78.89389496950434,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 8.332801999999958,
+        "p75Ms": 8.332801999999958,
+        "p99Ms": 8.332801999999958,
+        "hz": 120.00765168787223,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 8568088,
+        "decodePeakBytes": 7493320,
+        "retainedBytes": 7875752,
+        "maxRssBytes": 130629632
+      },
+      "wallMs": 371,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 374547,
+      "gzipBytes": 161487,
+      "encode": {
+        "meanMs": 538.380222,
+        "p75Ms": 538.380222,
+        "p99Ms": 538.380222,
+        "hz": 1.8574233583194295,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 142.85862099999997,
+        "p75Ms": 142.85862099999997,
+        "p99Ms": 142.85862099999997,
+        "hz": 6.999927571749416,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 123955128,
+        "decodePeakBytes": 49712608,
+        "retainedBytes": 49171848,
+        "maxRssBytes": 503517184
+      },
+      "wallMs": 968,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-objects-30e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 943520,
+      "gzipBytes": 227781,
+      "encode": {
+        "meanMs": 2168.119002,
+        "p75Ms": 2168.119002,
+        "p99Ms": 2168.119002,
+        "hz": 0.46122929556797454,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 5409.303594999999,
+        "p75Ms": 5409.303594999999,
+        "p99Ms": 5409.303594999999,
+        "hz": 0.1848666806064155,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 40889776,
+        "decodePeakBytes": 27663456,
+        "retainedBytes": 27945800,
+        "maxRssBytes": 302559232
+      },
+      "wallMs": 8086,
+      "metaShape": "objects",
+      "metaN": 30000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 472251,
+      "gzipBytes": 13123,
+      "encode": {
+        "meanMs": 0.9821320000000071,
+        "p75Ms": 0.9821320000000071,
+        "p99Ms": 0.9821320000000071,
+        "hz": 1018.1930738434271,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.9665800000000218,
+        "p75Ms": 0.9665800000000218,
+        "p99Ms": 0.9665800000000218,
+        "hz": 1034.5755136667192,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 585840,
+        "decodePeakBytes": 804584,
+        "retainedBytes": 1361968,
+        "maxRssBytes": 119664640
+      },
+      "wallMs": 214,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 298411,
+      "gzipBytes": 11255,
+      "encode": {
+        "meanMs": 0.6656389999999988,
+        "p75Ms": 0.6656389999999988,
+        "p99Ms": 0.6656389999999988,
+        "hz": 1502.3158198362805,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.248236999999989,
+        "p75Ms": 1.248236999999989,
+        "p99Ms": 1.248236999999989,
+        "hz": 801.1299136301911,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 115000,
+        "decodePeakBytes": 806128,
+        "retainedBytes": 891720,
+        "maxRssBytes": 116416512
+      },
+      "wallMs": 219,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 1.8080309999999997,
+        "p75Ms": 1.8080309999999997,
+        "p99Ms": 1.8080309999999997,
+        "hz": 553.0878618784745,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 912744,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 883576,
+        "maxRssBytes": 116658176
+      },
+      "wallMs": 215,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 472260,
+      "gzipBytes": 13143,
+      "encode": {
+        "meanMs": 42.526891000000006,
+        "p75Ms": 42.526891000000006,
+        "p99Ms": 42.526891000000006,
+        "hz": 23.514533427802185,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 0.8188430000000153,
+        "p75Ms": 0.8188430000000153,
+        "p99Ms": 0.8188430000000153,
+        "hz": 1221.2353283840507,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 23692064,
+        "decodePeakBytes": 807176,
+        "retainedBytes": 1478712,
+        "maxRssBytes": 156680192
+      },
+      "wallMs": 259,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 293005,
+      "gzipBytes": 10931,
+      "encode": {
+        "meanMs": 2.8695529999999962,
+        "p75Ms": 2.8695529999999962,
+        "p99Ms": 2.8695529999999962,
+        "hz": 348.48633219180874,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.5911729999999977,
+        "p75Ms": 2.5911729999999977,
+        "p99Ms": 2.5911729999999977,
+        "hz": 385.9256020342914,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4205184,
+        "decodePeakBytes": 846920,
+        "retainedBytes": 1008272,
+        "maxRssBytes": 115785728
+      },
+      "wallMs": 218,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 292005,
+      "gzipBytes": 10889,
+      "encode": {
+        "meanMs": 2.0027069999999867,
+        "p75Ms": 2.0027069999999867,
+        "p99Ms": 2.0027069999999867,
+        "hz": 499.32416474302363,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 1.8686250000000086,
+        "p75Ms": 1.8686250000000086,
+        "p99Ms": 1.8686250000000086,
+        "hz": 535.1528530336452,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 204808,
+        "decodePeakBytes": 857880,
+        "retainedBytes": 1014896,
+        "maxRssBytes": 117157888
+      },
+      "wallMs": 215,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 290405,
+      "gzipBytes": 10829,
+      "encode": {
+        "meanMs": 2.9000910000000033,
+        "p75Ms": 2.9000910000000033,
+        "p99Ms": 2.9000910000000033,
+        "hz": 344.81676609458077,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 2.5774310000000185,
+        "p75Ms": 2.5774310000000185,
+        "p99Ms": 2.5774310000000185,
+        "hz": 387.98322826100593,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4175704,
+        "decodePeakBytes": 852864,
+        "retainedBytes": 976488,
+        "maxRssBytes": 117047296
+      },
+      "wallMs": 216,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 491698,
+      "gzipBytes": 13342,
+      "encode": {
+        "meanMs": 21.07623799999999,
+        "p75Ms": 21.07623799999999,
+        "p99Ms": 21.07623799999999,
+        "hz": 47.4467976685403,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 4.855075999999997,
+        "p75Ms": 4.855075999999997,
+        "p99Ms": 4.855075999999997,
+        "hz": 205.96999923379173,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 8012048,
+        "decodePeakBytes": 1710768,
+        "retainedBytes": 2340432,
+        "maxRssBytes": 131473408
+      },
+      "wallMs": 233,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 472251,
+      "gzipBytes": 13123,
+      "encode": {
+        "meanMs": 11.973906,
+        "p75Ms": 11.973906,
+        "p99Ms": 11.973906,
+        "hz": 83.51493656288935,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 6.782938999999999,
+        "p75Ms": 6.782938999999999,
+        "p99Ms": 6.782938999999999,
+        "hz": 147.4287178463495,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 11470960,
+        "decodePeakBytes": 809320,
+        "retainedBytes": 1401816,
+        "maxRssBytes": 133623808
+      },
+      "wallMs": 233,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 472252,
+      "gzipBytes": 13126,
+      "encode": {
+        "meanMs": 39.817785000000015,
+        "p75Ms": 39.817785000000015,
+        "p99Ms": 39.817785000000015,
+        "hz": 25.114405535114514,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 12.351868999999994,
+        "p75Ms": 12.351868999999994,
+        "p99Ms": 12.351868999999994,
+        "hz": 80.95940784346082,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 10820104,
+        "decodePeakBytes": 9425592,
+        "retainedBytes": 12284096,
+        "maxRssBytes": 147845120
+      },
+      "wallMs": 268,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 472253,
+      "gzipBytes": 13126,
+      "encode": {
+        "meanMs": 7.529291999999998,
+        "p75Ms": 7.529291999999998,
+        "p99Ms": 7.529291999999998,
+        "hz": 132.81461258243144,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 37.94645299999999,
+        "p75Ms": 37.94645299999999,
+        "p99Ms": 37.94645299999999,
+        "hz": 26.35292421138809,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 3000872,
+        "decodePeakBytes": 6428424,
+        "retainedBytes": 6986096,
+        "maxRssBytes": 133996544
+      },
+      "wallMs": 260,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 508086,
+      "gzipBytes": 23979,
+      "encode": {
+        "meanMs": 7.897664999999989,
+        "p75Ms": 7.897664999999989,
+        "p99Ms": 7.897664999999989,
+        "hz": 126.61970341866885,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 7.495076999999981,
+        "p75Ms": 7.495076999999981,
+        "p99Ms": 7.495076999999981,
+        "hz": 133.4209108191954,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 9323328,
+        "decodePeakBytes": 8878856,
+        "retainedBytes": 9497896,
+        "maxRssBytes": 126664704
+      },
+      "wallMs": 236,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1088903,
+      "gzipBytes": 295655,
+      "encode": {
+        "meanMs": 7.37903,
+        "p75Ms": 7.37903,
+        "p99Ms": 7.37903,
+        "hz": 135.51916715340633,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 4.563358999999991,
+        "p75Ms": 4.563358999999991,
+        "p99Ms": 4.563358999999991,
+        "hz": 219.13682443130202,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2605792,
+        "decodePeakBytes": 2866088,
+        "retainedBytes": 3011320,
+        "maxRssBytes": 120725504
+      },
+      "wallMs": 715,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 293583,
+      "gzipBytes": 10954,
+      "encode": {
+        "meanMs": 285.64941999999996,
+        "p75Ms": 285.64941999999996,
+        "p99Ms": 285.64941999999996,
+        "hz": 3.500794785440139,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 74.97746300000006,
+        "p75Ms": 74.97746300000006,
+        "p99Ms": 74.97746300000006,
+        "hz": 13.3373411154229,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 77036288,
+        "decodePeakBytes": 67305048,
+        "retainedBytes": 67597880,
+        "maxRssBytes": 344231936
+      },
+      "wallMs": 587,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-ints-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 900023,
+      "gzipBytes": 231015,
+      "encode": {
+        "meanMs": 86.2381,
+        "p75Ms": 86.2381,
+        "p99Ms": 86.2381,
+        "hz": 11.595802783224583,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 10054.184736,
+        "p75Ms": 10054.184736,
+        "p99Ms": 10054.184736,
+        "hz": 0.09946107280279042,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 36538616,
+        "decodePeakBytes": 1702568,
+        "retainedBytes": 1843992,
+        "maxRssBytes": 304525312
+      },
+      "wallMs": 10940,
+      "metaShape": "ints",
+      "metaN": 100000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 6127781,
+      "gzipBytes": 504781,
+      "encode": {
+        "meanMs": 17.09140099999999,
+        "p75Ms": 17.09140099999999,
+        "p99Ms": 17.09140099999999,
+        "hz": 58.50895429812925,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 19.55174599999998,
+        "p75Ms": 19.55174599999998,
+        "p99Ms": 19.55174599999998,
+        "hz": 51.14632728964467,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6241400,
+        "decodePeakBytes": 9596512,
+        "retainedBytes": 21422520,
+        "maxRssBytes": 155201536
+      },
+      "wallMs": 339,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4980645,
+      "gzipBytes": 339342,
+      "encode": {
+        "meanMs": 14.545569,
+        "p75Ms": 14.545569,
+        "p99Ms": 14.545569,
+        "hz": 68.74945902769427,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 35.627252,
+        "p75Ms": 35.627252,
+        "p99Ms": 35.627252,
+        "hz": 28.06840112170313,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 114960,
+        "decodePeakBytes": 13666512,
+        "retainedBytes": 14241336,
+        "maxRssBytes": 171147264
+      },
+      "wallMs": 576,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 55.35287500000001,
+        "p75Ms": 55.35287500000001,
+        "p99Ms": 55.35287500000001,
+        "hz": 18.065908952335352,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 13769856,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 17676472,
+        "maxRssBytes": 153636864
+      },
+      "wallMs": 283,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 6127790,
+      "gzipBytes": 504793,
+      "encode": {
+        "meanMs": 256.508158,
+        "p75Ms": 256.508158,
+        "p99Ms": 256.508158,
+        "hz": 3.8985114851590805,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 17.13332300000002,
+        "p75Ms": 17.13332300000002,
+        "p99Ms": 17.13332300000002,
+        "hz": 58.36579395602353,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 103192072,
+        "decodePeakBytes": 9599216,
+        "retainedBytes": 21539688,
+        "maxRssBytes": 300482560
+      },
+      "wallMs": 584,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4357543,
+      "gzipBytes": 407021,
+      "encode": {
+        "meanMs": 49.90078500000001,
+        "p75Ms": 49.90078500000001,
+        "p99Ms": 49.90078500000001,
+        "hz": 20.039764905501983,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 39.87105399999996,
+        "p75Ms": 39.87105399999996,
+        "p99Ms": 39.87105399999996,
+        "hz": 25.08085188818939,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2822288,
+        "decodePeakBytes": 13784904,
+        "retainedBytes": 19575560,
+        "maxRssBytes": 168194048
+      },
+      "wallMs": 894,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2357524,
+      "gzipBytes": 362531,
+      "encode": {
+        "meanMs": 30.022498000000013,
+        "p75Ms": 30.022498000000013,
+        "p99Ms": 30.022498000000013,
+        "hz": 33.308354288174144,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 11.350085000000036,
+        "p75Ms": 11.350085000000036,
+        "p99Ms": 11.350085000000036,
+        "hz": 88.10506705456363,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 10907360,
+        "decodePeakBytes": 14504800,
+        "retainedBytes": 22899776,
+        "maxRssBytes": 161460224
+      },
+      "wallMs": 889,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4157439,
+      "gzipBytes": 406612,
+      "encode": {
+        "meanMs": 63.48485499999998,
+        "p75Ms": 63.48485499999998,
+        "p99Ms": 63.48485499999998,
+        "hz": 15.751788359601676,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 39.326728,
+        "p75Ms": 39.326728,
+        "p99Ms": 39.326728,
+        "hz": 25.427998993458086,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 14922744,
+        "decodePeakBytes": 16840264,
+        "retainedBytes": 22638864,
+        "maxRssBytes": 165453824
+      },
+      "wallMs": 703,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 7066713,
+      "gzipBytes": 1198660,
+      "encode": {
+        "meanMs": 148.048706,
+        "p75Ms": 148.048706,
+        "p99Ms": 148.048706,
+        "hz": 6.754533876169103,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 36.848727,
+        "p75Ms": 36.848727,
+        "p99Ms": 36.848727,
+        "hz": 27.137979556254415,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 114980872,
+        "decodePeakBytes": 32973424,
+        "retainedBytes": 45805864,
+        "maxRssBytes": 286240768
+      },
+      "wallMs": 548,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 5077781,
+      "gzipBytes": 489669,
+      "encode": {
+        "meanMs": 142.20864600000002,
+        "p75Ms": 142.20864600000002,
+        "p99Ms": 142.20864600000002,
+        "hz": 7.03192125182037,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 102.48870899999997,
+        "p75Ms": 102.48870899999997,
+        "p99Ms": 102.48870899999997,
+        "hz": 9.757172373007453,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 107773656,
+        "decodePeakBytes": 20001680,
+        "retainedBytes": 30945640,
+        "maxRssBytes": 371032064
+      },
+      "wallMs": 550,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 6127782,
+      "gzipBytes": 504783,
+      "encode": {
+        "meanMs": 137.68866999999997,
+        "p75Ms": 137.68866999999997,
+        "p99Ms": 137.68866999999997,
+        "hz": 7.2627617072632065,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 110.29669300000006,
+        "p75Ms": 110.29669300000006,
+        "p99Ms": 110.29669300000006,
+        "hz": 9.066454966152063,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 43163528,
+        "decodePeakBytes": 28998048,
+        "retainedBytes": 43141736,
+        "maxRssBytes": 226992128
+      },
+      "wallMs": 566,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 7816687,
+      "gzipBytes": 956105,
+      "encode": {
+        "meanMs": 102.93556400000003,
+        "p75Ms": 102.93556400000003,
+        "p99Ms": 102.93556400000003,
+        "hz": 9.714815377122719,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 302.27230599999996,
+        "p75Ms": 302.27230599999996,
+        "p99Ms": 302.27230599999996,
+        "hz": 3.3082752873827617,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 55192896,
+        "decodePeakBytes": 129437232,
+        "retainedBytes": 92060888,
+        "maxRssBytes": 356839424
+      },
+      "wallMs": 785,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 7316790,
+      "gzipBytes": 1209272,
+      "encode": {
+        "meanMs": 165.27694499999998,
+        "p75Ms": 165.27694499999998,
+        "p99Ms": 165.27694499999998,
+        "hz": 6.050450654203465,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 121.64682999999991,
+        "p75Ms": 121.64682999999991,
+        "p99Ms": 121.64682999999991,
+        "hz": 8.220518364514724,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 122983976,
+        "decodePeakBytes": 107528592,
+        "retainedBytes": 120579456,
+        "maxRssBytes": 335900672
+      },
+      "wallMs": 860,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 6477793,
+      "gzipBytes": 666785,
+      "encode": {
+        "meanMs": 72.217938,
+        "p75Ms": 72.217938,
+        "p99Ms": 72.217938,
+        "hz": 13.8469752487256,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 52.588986999999975,
+        "p75Ms": 52.588986999999975,
+        "p99Ms": 52.588986999999975,
+        "hz": 19.015388145810842,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 11609920,
+        "decodePeakBytes": 42002816,
+        "retainedBytes": 18864248,
+        "maxRssBytes": 192253952
+      },
+      "wallMs": 604,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-records-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2823127,
+      "gzipBytes": 382885,
+      "encode": {
+        "meanMs": 4071.013313,
+        "p75Ms": 4071.013313,
+        "p99Ms": 4071.013313,
+        "hz": 0.24563908862854658,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 641.7706029999999,
+        "p75Ms": 641.7706029999999,
+        "p99Ms": 641.7706029999999,
+        "hz": 1.5581891649842368,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 478657800,
+        "decodePeakBytes": 181252528,
+        "retainedBytes": 185983160,
+        "maxRssBytes": 1008721920
+      },
+      "wallMs": 5458,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-records-100e3",
+      "suite": "?",
+      "status": "error",
+      "error": "TIMEOUT(>45000ms)",
+      "wallMs": 45004,
+      "metaShape": "records",
+      "metaN": 100000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2414816,
+      "gzipBytes": 506152,
+      "encode": {
+        "meanMs": 8.623305999999985,
+        "p75Ms": 8.623305999999985,
+        "p99Ms": 8.623305999999985,
+        "hz": 115.96480514549776,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 11.528847000000042,
+        "p75Ms": 11.528847000000042,
+        "p99Ms": 11.528847000000042,
+        "hz": 86.73894275810898,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 2528416,
+        "decodePeakBytes": 7204952,
+        "retainedBytes": 10067640,
+        "maxRssBytes": 133492736
+      },
+      "wallMs": 397,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2291755,
+      "gzipBytes": 357957,
+      "encode": {
+        "meanMs": 9.597548999999987,
+        "p75Ms": 9.597548999999987,
+        "p99Ms": 9.597548999999987,
+        "hz": 104.19326851053341,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 29.618471999999997,
+        "p75Ms": 29.618471999999997,
+        "p99Ms": 29.618471999999997,
+        "hz": 33.76271402522048,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 115016,
+        "decodePeakBytes": 13234384,
+        "retainedBytes": 13559960,
+        "maxRssBytes": 140718080
+      },
+      "wallMs": 629,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 39.073462999999975,
+        "p75Ms": 39.073462999999975,
+        "p99Ms": 39.073462999999975,
+        "hz": 25.592817304163713,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 13343872,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 8322568,
+        "maxRssBytes": 141508608
+      },
+      "wallMs": 261,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2414825,
+      "gzipBytes": 506170,
+      "encode": {
+        "meanMs": 207.431961,
+        "p75Ms": 207.431961,
+        "p99Ms": 207.431961,
+        "hz": 4.8208578619183955,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 9.935205999999994,
+        "p75Ms": 9.935205999999994,
+        "p99Ms": 9.935205999999994,
+        "hz": 100.65216564206123,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 83883304,
+        "decodePeakBytes": 7207544,
+        "retainedBytes": 10243240,
+        "maxRssBytes": 279961600
+      },
+      "wallMs": 630,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1824867,
+      "gzipBytes": 543492,
+      "encode": {
+        "meanMs": 15.217615999999992,
+        "p75Ms": 15.217615999999992,
+        "p99Ms": 15.217615999999992,
+        "hz": 65.71331541024563,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 16.874663000000055,
+        "p75Ms": 16.874663000000055,
+        "p99Ms": 16.874663000000055,
+        "hz": 59.26044271224834,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 5200688,
+        "decodePeakBytes": 11155536,
+        "retainedBytes": 11687576,
+        "maxRssBytes": 139804672
+      },
+      "wallMs": 555,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1124821,
+      "gzipBytes": 515447,
+      "encode": {
+        "meanMs": 13.950745000000012,
+        "p75Ms": 13.950745000000012,
+        "p99Ms": 13.950745000000012,
+        "hz": 71.68075970136356,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 6.790422000000035,
+        "p75Ms": 6.790422000000035,
+        "p99Ms": 6.790422000000035,
+        "hz": 147.2662523772447,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 12526464,
+        "decodePeakBytes": 7325672,
+        "retainedBytes": 14588544,
+        "maxRssBytes": 139513856
+      },
+      "wallMs": 519,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1624728,
+      "gzipBytes": 521438,
+      "encode": {
+        "meanMs": 18.85952500000002,
+        "p75Ms": 18.85952500000002,
+        "p99Ms": 18.85952500000002,
+        "hz": 53.02360478325933,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 16.984557999999993,
+        "p75Ms": 16.984557999999993,
+        "p99Ms": 16.984557999999993,
+        "hz": 58.87701051743592,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 8127600,
+        "decodePeakBytes": 8418264,
+        "retainedBytes": 8838880,
+        "maxRssBytes": 135983104
+      },
+      "wallMs": 921,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4186582,
+      "gzipBytes": 1239740,
+      "encode": {
+        "meanMs": 152.25285399999999,
+        "p75Ms": 152.25285399999999,
+        "p99Ms": 152.25285399999999,
+        "hz": 6.56802137843669,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 36.605773,
+        "p75Ms": 36.605773,
+        "p99Ms": 36.605773,
+        "hz": 27.318095427188492,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 68714168,
+        "decodePeakBytes": 31674032,
+        "retainedBytes": 36170416,
+        "maxRssBytes": 224747520
+      },
+      "wallMs": 738,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2014816,
+      "gzipBytes": 493077,
+      "encode": {
+        "meanMs": 83.66859500000001,
+        "p75Ms": 83.66859500000001,
+        "p99Ms": 83.66859500000001,
+        "hz": 11.951915769590727,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 68.75257999999997,
+        "p75Ms": 68.75257999999997,
+        "p99Ms": 68.75257999999997,
+        "hz": 14.544908714698423,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 69830408,
+        "decodePeakBytes": 14409136,
+        "retainedBytes": 16980224,
+        "maxRssBytes": 293523456
+      },
+      "wallMs": 591,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2414817,
+      "gzipBytes": 506155,
+      "encode": {
+        "meanMs": 104.18256199999999,
+        "p75Ms": 104.18256199999999,
+        "p99Ms": 104.18256199999999,
+        "hz": 9.598535309584728,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 56.955887000000075,
+        "p75Ms": 56.955887000000075,
+        "p99Ms": 56.955887000000075,
+        "hz": 17.55744757341763,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 26590416,
+        "decodePeakBytes": 27232528,
+        "retainedBytes": 32407776,
+        "maxRssBytes": 175558656
+      },
+      "wallMs": 628,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 3203713,
+      "gzipBytes": 719956,
+      "encode": {
+        "meanMs": 49.425501000000025,
+        "p75Ms": 49.425501000000025,
+        "p99Ms": 49.425501000000025,
+        "hz": 20.232470683504037,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 185.47367499999996,
+        "p75Ms": 185.47367499999996,
+        "p99Ms": 185.47367499999996,
+        "hz": 5.39160072177359,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 30497696,
+        "decodePeakBytes": 90497280,
+        "retainedBytes": 94004944,
+        "maxRssBytes": 220659712
+      },
+      "wallMs": 610,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 5153279,
+      "gzipBytes": 1258561,
+      "encode": {
+        "meanMs": 141.90183699999997,
+        "p75Ms": 141.90183699999997,
+        "p99Ms": 141.90183699999997,
+        "hz": 7.04712511931752,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 108.07447300000001,
+        "p75Ms": 108.07447300000001,
+        "p99Ms": 108.07447300000001,
+        "hz": 9.252878799603305,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 106147672,
+        "decodePeakBytes": 95001912,
+        "retainedBytes": 100573120,
+        "maxRssBytes": 303828992
+      },
+      "wallMs": 856,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2888903,
+      "gzipBytes": 610723,
+      "encode": {
+        "meanMs": 37.364553,
+        "p75Ms": 37.364553,
+        "p99Ms": 37.364553,
+        "hz": 26.763333686876972,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 18.200046000000043,
+        "p75Ms": 18.200046000000043,
+        "p99Ms": 18.200046000000043,
+        "hz": 54.944916073288915,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4038664,
+        "decodePeakBytes": 18441176,
+        "retainedBytes": 18938552,
+        "maxRssBytes": 146984960
+      },
+      "wallMs": 869,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-objects-100e3",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 1312165,
+      "gzipBytes": 520400,
+      "encode": {
+        "meanMs": 2032.132014,
+        "p75Ms": 2032.132014,
+        "p99Ms": 2032.132014,
+        "hz": 0.492094014124419,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 453.9820599999998,
+        "p75Ms": 453.9820599999998,
+        "p99Ms": 453.9820599999998,
+        "hz": 2.2027302136124067,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 355223080,
+        "decodePeakBytes": 127217392,
+        "retainedBytes": 126808544,
+        "maxRssBytes": 770809856
+      },
+      "wallMs": 2954,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-objects-100e3",
+      "suite": "?",
+      "status": "error",
+      "error": "TIMEOUT(>45000ms)",
+      "wallMs": 45004,
+      "metaShape": "objects",
+      "metaN": 100000
+    },
+    {
+      "lib": "json",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4728475,
+      "gzipBytes": 44610,
+      "encode": {
+        "meanMs": 10.892877999999996,
+        "p75Ms": 10.892877999999996,
+        "p99Ms": 10.892877999999996,
+        "hz": 91.80310290815709,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 9.694467000000003,
+        "p75Ms": 9.694467000000003,
+        "p99Ms": 9.694467000000003,
+        "hz": 103.15162246671217,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4842064,
+        "decodePeakBytes": 8004584,
+        "retainedBytes": 12818968,
+        "maxRssBytes": 147501056
+      },
+      "wallMs": 248,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "v8",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2984331,
+      "gzipBytes": 29971,
+      "encode": {
+        "meanMs": 5.9474010000000135,
+        "p75Ms": 5.9474010000000135,
+        "p99Ms": 5.9474010000000135,
+        "hz": 168.1406718665847,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 12.983212000000009,
+        "p75Ms": 12.983212000000009,
+        "p99Ms": 12.983212000000009,
+        "hz": 77.02254264969248,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 113504,
+        "decodePeakBytes": 8006128,
+        "retainedBytes": 8093200,
+        "maxRssBytes": 140431360
+      },
+      "wallMs": 247,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "structuredClone",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 0,
+      "encode": {
+        "meanMs": 18.61674099999999,
+        "p75Ms": 18.61674099999999,
+        "p99Ms": 18.61674099999999,
+        "hz": 53.71509438735816,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 8114208,
+        "decodePeakBytes": 4464,
+        "retainedBytes": 8083544,
+        "maxRssBytes": 141422592
+      },
+      "wallMs": 241,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "superjson",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4728484,
+      "gzipBytes": 44629,
+      "encode": {
+        "meanMs": 423.582498,
+        "p75Ms": 423.582498,
+        "p99Ms": 423.582498,
+        "hz": 2.360815200631826,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 8.151310999999964,
+        "p75Ms": 8.151310999999964,
+        "p99Ms": 8.151310999999964,
+        "hz": 122.67965238965908,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 169443568,
+        "decodePeakBytes": 8007176,
+        "retainedBytes": 12936968,
+        "maxRssBytes": 444772352
+      },
+      "wallMs": 676,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "cbor-x",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2931405,
+      "gzipBytes": 29379,
+      "encode": {
+        "meanMs": 14.371679,
+        "p75Ms": 14.371679,
+        "p99Ms": 14.371679,
+        "hz": 69.58129248503253,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 15.661084999999986,
+        "p75Ms": 15.661084999999986,
+        "p99Ms": 15.661084999999986,
+        "hz": 63.85253639834028,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 4636032,
+        "decodePeakBytes": 8052064,
+        "retainedBytes": 8211296,
+        "maxRssBytes": 135671808
+      },
+      "wallMs": 255,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "msgpackr",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2921605,
+      "gzipBytes": 29288,
+      "encode": {
+        "meanMs": 8.393891999999994,
+        "p75Ms": 8.393891999999994,
+        "p99Ms": 8.393891999999994,
+        "hz": 119.13424666412205,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 8.594903000000016,
+        "p75Ms": 8.594903000000016,
+        "p99Ms": 8.594903000000016,
+        "hz": 116.3480262662648,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 216072,
+        "decodePeakBytes": 8065832,
+        "retainedBytes": 8223976,
+        "maxRssBytes": 136425472
+      },
+      "wallMs": 243,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "msgpack",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2905925,
+      "gzipBytes": 29143,
+      "encode": {
+        "meanMs": 15.52574199999998,
+        "p75Ms": 15.52574199999998,
+        "p99Ms": 15.52574199999998,
+        "hz": 64.40915996156585,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 9.323863999999986,
+        "p75Ms": 9.323863999999986,
+        "p99Ms": 9.323863999999986,
+        "hz": 107.2516716245541,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 6696976,
+        "decodePeakBytes": 8058568,
+        "retainedBytes": 8178240,
+        "maxRssBytes": 145014784
+      },
+      "wallMs": 253,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "devalue",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4748581,
+      "gzipBytes": 44764,
+      "encode": {
+        "meanMs": 118.42049,
+        "p75Ms": 118.42049,
+        "p99Ms": 118.42049,
+        "hz": 8.444484565128889,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 26.113598999999965,
+        "p75Ms": 26.113598999999965,
+        "p99Ms": 26.113598999999965,
+        "hz": 38.29422363420689,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 69326472,
+        "decodePeakBytes": 16127200,
+        "retainedBytes": 21008144,
+        "maxRssBytes": 254976000
+      },
+      "wallMs": 382,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "seroval",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4728475,
+      "gzipBytes": 44610,
+      "encode": {
+        "meanMs": 132.76696700000002,
+        "p75Ms": 132.76696700000002,
+        "p99Ms": 132.76696700000002,
+        "hz": 7.531994008720557,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 42.509431000000006,
+        "p75Ms": 42.509431000000006,
+        "p99Ms": 42.509431000000006,
+        "hz": 23.52419160821042,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 112310376,
+        "decodePeakBytes": 8009328,
+        "retainedBytes": 12861408,
+        "maxRssBytes": 284762112
+      },
+      "wallMs": 422,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "turbo-stream",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4728476,
+      "gzipBytes": 44611,
+      "encode": {
+        "meanMs": 186.541676,
+        "p75Ms": 186.541676,
+        "p99Ms": 186.541676,
+        "hz": 5.360732365243679,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 90.540303,
+        "p75Ms": 90.540303,
+        "p99Ms": 90.540303,
+        "hz": 11.04480509635582,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 68468288,
+        "decodePeakBytes": 97175696,
+        "retainedBytes": 104303352,
+        "maxRssBytes": 346677248
+      },
+      "wallMs": 514,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "flatted",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4728477,
+      "gzipBytes": 44611,
+      "encode": {
+        "meanMs": 74.46923899999999,
+        "p75Ms": 74.46923899999999,
+        "p99Ms": 74.46923899999999,
+        "hz": 13.42836335416292,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 474.79277399999995,
+        "p75Ms": 474.79277399999995,
+        "p99Ms": 474.79277399999995,
+        "hz": 2.1061820119444365,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 28857032,
+        "decodePeakBytes": 103440432,
+        "retainedBytes": 108256752,
+        "maxRssBytes": 363544576
+      },
+      "wallMs": 804,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "ungap-structured-clone",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 4764969,
+      "gzipBytes": 54787,
+      "encode": {
+        "meanMs": 65.221722,
+        "p75Ms": 65.221722,
+        "p99Ms": 65.221722,
+        "hz": 15.332315206274377,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 52.18280199999998,
+        "p75Ms": 52.18280199999998,
+        "p99Ms": 52.18280199999998,
+        "hz": 19.163401765968803,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 34080424,
+        "decodePeakBytes": 65542648,
+        "retainedBytes": 70420232,
+        "maxRssBytes": 211890176
+      },
+      "wallMs": 356,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "bson",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 11888903,
+      "gzipBytes": 2949829,
+      "encode": {
+        "meanMs": 78.38806,
+        "p75Ms": 78.38806,
+        "p99Ms": 78.38806,
+        "hz": 12.757044886682998,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 21.90365500000007,
+        "p75Ms": 21.90365500000007,
+        "p99Ms": 21.90365500000007,
+        "hz": 45.654480953064535,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 16269704,
+        "decodePeakBytes": 22128800,
+        "retainedBytes": 22276424,
+        "maxRssBytes": 191422464
+      },
+      "wallMs": 4526,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "ion-js",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "ok",
+      "payloadBytes": 2937044,
+      "gzipBytes": 29435,
+      "encode": {
+        "meanMs": 2816.0440790000002,
+        "p75Ms": 2816.0440790000002,
+        "p99Ms": 2816.0440790000002,
+        "hz": 0.3551080778377262,
+        "rme": 0,
+        "samples": 1
+      },
+      "decode": {
+        "meanMs": 874.0707229999998,
+        "p75Ms": 874.0707229999998,
+        "p99Ms": 874.0707229999998,
+        "hz": 1.1440721828180946,
+        "rme": 0,
+        "samples": 1
+      },
+      "memory": {
+        "encodePeakBytes": 704391448,
+        "decodePeakBytes": 329918288,
+        "retainedBytes": 330219264,
+        "maxRssBytes": 1243103232
+      },
+      "wallMs": 3949,
+      "metaShape": "ints",
+      "metaN": 1000000
+    },
+    {
+      "lib": "obj-codec",
+      "dataset": "S5-ints-1e6",
+      "suite": "S5",
+      "status": "error",
+      "error": "RangeError: Maximum call stack size exceeded",
+      "wallMs": 1204,
+      "metaShape": "ints",
+      "metaN": 1000000
+    }
+  ]
+}

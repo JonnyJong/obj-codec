@@ -1,0 +1,50 @@
+feature                 JSON              v8                structuredClone   superjson         cbor-x            msgpackr(sc)      @msgpack/msgpack  devalue           seroval           turbo-stream      flatted           @ungap/sc         bson              ion-js            obj-codec         
+undefined value         no                yes               yes               yes               yes               yes               no                yes               yes               yes               no                yes               no                throws            yes               
+bigint                  throws            yes               yes               yes               yes               yes               yes               yes               yes               yes               throws            yes               no                no                yes               
+bigint (>64bit)         throws            yes               yes               yes               yes               yes               no                yes               yes               yes               throws            yes               no                no                yes               
+NaN                     no                yes               yes               yes               yes               yes               yes               yes               yes               yes               no                yes               yes               no                yes               
++/-Infinity             no                yes               yes               yes               yes               yes               yes               yes               yes               yes               no                yes               yes               no                yes               
+-0                      no                yes               yes               yes               no                no                no                yes               yes               yes               no                yes               yes               no                yes               
+Date                    no                yes               yes               yes               yes               yes               yes               yes               yes               yes               no                yes               yes               yes               yes               
+RegExp                  no                yes               yes               yes               yes               yes               no                yes               yes               yes               no                yes               yes               no                yes               
+Map                     no                yes               yes               yes               yes               yes               no                yes               yes               yes               no                yes               throws            no                yes               
+Set                     no                yes               yes               yes               yes               yes               no                yes               yes               yes               no                yes               no                no                yes               
+Uint8Array              no                yes               yes               yes               yes               yes               yes               yes               yes               yes               no                yes               no                yes               yes               
+Int32Array              no                yes               yes               yes               yes               yes               no                yes               yes               yes               no                yes               no                no                yes               
+Float64Array            no                yes               yes               yes               yes               yes               no                yes               yes               yes               no                yes               no                no                yes               
+BigInt64Array           throws            yes               yes               throws            yes               yes               no                yes               yes               yes               throws            yes               no                no                yes               
+ArrayBuffer             no                yes               yes               no                no                yes               no                yes               yes               yes               no                yes               no                no                yes               
+DataView                no                yes               yes               no                no                yes               no                yes               yes               yes               no                yes               no                no                yes               
+Symbol                  throws            throws            throws            no                throws            throws            throws            throws            throws            no                no                throws            no                throws            yes               
+undefined in array      no                yes               yes               yes               yes               yes               no                yes               yes               yes               no                yes               no                throws            yes               
+sparse array            no                yes               yes               no                no                no                no                yes               yes               no                no                no                no                throws            throws            
+numeric object key      yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               no                yes               
+circular ref            throws            yes               yes               yes               throws            yes               throws            yes               yes               yes               yes               yes               throws            throws            yes               
+circular via array      throws            yes               yes               yes               throws            yes               throws            yes               yes               yes               yes               yes               throws            throws            yes               
+shared ref identity     no                yes               yes               yes               no                yes               no                yes               yes               yes               yes               yes               no                no                yes               
+shared ref in Map/Set   throws            yes               yes               yes               no                yes               throws            yes               yes               yes               throws            yes               throws            no                yes               
+custom class instance   no                no                no                no                no                no                no                throws            yes               no                no                no                no                no                yes               
+Error                   no                yes               yes               yes               yes               yes               no                throws            yes               no                no                yes               no                no                no                
+unicode string          yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               no                yes               
+lone surrogate          yes               yes               yes               yes               no                no                yes               yes               yes               yes               yes               yes               no                no                no                
+deep nesting (1000)     yes               yes               yes               yes               yes               yes               throws            yes               throws            yes               yes               yes               yes               no                yes               
+null prototype obj      yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               throws            yes               
+huge string 1MB         yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               
+1e6 element array       yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               no                throws            
+
+--- sizes on a mixed sample ---
+JSON               136
+v8                 115
+structuredClone    undefined
+superjson          187
+cbor-x             84
+msgpackr(sc)       85
+@msgpack/msgpack   79
+devalue            186
+seroval            128
+turbo-stream       138
+flatted            166
+@ungap/sc          326
+bson               165
+ion-js             107
+obj-codec          190

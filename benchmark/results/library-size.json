@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "kind": "library-size",
+    "startedAt": "2026-10-27T08:10:58.687Z",
+    "node": "v24.16.0",
+    "bundler": "esbuild (bundle, minify, platform=node, esm, node:* external)",
+    "compression": "gzip level 9, brotli quality 11",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX @ march"
+  },
+  "rows": [
+    {
+      "id": "json",
+      "name": "JSON",
+      "builtin": true
+    },
+    {
+      "id": "v8",
+      "name": "v8.serialize",
+      "builtin": true
+    },
+    {
+      "id": "structuredClone",
+      "name": "structuredClone",
+      "builtin": true
+    },
+    {
+      "id": "superjson",
+      "name": "superjson",
+      "builtin": false,
+      "minBytes": 11521,
+      "gzipBytes": 4108,
+      "brotliBytes": 3756,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 6.1283259999999995
+    },
+    {
+      "id": "cbor-x",
+      "name": "cbor-x",
+      "builtin": false,
+      "minBytes": 40364,
+      "gzipBytes": 15027,
+      "brotliBytes": 13512,
+      "dependencies": [],
+      "optionalDependencies": [
+        "cbor-extract"
+      ],
+      "nativeAddon": "cbor-extract",
+      "importMs": 12.887512
+    },
+    {
+      "id": "msgpackr",
+      "name": "msgpackr",
+      "builtin": false,
+      "minBytes": 44570,
+      "gzipBytes": 16513,
+      "brotliBytes": 14902,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 10.462670000000001
+    },
+    {
+      "id": "msgpack",
+      "name": "@msgpack/msgpack",
+      "builtin": false,
+      "minBytes": 27431,
+      "gzipBytes": 7380,
+      "brotliBytes": 6617,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 5.156381000000001
+    },
+    {
+      "id": "devalue",
+      "name": "devalue",
+      "builtin": false,
+      "minBytes": 19362,
+      "gzipBytes": 6882,
+      "brotliBytes": 6287,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 5.668942999999999
+    },
+    {
+      "id": "seroval",
+      "name": "seroval",
+      "builtin": false,
+      "minBytes": 51828,
+      "gzipBytes": 15880,
+      "brotliBytes": 14292,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 5.009169
+    },
+    {
+      "id": "turbo-stream",
+      "name": "turbo-stream",
+      "builtin": false,
+      "minBytes": 14368,
+      "gzipBytes": 4887,
+      "brotliBytes": 4432,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 3.5488479999999996
+    },
+    {
+      "id": "flatted",
+      "name": "flatted",
+      "builtin": false,
+      "minBytes": 1078,
+      "gzipBytes": 636,
+      "brotliBytes": 593,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 3.1146510000000003
+    },
+    {
+      "id": "ungap-structured-clone",
+      "name": "@ungap/structured-clone/json",
+      "builtin": false,
+      "minBytes": 3114,
+      "gzipBytes": 1409,
+      "brotliBytes": 1278,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 4.111271
+    },
+    {
+      "id": "bson",
+      "name": "bson",
+      "builtin": false,
+      "minBytes": 77070,
+      "gzipBytes": 22906,
+      "brotliBytes": 20319,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 7.058706000000001
+    },
+    {
+      "id": "ion-js",
+      "name": "ion-js",
+      "builtin": false,
+      "minBytes": 132214,
+      "gzipBytes": 33443,
+      "brotliBytes": 28983,
+      "dependencies": [],
+      "optionalDependencies": [],
+      "nativeAddon": null,
+      "importMs": 14.799843000000001
+    },
+    {
+      "id": "obj-codec",
+      "name": "obj-codec",
+      "builtin": false,
+      "minBytes": 12354,
+      "gzipBytes": 4237,
+      "brotliBytes": 3842,
+      "importMs": 3.4843550000000008
+    }
+  ]
+}
