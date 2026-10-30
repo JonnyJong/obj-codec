@@ -1,7 +1,7 @@
 {
 	"name": "obj-codec",
 	"version": "2.0.0",
-	"description": "Encode objects into binary and decode binary back into objects, with streaming, nested references and custom codecs",
+	"description": "A binary codec for JavaScript values: reference fidelity, near-complete type coverage, and chunkable streaming",
 	"keywords": [
 		"serialization",
 		"binary-encoding",
@@ -36,6 +36,10 @@
 			"require": "./dist/web.js"
 		}
 	},
+	"files": [
+		"dist/",
+		"docs/"
+	],
 	"scripts": {
 		"test": "vitest",
 		"test:ci": "vitest run",
@@ -53,8 +57,7 @@
 		"vitest": "^5.0.5"
 	},
 	"engines": {
-		"node": ">=22",
-		"pnpm": ">=10"
+		"node": ">=22"
 	},
 	"volta": {
 		"node": "24.22.2"
