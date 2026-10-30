@@ -1,5 +1,6 @@
 // Definitive capability probe, each library in its richest supported mode.
 import * as v8 from 'node:v8';
+import { writeFileSync } from 'node:fs';
 import superjson from 'superjson';
 import * as cborx from 'cbor-x';
 import { Packr } from 'msgpackr';
@@ -28,29 +29,21 @@ const fooPlugin = createPlugin({
 	deserialize: (node) => new Foo(node.v),
 });
 
-// obj-codec needs a global registration for the custom class
-ObjCodec.register({
+// obj-codec: 每个 Codec 实例自带注册表，所以探测用的实例只管自己。
+// `write` 只写负载（类型 ID 由编码器负责），`read` 直接返回值。
+const objCodec = new ObjCodec();
+objCodec.register({
+	kind: 'referable',
 	name: 'Foo',
 	class: Foo,
-	encode: (d) => d.v,
-	decode: (v) => new Foo(v),
+	write: (ctx, value) => {
+		ctx.writer.varint(value.v);
+	},
+	read: (ctx) => new Foo(ctx.reader.varint()),
 });
 
-const objEncode = (v, opts) => {
-	const enc = ObjCodec.encode(v, opts);
-	const chunks = [];
-	for (const c of enc.encode()) chunks.push(c);
-	const total = chunks.reduce((n, c) => n + c.length, 0);
-	const out = new Uint8Array(total);
-	let o = 0;
-	for (const c of chunks) { out.set(c, o); o += c.length; }
-	return out;
-};
-const objDecode = (b, opts) => {
-	const dec = ObjCodec.decode(opts);
-	dec.decode(b);
-	return dec.getResult();
-};
+const objEncode = (v, opts) => objCodec.encodeSync(v, opts);
+const objDecode = (b, opts) => objCodec.decodeSync(b, opts);
 
 const mk = (name, encode, decode, extra = {}) => ({ name, encode, decode, ...extra });
 
@@ -127,23 +120,31 @@ for (const lib of libs) {
 
 const names = features.map((f) => f.name);
 const pad = (s, n) => String(s).padEnd(n);
-console.log(pad('feature', 24) + libs.map((l) => pad(l.name, 18)).join(''));
-for (const n of names) console.log(pad(n, 24) + libs.map((l) => pad(out[l.name][n], 18)).join(''));
+// 表头与数据行同时写进 matrix.txt，避免手工抄 stdout 抄出偏差
+const lines = [];
+lines.push(pad('feature', 24) + libs.map((l) => pad(l.name, 18)).join(''));
+for (const n of names) lines.push(pad(n, 24) + libs.map((l) => pad(out[l.name][n], 18)).join(''));
 
-console.log('\n--- sizes on a mixed sample ---');
+lines.push('');
+lines.push('--- sizes on a mixed sample ---');
 const sample = { id: 12345, name: 'hello', active: true, tags: ['a', 'b'], when: new Date(0), n: 42, nested: { x: 1.5 }, arr: [1, 2, 3, 4, 5] };
 for (const lib of libs) {
+	let len;
 	try {
 		const p = await lib.encode(sample);
-		let len;
 		if (typeof p === 'string') len = Buffer.byteLength(p);
 		else if (p instanceof Uint8Array || p instanceof ArrayBuffer) len = p.byteLength;
 		else if (p && p.chunks) len = p.chunks.reduce((n, c) => n + (typeof c === 'string' ? Buffer.byteLength(c) : c.byteLength), 0);
 		else if (Array.isArray(p)) len = JSON.stringify(p).length;
 		else len = undefined;
-		console.log(pad(lib.name, 18), len);
-	} catch (e) { console.log(pad(lib.name, 18), 'throws: ' + e.message.slice(0, 50)); }
+	} catch (e) {
+		len = `throws: ${e.message.slice(0, 50)}`;
+	}
+	lines.push(`${pad(lib.name, 18)} ${len}`);
 }
 
-import { writeFileSync } from 'node:fs';
+const report = lines.join('\n');
+console.log(report);
+
 writeFileSync(new URL('./capability.json', import.meta.url), JSON.stringify(out, null, 2));
+writeFileSync(new URL('./matrix.txt', import.meta.url), `${report}\n`);

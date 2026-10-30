@@ -1,118 +1,90 @@
-import { DecodeOptions, Decoder } from './decoder';
-import { EncodeOptions, Encoder } from './encoder';
-import { IObjCodec, globalCodecs } from './global';
-import { BinaryType, ObjDecoderOptions, ObjEncoderOptions } from './types';
-import { mergeCodecs } from './utils';
+import { CodecBase, concatChunks } from './codec-base';
+import type { Decoder } from './decode';
+import type { Encoder } from './encode';
+import type { CodecOptions } from './types';
 
-class ObjEncoder extends ReadableStream<Uint8Array> {
-	#encoder: Encoder;
-	#generator: Generator<Uint8Array, void, unknown>;
-	constructor(options: EncodeOptions) {
+export type {
+	CodecOptions,
+	CustomCodec,
+	CustomContainerCodec,
+	CustomReferableCodec,
+} from './types';
+
+/** 编码流 */
+export class EncodeStream extends ReadableStream<Uint8Array> {
+	constructor(encoder: Encoder, root: unknown) {
+		const generator = encoder.encode(root);
 		super({
 			pull: (controller) => {
 				try {
-					const { value, done } = this.#generator.next();
+					const { value, done } = generator.next();
 					if (done) {
 						controller.close();
-					} else {
-						controller.enqueue(value);
+						return;
 					}
+					controller.enqueue(value);
 				} catch (error) {
 					controller.error(error);
 				}
 			},
 			cancel: () => {
-				this.#generator.return();
+				// 释放生成器
+				generator.return(undefined);
 			},
 		});
-		this.#encoder = new Encoder(options);
-		this.#generator = this.#encoder.encode();
-	}
-	/** 启动编码 */
-	encode(): Generator<Uint8Array, void, unknown> {
-		return this.#generator;
 	}
 }
 
-class ObjDecoder extends WritableStream<Uint8Array> {
+/** 解码流 */
+export class DecodeStream extends WritableStream<Uint8Array> {
 	#decoder: Decoder;
-	constructor(options: DecodeOptions) {
+	constructor(decoder: Decoder) {
 		super({
-			write: (chunk, controller) => {
-				try {
-					this.#decoder.decode(chunk);
-				} catch (error) {
-					controller.error(error);
-				}
+			write: (chunk) => {
+				decoder.push(chunk);
+			},
+			close: () => {
+				decoder.end();
 			},
 		});
-		this.#decoder = new Decoder(options);
+		this.#decoder = decoder;
 	}
-	/** 解码 */
-	decode(buffer: BinaryType): void {
-		this.#decoder.decode(buffer);
+	/** 解码结果；未完成时抛错 */
+	get result(): unknown {
+		return this.#decoder.result;
+	}
+	/** 是否已解完 */
+	get done(): boolean {
+		return this.#decoder.done;
+	}
+}
+
+/** 编解码器 */
+export class ObjCodec extends CodecBase {
+	/** 创建编码可读流 */
+	encode(root: unknown, options?: CodecOptions): EncodeStream {
+		return new EncodeStream(this.createEncoder(options?.externalRefs), root);
+	}
+	/** 创建解码可写流 */
+	decode(options?: CodecOptions): DecodeStream {
+		return new DecodeStream(this.createDecoder(options?.externalRefs));
 	}
 	/**
-	 * 获取结果
+	 * 一次性编码
 	 * @description
-	 * 调用此方法将结束解码
+	 * 直接获取完整编码结果
 	 */
-	getResult(): any {
-		return this.#decoder.getResult();
+	encodeSync(root: unknown, options?: CodecOptions): Uint8Array {
+		return concatChunks(this.createEncoder(options?.externalRefs).encode(root));
 	}
-}
-
-export class ObjCodec extends IObjCodec {
 	/**
-	 * 编码
-	 * @param root 编码根对象
+	 * 一次性解码
+	 * @description
+	 * 直接从完整数据解码
 	 */
-	static encode(root: any, options?: ObjEncoderOptions) {
-		return new ObjEncoder({
-			...options,
-			root,
-			codec: globalCodecs,
-		});
-	}
-	/** 解码 */
-	static decode(options?: ObjDecoderOptions) {
-		return new ObjDecoder({
-			...options,
-			codec: globalCodecs,
-		});
-	}
-	encode(root: any, options?: ObjEncoderOptions) {
-		return new ObjEncoder({
-			uniqueValues: this.uniqueValues,
-			...options,
-			root,
-			codec: mergeCodecs(globalCodecs, this._codecs),
-		});
-	}
-	decode(options?: ObjDecoderOptions) {
-		return new ObjDecoder({
-			uniqueValues: this.uniqueValues,
-			...options,
-			codec: mergeCodecs(globalCodecs, this._codecs),
-		});
+	decodeSync(bytes: Uint8Array, options?: CodecOptions): unknown {
+		const decoder = this.createDecoder(options?.externalRefs);
+		decoder.push(bytes);
+		return decoder.end();
 	}
 }
-
-export type {
-	BinaryType,
-	BaseType,
-	InternalType,
-	BasicType,
-	IClass,
-	ICodec,
-	InternalTypeName,
-	InternalCodec,
-} from './types';
-export {
-	INTERNAL_CODEC_MAP,
-	INTERNAL_CODEC,
-	INTERNAL_TYPE_ID,
-	CUSTOM_TYPE_ID_BEGIN,
-	VERSION,
-} from './global';
-export { Pointer, concatBuffers, bufferToUint8Array, isBinary } from './utils';

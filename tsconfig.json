@@ -4,6 +4,8 @@
 		"target": "esnext",
 		"module": "nodenext",
 		"moduleResolution": "nodenext",
+		"types": ["node"],
+		"lib": ["es2020"],
 		// Checking
 		"strict": true,
 		"noImplicitAny": true,
@@ -19,15 +21,20 @@
 		"allowJs": false,
 		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
 		// Features
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"experimentalDecorators": true,
+		"erasableSyntaxOnly": true,
 		// Output
 		"sourceMap": true,
 		"removeComments": false,
 		"newLine": "lf",
 		"declaration": true,
+		"emitDeclarationOnly": true,
+		"rootDir": "src",
+		"outDir": "dist",
 	},
 	"include": [
 		"src/**/*"

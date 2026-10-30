@@ -1,6 +1,6 @@
-import * as turbo from 'turbo-stream';
 import { ObjCodec } from 'obj-codec';
-import { ObjCodec as WebObjCodec } from 'obj-codec';
+import { ObjCodec as WebCodec } from 'obj-codec/web';
+import * as turbo from 'turbo-stream';
 import type { Capability } from '../datasets/types';
 import { adapters } from './index';
 import { registerCodecFixtures } from './register-fixtures';
@@ -23,8 +23,26 @@ export interface StreamAdapter {
 	sizeOf(payload: unknown): number;
 }
 
-// The web entry is a separate module instance with its own global registry.
-registerCodecFixtures(WebObjCodec as unknown as { register(c: unknown): void });
+// Node 与 Web 入口是两份独立的模块实例，注册表也各有一份。
+const nodeCodec = new ObjCodec();
+const webCodec = new WebCodec();
+registerCodecFixtures(nodeCodec);
+registerCodecFixtures(webCodec);
+
+/**
+ * 把数据集里的 v1 风格选项换成 v2 选项
+ * @description
+ * 数据集写着 v1 的 `uniqueValues`；v2 用 `externalRefs` 承担同一职责
+ * （同样「不编码内容，只写引用号」），因此这里做一次翻译。
+ */
+function objCodecOptions(
+	options: unknown,
+): { externalRefs?: unknown[] } | undefined {
+	if (!options || typeof options !== 'object') return undefined;
+	const raw = options as { uniqueValues?: unknown[]; externalRefs?: unknown[] };
+	const externalRefs = raw.externalRefs ?? raw.uniqueValues;
+	return externalRefs ? { externalRefs } : undefined;
+}
 
 const base = new Map(adapters.map((a) => [a.id, a]));
 
@@ -85,11 +103,19 @@ export const streamAdapters: StreamAdapter[] = [
 		encode: (value, options) => baseAdapter('obj-codec').encode(value, options),
 		sizeOf: (payload) => baseAdapter('obj-codec').sizeOf(payload),
 		split: (payload, chunkSize) => splitBytes(payload as Uint8Array, chunkSize),
-		decode: (chunks, options) => {
-			const decoder = ObjCodec.decode(options as never);
-			for (const chunk of chunks) decoder.decode(chunk as Uint8Array);
-			return decoder.getResult();
-		},
+		decode: (chunks, options) =>
+			new Promise((resolve, reject) => {
+				// v2 的解码器是增量的：逐块 write 即可，无需自己拼缓冲
+				const decoder = nodeCodec.decode(objCodecOptions(options));
+				decoder.on('error', reject);
+				for (const chunk of chunks) decoder.write(chunk as Uint8Array);
+				decoder.end();
+				try {
+					resolve(decoder.result);
+				} catch (error) {
+					reject(error);
+				}
+			}),
 	},
 	{
 		id: 'obj-codec-web',
@@ -100,11 +126,9 @@ export const streamAdapters: StreamAdapter[] = [
 		sizeOf: (payload) => baseAdapter('obj-codec').sizeOf(payload),
 		split: (payload, chunkSize) => splitBytes(payload as Uint8Array, chunkSize),
 		decode: async (chunks, options) => {
-			const decoder = WebObjCodec.decode(options as never);
-			await streamOf(chunks as Uint8Array[]).pipeTo(
-				decoder as unknown as WritableStream<Uint8Array>,
-			);
-			return decoder.getResult();
+			const decoder = webCodec.decode(objCodecOptions(options));
+			await streamOf(chunks as Uint8Array[]).pipeTo(decoder);
+			return decoder.result;
 		},
 	},
 	{

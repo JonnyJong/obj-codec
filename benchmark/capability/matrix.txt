@@ -17,7 +17,7 @@ ArrayBuffer             no                yes               yes               no
 DataView                no                yes               yes               no                no                yes               no                yes               yes               yes               no                yes               no                no                yes               
 Symbol                  throws            throws            throws            no                throws            throws            throws            throws            throws            no                no                throws            no                throws            yes               
 undefined in array      no                yes               yes               yes               yes               yes               no                yes               yes               yes               no                yes               no                throws            yes               
-sparse array            no                yes               yes               no                no                no                no                yes               yes               no                no                no                no                throws            throws            
+sparse array            no                yes               yes               no                no                no                no                yes               yes               no                no                no                no                throws            yes               
 numeric object key      yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               no                yes               
 circular ref            throws            yes               yes               yes               throws            yes               throws            yes               yes               yes               yes               yes               throws            throws            yes               
 circular via array      throws            yes               yes               yes               throws            yes               throws            yes               yes               yes               yes               yes               throws            throws            yes               
@@ -30,7 +30,7 @@ lone surrogate          yes               yes               yes               ye
 deep nesting (1000)     yes               yes               yes               yes               yes               yes               throws            yes               throws            yes               yes               yes               yes               no                yes               
 null prototype obj      yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               throws            yes               
 huge string 1MB         yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               
-1e6 element array       yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               no                throws            
+1e6 element array       yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               yes               no                yes               
 
 --- sizes on a mixed sample ---
 JSON               136
@@ -47,4 +47,4 @@ flatted            166
 @ungap/sc          326
 bson               165
 ion-js             107
-obj-codec          190
+obj-codec          110

@@ -100,7 +100,7 @@ function formatSize(n: number): string {
 
 export const s5: Dataset[] = [
 	...SCALE_SIZES.flatMap((n) => shapes.map((shape) => makeDataset(shape, n))),
-	// Boundary probe: obj-codec's concatBuffers(...array) blows the call stack here.
+	// Boundary probe: the largest size any shape reaches here.
 	makeDataset(shapes[0], 1_000_000, true),
 ];
 

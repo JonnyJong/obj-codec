@@ -14,6 +14,7 @@ import * as devalue from 'devalue';
 import * as flatted from 'flatted';
 import * as ion from 'ion-js';
 import { Packr } from 'msgpackr';
+import { ObjCodec } from 'obj-codec';
 import {
 	createPlugin,
 	deserialize as serovalDeserialize,
@@ -21,7 +22,6 @@ import {
 } from 'seroval';
 import superjson from 'superjson';
 import * as turbo from 'turbo-stream';
-import { ObjCodec } from 'obj-codec';
 import { DomainNode, Point } from '../datasets/fixtures';
 import type { Adapter, Capability } from '../datasets/types';
 import { registerCodecFixtures } from './register-fixtures';
@@ -135,7 +135,9 @@ const objCodecCapabilities: Capability[] = [
 ];
 
 // S3 fixtures: obj-codec registers codecs, seroval declares plugins.
-registerCodecFixtures(ObjCodec as unknown as { register(c: unknown): void });
+// 注册表在 `Codec` 实例上，所以这里为基准测试建一个专用实例。
+const objCodec = new ObjCodec();
+registerCodecFixtures(objCodec);
 
 const domainNodePlugin = createPlugin({
 	tag: 'DomainNode',
@@ -480,20 +482,30 @@ export const adapters: Adapter[] = [
 		id: 'obj-codec',
 		version: objCodecVersion,
 		wire: 'binary',
-		config: { api: 'ObjCodec.encode/decode', build: 'dist/index.esm.js' },
+		config: { api: 'Codec.encodeSync/decodeSync', build: 'dist/index.esm.js' },
 		capabilities: objCodecCapabilities,
-		encode: (v, options) => {
-			const encoder = ObjCodec.encode(v, options as never);
-			return concat([...encoder.encode()]);
-		},
-		decode: (p, options) => {
-			const decoder = ObjCodec.decode(options as never);
-			decoder.decode(bytesOfBinary(p));
-			return decoder.getResult();
-		},
+		encode: (v, options) => objCodec.encodeSync(v, objCodecOptions(options)),
+		decode: (p, options) =>
+			objCodec.decodeSync(bytesOfBinary(p), objCodecOptions(options)),
 		sizeOf: (p) => (p as Uint8Array).byteLength,
 		bytesOf: bytesOfBinary,
 	},
 ];
+
+/**
+ * 把数据集里的 v1 风格选项换成 v2 选项
+ * @description
+ * 数据集是跨库共用的，它们写着 v1 的 `uniqueValues`。
+ * v2 用 `externalRefs` 承担同一职责：同样「不编码内容，只写引用号」，
+ * 因此这里做一次翻译，数据集本身不必区分版本。
+ */
+function objCodecOptions(
+	options: unknown,
+): { externalRefs?: unknown[] } | undefined {
+	if (!options || typeof options !== 'object') return undefined;
+	const raw = options as { uniqueValues?: unknown[]; externalRefs?: unknown[] };
+	const externalRefs = raw.externalRefs ?? raw.uniqueValues;
+	return externalRefs ? { externalRefs } : undefined;
+}
 
 export const adapterById = new Map(adapters.map((a) => [a.id, a]));

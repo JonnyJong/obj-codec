@@ -1,0 +1,84 @@
+{
+	"t": "array",
+	"v": [
+		{
+			"t": "null"
+		},
+		{
+			"t": "undefined"
+		},
+		{
+			"t": "boolean",
+			"v": true
+		},
+		{
+			"t": "boolean",
+			"v": false
+		},
+		{
+			"t": "number",
+			"v": "0"
+		},
+		{
+			"t": "number",
+			"v": "-0"
+		},
+		{
+			"t": "number",
+			"v": "1"
+		},
+		{
+			"t": "number",
+			"v": "-1"
+		},
+		{
+			"t": "number",
+			"v": "127"
+		},
+		{
+			"t": "number",
+			"v": "128"
+		},
+		{
+			"t": "number",
+			"v": "1.5"
+		},
+		{
+			"t": "number",
+			"v": "NaN"
+		},
+		{
+			"t": "number",
+			"v": "Infinity"
+		},
+		{
+			"t": "number",
+			"v": "-Infinity"
+		},
+		{
+			"t": "bigint",
+			"v": "1"
+		},
+		{
+			"t": "bigint",
+			"v": "-1"
+		},
+		{
+			"t": "bigint",
+			"v": "1180591620717411303424"
+		},
+		{
+			"t": "string",
+			"v": "hello"
+		},
+		{
+			"t": "string",
+			"v": "你好"
+		},
+		{
+			"t": "string",
+			"v": "😀"
+		}
+	],
+	"id": 0
+}

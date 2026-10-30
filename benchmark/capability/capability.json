@@ -494,7 +494,7 @@
     "DataView": "yes",
     "Symbol": "yes",
     "undefined in array": "yes",
-    "sparse array": "throws",
+    "sparse array": "yes",
     "numeric object key": "yes",
     "circular ref": "yes",
     "circular via array": "yes",
@@ -507,6 +507,6 @@
     "deep nesting (1000)": "yes",
     "null prototype obj": "yes",
     "huge string 1MB": "yes",
-    "1e6 element array": "throws"
+    "1e6 element array": "yes"
   }
 }

@@ -120,10 +120,9 @@ export const s3: Dataset[] = [
 		},
 	}),
 
-	// Regression target: obj-codec currently mis-numbers pointers when a custom
-	// codec's encoded payload contains referable values, so the second instance in
-	// a container decodes as its inner representation. Keep this dataset so the
-	// fix is measurable (see DESIGN.md 9.5).
+	// Regression target: a custom codec whose payload holds several fields is read
+	// back in pieces, so its `read` has to keep progress in `ctx.state`. Without
+	// that the second instance in a container decodes as its inner representation.
 	defineDataset({
 		id: 'D04-custom-class-container',
 		suite: 'S3',
