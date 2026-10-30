@@ -157,6 +157,37 @@ describe('Buffer: varint', () => {
 		reader.end();
 		expect(reader.varint()).toBe(Number.MAX_SAFE_INTEGER);
 	});
+	it('拒绝超过 8 字节的 varint', () => {
+		const reader = new BufferReader();
+		// 每个字节都带延续位，永远读不到终止字节
+		reader.push(new Uint8Array(9).fill(0x80));
+		reader.end();
+		expect(() => reader.varint()).toThrow(RangeError);
+		expect(() => reader.varint()).toThrow(/too long/);
+	});
+	it('拒绝超出安全整数范围的 8 字节 varint', () => {
+		const reader = new BufferReader();
+		// 0xff × 7 + 0x7f，值是 2^56 - 1
+		reader.push(new Uint8Array([...new Array(7).fill(0xff), 0x7f]));
+		reader.end();
+		expect(() => reader.varint()).toThrow(/safe integer/);
+	});
+	it('恰好在分块末尾结束时推进游标', () => {
+		// 第一块刻意超过合并阈值，否则 `push` 会把两块并成一个，测不到跨块
+		const tail = write((w) => w.varint(0x4000));
+		const first = new Uint8Array(300);
+		first.set(tail, first.length - tail.length);
+		const second = write((w) => w.varint(Number.MAX_SAFE_INTEGER));
+		const reader = new BufferReader();
+		reader.push(first);
+		// 跳过分隔填充，让 varint 正好在第一块末尾结束
+		reader.bytes(first.length - tail.length);
+		expect(reader.varint()).toBe(0x4000);
+		// 游标已推进：下一块不必回头找上一块
+		reader.push(second);
+		expect(reader.varint()).toBe(Number.MAX_SAFE_INTEGER);
+		expect(reader.buffered).toBe(0);
+	});
 });
 
 describe('Buffer: UTF-8', () => {
@@ -599,6 +630,30 @@ describe('Buffer: 读取器', () => {
 		const reader = new BufferReader();
 		reader.push(new Uint8Array([1, 2, 3]));
 		expect(() => reader.discard(2)).toThrow(RangeError);
+	});
+	it('discard 反复落在同一分块内仍能连续读到正确字节', () => {
+		const source = new Uint8Array(32).map((_, i) => i);
+		const reader = new BufferReader();
+		reader.push(source);
+		// 每读一个字节就释放一次：分块不会被截断，偏移必须累加正确
+		for (let i = 0; i < source.length; i++) {
+			expect(reader.u8()).toBe(i);
+			reader.discard(reader.position);
+			expect(reader.front).toBe(i + 1);
+		}
+		expect(reader.buffered).toBe(0);
+	});
+	it('discard 后跨块读取仍从正确位置继续', () => {
+		const source = new Uint8Array(48).map((_, i) => i);
+		const reader = new BufferReader();
+		for (const chunk of slice(source, 8)) reader.push(chunk);
+		reader.end();
+		for (let i = 0; i < 20; i++) {
+			expect(reader.u8()).toBe(i);
+			reader.discard(reader.position);
+		}
+		// 游标已被释放点推着走，剩余数据必须原样读出
+		expect(reader.bytes(28)).toEqual(source.subarray(20));
 	});
 	it('逐字节喂入不丢数据', () => {
 		const source = new Uint8Array(50).map((_, i) => i);

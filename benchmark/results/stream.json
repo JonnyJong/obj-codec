@@ -1,7 +1,7 @@
 {
   "meta": {
     "kind": "stream",
-    "startedAt": "2026-10-29T08:28:36.568Z",
+    "startedAt": "2026-10-30T03:08:46.292Z",
     "node": "v24.16.0",
     "platform": "linux 7.2.11-arch1-1 x64",
     "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
@@ -96,10 +96,10 @@
       "status": "ok",
       "chunks": 87,
       "payloadBytes": 88494,
-      "decodeMs": 4.294720999999981,
-      "peakBytes": 6676880,
-      "maxRssBytes": 115535872,
-      "wallMs": 247
+      "decodeMs": 2.317200000000014,
+      "peakBytes": 1497296,
+      "maxRssBytes": 130691072,
+      "wallMs": 251
     },
     {
       "stream": "obj-codec-node",
@@ -110,10 +110,10 @@
       "status": "ok",
       "chunks": 6,
       "payloadBytes": 88494,
-      "decodeMs": 6.839417999999995,
-      "peakBytes": 7281128,
-      "maxRssBytes": 119021568,
-      "wallMs": 258
+      "decodeMs": 1.954433999999992,
+      "peakBytes": 1379512,
+      "maxRssBytes": 131534848,
+      "wallMs": 238
     },
     {
       "stream": "obj-codec-node",
@@ -124,10 +124,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 88494,
-      "decodeMs": 5.052849000000009,
-      "peakBytes": 6364384,
-      "maxRssBytes": 116686848,
-      "wallMs": 246
+      "decodeMs": 2.54762199999999,
+      "peakBytes": 1351568,
+      "maxRssBytes": 131452928,
+      "wallMs": 245
     },
     {
       "stream": "obj-codec-node",
@@ -138,10 +138,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 88494,
-      "decodeMs": 4.991544000000005,
-      "peakBytes": 6401832,
-      "maxRssBytes": 117497856,
-      "wallMs": 246
+      "decodeMs": 1.9307159999999897,
+      "peakBytes": 1354344,
+      "maxRssBytes": 130850816,
+      "wallMs": 241
     },
     {
       "stream": "obj-codec-web",
@@ -152,10 +152,10 @@
       "status": "ok",
       "chunks": 87,
       "payloadBytes": 88494,
-      "decodeMs": 4.7320410000000095,
-      "peakBytes": 7335960,
-      "maxRssBytes": 117420032,
-      "wallMs": 254
+      "decodeMs": 5.4448170000000005,
+      "peakBytes": 2030816,
+      "maxRssBytes": 131014656,
+      "wallMs": 250
     },
     {
       "stream": "obj-codec-web",
@@ -166,10 +166,10 @@
       "status": "ok",
       "chunks": 6,
       "payloadBytes": 88494,
-      "decodeMs": 4.70531299999999,
-      "peakBytes": 7829368,
-      "maxRssBytes": 115015680,
-      "wallMs": 252
+      "decodeMs": 5.073768000000001,
+      "peakBytes": 1745176,
+      "maxRssBytes": 132886528,
+      "wallMs": 247
     },
     {
       "stream": "obj-codec-web",
@@ -180,10 +180,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 88494,
-      "decodeMs": 5.765379999999993,
-      "peakBytes": 6905216,
-      "maxRssBytes": 116588544,
-      "wallMs": 247
+      "decodeMs": 3.479028999999997,
+      "peakBytes": 1690936,
+      "maxRssBytes": 129925120,
+      "wallMs": 245
     },
     {
       "stream": "obj-codec-web",
@@ -194,10 +194,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 88494,
-      "decodeMs": 5.959345999999982,
-      "peakBytes": 6574648,
-      "maxRssBytes": 119721984,
-      "wallMs": 257
+      "decodeMs": 4.02245400000001,
+      "peakBytes": 1687456,
+      "maxRssBytes": 130719744,
+      "wallMs": 249
     },
     {
       "stream": "turbo-stream",
@@ -208,9 +208,9 @@
       "status": "ok",
       "chunks": 154,
       "payloadBytes": 157344,
-      "decodeMs": 4.1019480000000215,
-      "peakBytes": 2980856,
-      "maxRssBytes": 126058496,
+      "decodeMs": 3.9269529999999975,
+      "peakBytes": 2964896,
+      "maxRssBytes": 144367616,
       "wallMs": 262
     },
     {
@@ -222,10 +222,10 @@
       "status": "ok",
       "chunks": 10,
       "payloadBytes": 157344,
-      "decodeMs": 3.7750150000000247,
-      "peakBytes": 2896680,
-      "maxRssBytes": 125652992,
-      "wallMs": 270
+      "decodeMs": 3.9613959999999793,
+      "peakBytes": 2896704,
+      "maxRssBytes": 142012416,
+      "wallMs": 283
     },
     {
       "stream": "turbo-stream",
@@ -236,9 +236,9 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 157344,
-      "decodeMs": 6.045263000000006,
+      "decodeMs": 6.94490399999998,
       "peakBytes": 2863672,
-      "maxRssBytes": 121913344,
+      "maxRssBytes": 140685312,
       "wallMs": 268
     },
     {
@@ -250,10 +250,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 157344,
-      "decodeMs": 6.492863999999997,
+      "decodeMs": 5.874932000000001,
       "peakBytes": 2863672,
-      "maxRssBytes": 123744256,
-      "wallMs": 278
+      "maxRssBytes": 142102528,
+      "wallMs": 265
     },
     {
       "stream": "cbor-x-buffered",
@@ -264,10 +264,10 @@
       "status": "ok",
       "chunks": 121,
       "payloadBytes": 123154,
-      "decodeMs": 1.501720000000006,
-      "peakBytes": 773864,
-      "maxRssBytes": 108097536,
-      "wallMs": 228
+      "decodeMs": 1.4657010000000241,
+      "peakBytes": 760448,
+      "maxRssBytes": 129626112,
+      "wallMs": 227
     },
     {
       "stream": "cbor-x-buffered",
@@ -278,9 +278,9 @@
       "status": "ok",
       "chunks": 8,
       "payloadBytes": 123154,
-      "decodeMs": 1.5456590000000006,
-      "peakBytes": 760104,
-      "maxRssBytes": 109305856,
+      "decodeMs": 1.4938549999999964,
+      "peakBytes": 746608,
+      "maxRssBytes": 129998848,
       "wallMs": 230
     },
     {
@@ -292,10 +292,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 123154,
-      "decodeMs": 1.4857450000000085,
-      "peakBytes": 745792,
-      "maxRssBytes": 108163072,
-      "wallMs": 234
+      "decodeMs": 1.6400319999999908,
+      "peakBytes": 757696,
+      "maxRssBytes": 129318912,
+      "wallMs": 231
     },
     {
       "stream": "cbor-x-buffered",
@@ -306,10 +306,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 123154,
-      "decodeMs": 1.5281570000000215,
-      "peakBytes": 757808,
-      "maxRssBytes": 107032576,
-      "wallMs": 235
+      "decodeMs": 1.5309560000000033,
+      "peakBytes": 757696,
+      "maxRssBytes": 128778240,
+      "wallMs": 224
     },
     {
       "stream": "msgpackr-buffered",
@@ -320,10 +320,10 @@
       "status": "ok",
       "chunks": 76,
       "payloadBytes": 77138,
-      "decodeMs": 0.7369489999999814,
-      "peakBytes": 538488,
-      "maxRssBytes": 107425792,
-      "wallMs": 238
+      "decodeMs": 0.7967879999999923,
+      "peakBytes": 531976,
+      "maxRssBytes": 129122304,
+      "wallMs": 233
     },
     {
       "stream": "msgpackr-buffered",
@@ -334,10 +334,10 @@
       "status": "ok",
       "chunks": 5,
       "payloadBytes": 77138,
-      "decodeMs": 0.7969980000000021,
-      "peakBytes": 517232,
-      "maxRssBytes": 109195264,
-      "wallMs": 228
+      "decodeMs": 0.7975299999999947,
+      "peakBytes": 517040,
+      "maxRssBytes": 130158592,
+      "wallMs": 225
     },
     {
       "stream": "msgpackr-buffered",
@@ -348,10 +348,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 77138,
-      "decodeMs": 0.8004059999999811,
-      "peakBytes": 515040,
-      "maxRssBytes": 108724224,
-      "wallMs": 232
+      "decodeMs": 0.7173799999999915,
+      "peakBytes": 519848,
+      "maxRssBytes": 129925120,
+      "wallMs": 230
     },
     {
       "stream": "msgpackr-buffered",
@@ -362,10 +362,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 77138,
-      "decodeMs": 0.7279649999999833,
-      "peakBytes": 515200,
-      "maxRssBytes": 106868736,
-      "wallMs": 227
+      "decodeMs": 0.7622910000000047,
+      "peakBytes": 513984,
+      "maxRssBytes": 129003520,
+      "wallMs": 234
     },
     {
       "stream": "json-buffered",
@@ -376,10 +376,10 @@
       "status": "ok",
       "chunks": 154,
       "payloadBytes": 157343,
-      "decodeMs": 0.4157079999999951,
+      "decodeMs": 0.3972300000000075,
       "peakBytes": 537344,
-      "maxRssBytes": 106688512,
-      "wallMs": 222
+      "maxRssBytes": 127533056,
+      "wallMs": 223
     },
     {
       "stream": "json-buffered",
@@ -390,10 +390,10 @@
       "status": "ok",
       "chunks": 10,
       "payloadBytes": 157343,
-      "decodeMs": 0.423546999999985,
+      "decodeMs": 0.41462299999997754,
       "peakBytes": 536200,
-      "maxRssBytes": 108347392,
-      "wallMs": 225
+      "maxRssBytes": 127193088,
+      "wallMs": 218
     },
     {
       "stream": "json-buffered",
@@ -404,10 +404,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 157343,
-      "decodeMs": 0.36729400000001533,
-      "peakBytes": 378800,
-      "maxRssBytes": 108019712,
-      "wallMs": 222
+      "decodeMs": 0.3715609999999856,
+      "peakBytes": 377880,
+      "maxRssBytes": 129327104,
+      "wallMs": 215
     },
     {
       "stream": "json-buffered",
@@ -418,10 +418,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 157343,
-      "decodeMs": 0.36923699999999826,
+      "decodeMs": 0.37350900000001275,
       "peakBytes": 378800,
-      "maxRssBytes": 108728320,
-      "wallMs": 225
+      "maxRssBytes": 129368064,
+      "wallMs": 223
     },
     {
       "stream": "obj-codec-node",
@@ -432,68 +432,68 @@
       "status": "ok",
       "chunks": 951,
       "payloadBytes": 973272,
-      "decodeMs": 3.1535989999999856,
-      "peakBytes": 2101336,
-      "maxRssBytes": 122580992,
-      "wallMs": 244
-    },
-    {
-      "stream": "obj-codec-node",
-      "lib": "obj-codec",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": 16384,
-      "status": "ok",
-      "chunks": 60,
-      "payloadBytes": 973272,
-      "decodeMs": 0.7367129999999804,
-      "peakBytes": 1263304,
-      "maxRssBytes": 121651200,
-      "wallMs": 242
-    },
-    {
-      "stream": "obj-codec-node",
-      "lib": "obj-codec",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": 262144,
-      "status": "ok",
-      "chunks": 4,
-      "payloadBytes": 973272,
-      "decodeMs": 0.5724790000000155,
-      "peakBytes": 1162336,
-      "maxRssBytes": 122970112,
-      "wallMs": 236
-    },
-    {
-      "stream": "obj-codec-node",
-      "lib": "obj-codec",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": -1,
-      "status": "ok",
-      "chunks": 1,
-      "payloadBytes": 973272,
-      "decodeMs": 0.47713999999999146,
-      "peakBytes": 1156424,
-      "maxRssBytes": 119791616,
-      "wallMs": 232
-    },
-    {
-      "stream": "obj-codec-web",
-      "lib": "obj-codec",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": 1024,
-      "status": "ok",
-      "chunks": 951,
-      "payloadBytes": 973272,
-      "decodeMs": 4.773686999999995,
-      "peakBytes": 4630272,
-      "maxRssBytes": 122445824,
+      "decodeMs": 2.824387999999999,
+      "peakBytes": 1676472,
+      "maxRssBytes": 141504512,
       "wallMs": 249
     },
     {
+      "stream": "obj-codec-node",
+      "lib": "obj-codec",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": 16384,
+      "status": "ok",
+      "chunks": 60,
+      "payloadBytes": 973272,
+      "decodeMs": 1.2114459999999951,
+      "peakBytes": 1212080,
+      "maxRssBytes": 142622720,
+      "wallMs": 241
+    },
+    {
+      "stream": "obj-codec-node",
+      "lib": "obj-codec",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": 262144,
+      "status": "ok",
+      "chunks": 4,
+      "payloadBytes": 973272,
+      "decodeMs": 0.5335159999999917,
+      "peakBytes": 1152616,
+      "maxRssBytes": 140107776,
+      "wallMs": 242
+    },
+    {
+      "stream": "obj-codec-node",
+      "lib": "obj-codec",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": -1,
+      "status": "ok",
+      "chunks": 1,
+      "payloadBytes": 973272,
+      "decodeMs": 0.6867209999999773,
+      "peakBytes": 1141952,
+      "maxRssBytes": 139370496,
+      "wallMs": 240
+    },
+    {
+      "stream": "obj-codec-web",
+      "lib": "obj-codec",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": 1024,
+      "status": "ok",
+      "chunks": 951,
+      "payloadBytes": 973272,
+      "decodeMs": 4.6037919999999986,
+      "peakBytes": 4215680,
+      "maxRssBytes": 141299712,
+      "wallMs": 252
+    },
+    {
       "stream": "obj-codec-web",
       "lib": "obj-codec",
       "mode": "incremental",
@@ -502,9 +502,9 @@
       "status": "ok",
       "chunks": 60,
       "payloadBytes": 973272,
-      "decodeMs": 0.9500850000000014,
-      "peakBytes": 1752608,
-      "maxRssBytes": 120406016,
+      "decodeMs": 0.9034199999999828,
+      "peakBytes": 1699920,
+      "maxRssBytes": 138993664,
       "wallMs": 241
     },
     {
@@ -516,110 +516,110 @@
       "status": "ok",
       "chunks": 4,
       "payloadBytes": 973272,
-      "decodeMs": 0.7010889999999961,
-      "peakBytes": 1510184,
-      "maxRssBytes": 119787520,
-      "wallMs": 242
-    },
-    {
-      "stream": "obj-codec-web",
-      "lib": "obj-codec",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": -1,
-      "status": "ok",
-      "chunks": 1,
-      "payloadBytes": 973272,
-      "decodeMs": 0.5520989999999983,
-      "peakBytes": 1487544,
-      "maxRssBytes": 121311232,
-      "wallMs": 242
-    },
-    {
-      "stream": "turbo-stream",
-      "lib": "turbo-stream",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": 1024,
-      "status": "ok",
-      "chunks": 951,
-      "payloadBytes": 973255,
-      "decodeMs": 19.984759999999994,
-      "peakBytes": 31702112,
-      "maxRssBytes": 220512256,
-      "wallMs": 395
-    },
-    {
-      "stream": "turbo-stream",
-      "lib": "turbo-stream",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": 16384,
-      "status": "ok",
-      "chunks": 60,
-      "payloadBytes": 973255,
-      "decodeMs": 19.23313900000005,
-      "peakBytes": 31262256,
-      "maxRssBytes": 217608192,
-      "wallMs": 399
-    },
-    {
-      "stream": "turbo-stream",
-      "lib": "turbo-stream",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": 262144,
-      "status": "ok",
-      "chunks": 4,
-      "payloadBytes": 973255,
-      "decodeMs": 24.62153600000005,
-      "peakBytes": 31264112,
-      "maxRssBytes": 217825280,
-      "wallMs": 410
-    },
-    {
-      "stream": "turbo-stream",
-      "lib": "turbo-stream",
-      "mode": "incremental",
-      "dataset": "A04-long-text",
-      "chunkSize": -1,
-      "status": "ok",
-      "chunks": 1,
-      "payloadBytes": 973255,
-      "decodeMs": 19.91815399999996,
-      "peakBytes": 31253496,
-      "maxRssBytes": 221798400,
-      "wallMs": 401
-    },
-    {
-      "stream": "cbor-x-buffered",
-      "lib": "cbor-x",
-      "mode": "buffered",
-      "dataset": "A04-long-text",
-      "chunkSize": 1024,
-      "status": "ok",
-      "chunks": 951,
-      "payloadBytes": 973252,
-      "decodeMs": 0.7057330000000093,
-      "peakBytes": 1179496,
-      "maxRssBytes": 122089472,
-      "wallMs": 241
-    },
-    {
-      "stream": "cbor-x-buffered",
-      "lib": "cbor-x",
-      "mode": "buffered",
-      "dataset": "A04-long-text",
-      "chunkSize": 16384,
-      "status": "ok",
-      "chunks": 60,
-      "payloadBytes": 973252,
-      "decodeMs": 0.6490709999999922,
-      "peakBytes": 1109608,
-      "maxRssBytes": 122490880,
+      "decodeMs": 0.6588959999999986,
+      "peakBytes": 1499696,
+      "maxRssBytes": 140566528,
       "wallMs": 239
     },
     {
+      "stream": "obj-codec-web",
+      "lib": "obj-codec",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": -1,
+      "status": "ok",
+      "chunks": 1,
+      "payloadBytes": 973272,
+      "decodeMs": 0.5285149999999987,
+      "peakBytes": 1479952,
+      "maxRssBytes": 140017664,
+      "wallMs": 235
+    },
+    {
+      "stream": "turbo-stream",
+      "lib": "turbo-stream",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": 1024,
+      "status": "ok",
+      "chunks": 951,
+      "payloadBytes": 973255,
+      "decodeMs": 19.61909799999995,
+      "peakBytes": 31702112,
+      "maxRssBytes": 239005696,
+      "wallMs": 400
+    },
+    {
+      "stream": "turbo-stream",
+      "lib": "turbo-stream",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": 16384,
+      "status": "ok",
+      "chunks": 60,
+      "payloadBytes": 973255,
+      "decodeMs": 19.28943400000003,
+      "peakBytes": 31260928,
+      "maxRssBytes": 236949504,
+      "wallMs": 393
+    },
+    {
+      "stream": "turbo-stream",
+      "lib": "turbo-stream",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": 262144,
+      "status": "ok",
+      "chunks": 4,
+      "payloadBytes": 973255,
+      "decodeMs": 24.667816000000016,
+      "peakBytes": 31265304,
+      "maxRssBytes": 237645824,
+      "wallMs": 404
+    },
+    {
+      "stream": "turbo-stream",
+      "lib": "turbo-stream",
+      "mode": "incremental",
+      "dataset": "A04-long-text",
+      "chunkSize": -1,
+      "status": "ok",
+      "chunks": 1,
+      "payloadBytes": 973255,
+      "decodeMs": 20.86370199999999,
+      "peakBytes": 31252112,
+      "maxRssBytes": 236777472,
+      "wallMs": 389
+    },
+    {
+      "stream": "cbor-x-buffered",
+      "lib": "cbor-x",
+      "mode": "buffered",
+      "dataset": "A04-long-text",
+      "chunkSize": 1024,
+      "status": "ok",
+      "chunks": 951,
+      "payloadBytes": 973252,
+      "decodeMs": 0.6893880000000081,
+      "peakBytes": 1179496,
+      "maxRssBytes": 142696448,
+      "wallMs": 233
+    },
+    {
+      "stream": "cbor-x-buffered",
+      "lib": "cbor-x",
+      "mode": "buffered",
+      "dataset": "A04-long-text",
+      "chunkSize": 16384,
+      "status": "ok",
+      "chunks": 60,
+      "payloadBytes": 973252,
+      "decodeMs": 0.6606060000000014,
+      "peakBytes": 1109608,
+      "maxRssBytes": 141041664,
+      "wallMs": 233
+    },
+    {
       "stream": "cbor-x-buffered",
       "lib": "cbor-x",
       "mode": "buffered",
@@ -628,9 +628,9 @@
       "status": "ok",
       "chunks": 4,
       "payloadBytes": 973252,
-      "decodeMs": 0.6397770000000094,
+      "decodeMs": 0.6000970000000052,
       "peakBytes": 1099712,
-      "maxRssBytes": 121118720,
+      "maxRssBytes": 141012992,
       "wallMs": 227
     },
     {
@@ -642,10 +642,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 973252,
-      "decodeMs": 0.6604269999999985,
+      "decodeMs": 0.6290909999999883,
       "peakBytes": 1099472,
-      "maxRssBytes": 122388480,
-      "wallMs": 237
+      "maxRssBytes": 142565376,
+      "wallMs": 235
     },
     {
       "stream": "msgpackr-buffered",
@@ -656,9 +656,9 @@
       "status": "ok",
       "chunks": 951,
       "payloadBytes": 973253,
-      "decodeMs": 0.6852409999999907,
+      "decodeMs": 0.6999899999999855,
       "peakBytes": 1183736,
-      "maxRssBytes": 121544704,
+      "maxRssBytes": 142794752,
       "wallMs": 235
     },
     {
@@ -670,10 +670,10 @@
       "status": "ok",
       "chunks": 60,
       "payloadBytes": 973253,
-      "decodeMs": 0.6280869999999936,
+      "decodeMs": 0.6504909999999882,
       "peakBytes": 1113808,
-      "maxRssBytes": 121028608,
-      "wallMs": 239
+      "maxRssBytes": 141197312,
+      "wallMs": 240
     },
     {
       "stream": "msgpackr-buffered",
@@ -684,10 +684,10 @@
       "status": "ok",
       "chunks": 4,
       "payloadBytes": 973253,
-      "decodeMs": 0.6208879999999795,
+      "decodeMs": 0.6323490000000049,
       "peakBytes": 1103912,
-      "maxRssBytes": 122769408,
-      "wallMs": 235
+      "maxRssBytes": 143724544,
+      "wallMs": 256
     },
     {
       "stream": "msgpackr-buffered",
@@ -698,10 +698,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 973253,
-      "decodeMs": 0.6386819999999886,
+      "decodeMs": 0.6268900000000031,
       "peakBytes": 1103672,
-      "maxRssBytes": 122204160,
-      "wallMs": 238
+      "maxRssBytes": 142528512,
+      "wallMs": 234
     },
     {
       "stream": "json-buffered",
@@ -712,9 +712,9 @@
       "status": "ok",
       "chunks": 951,
       "payloadBytes": 973254,
-      "decodeMs": 0.6491980000000126,
+      "decodeMs": 0.6459059999999965,
       "peakBytes": 2067224,
-      "maxRssBytes": 121450496,
+      "maxRssBytes": 139640832,
       "wallMs": 236
     },
     {
@@ -726,10 +726,10 @@
       "status": "ok",
       "chunks": 60,
       "payloadBytes": 973254,
-      "decodeMs": 0.6594859999999869,
-      "peakBytes": 2060096,
-      "maxRssBytes": 117284864,
-      "wallMs": 245
+      "decodeMs": 0.6650450000000205,
+      "peakBytes": 2058440,
+      "maxRssBytes": 140251136,
+      "wallMs": 235
     },
     {
       "stream": "json-buffered",
@@ -740,10 +740,10 @@
       "status": "ok",
       "chunks": 4,
       "payloadBytes": 973254,
-      "decodeMs": 0.6556249999999864,
-      "peakBytes": 2058376,
-      "maxRssBytes": 119668736,
-      "wallMs": 235
+      "decodeMs": 0.6736130000000173,
+      "peakBytes": 2058864,
+      "maxRssBytes": 139071488,
+      "wallMs": 234
     },
     {
       "stream": "json-buffered",
@@ -754,10 +754,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 973254,
-      "decodeMs": 0.4291589999999985,
+      "decodeMs": 0.43960400000000277,
       "peakBytes": 1086352,
-      "maxRssBytes": 119316480,
-      "wallMs": 239
+      "maxRssBytes": 140468224,
+      "wallMs": 228
     },
     {
       "stream": "obj-codec-node",
@@ -768,10 +768,10 @@
       "status": "ok",
       "chunks": 277,
       "payloadBytes": 282646,
-      "decodeMs": 13.052254000000005,
-      "peakBytes": 6430008,
-      "maxRssBytes": 139919360,
-      "wallMs": 293
+      "decodeMs": 4.796154000000001,
+      "peakBytes": 5292648,
+      "maxRssBytes": 145670144,
+      "wallMs": 268
     },
     {
       "stream": "obj-codec-node",
@@ -782,10 +782,10 @@
       "status": "ok",
       "chunks": 18,
       "payloadBytes": 282646,
-      "decodeMs": 11.36877100000001,
-      "peakBytes": 7714016,
-      "maxRssBytes": 136679424,
-      "wallMs": 296
+      "decodeMs": 4.310966000000008,
+      "peakBytes": 5147080,
+      "maxRssBytes": 145461248,
+      "wallMs": 265
     },
     {
       "stream": "obj-codec-node",
@@ -796,10 +796,10 @@
       "status": "ok",
       "chunks": 2,
       "payloadBytes": 282646,
-      "decodeMs": 10.649127000000021,
-      "peakBytes": 6039360,
-      "maxRssBytes": 138809344,
-      "wallMs": 287
+      "decodeMs": 4.526269000000013,
+      "peakBytes": 5061080,
+      "maxRssBytes": 144805888,
+      "wallMs": 262
     },
     {
       "stream": "obj-codec-node",
@@ -810,10 +810,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 282646,
-      "decodeMs": 11.974873000000002,
-      "peakBytes": 5320136,
-      "maxRssBytes": 136597504,
-      "wallMs": 280
+      "decodeMs": 5.078180000000003,
+      "peakBytes": 4996536,
+      "maxRssBytes": 144543744,
+      "wallMs": 253
     },
     {
       "stream": "obj-codec-web",
@@ -824,10 +824,10 @@
       "status": "ok",
       "chunks": 277,
       "payloadBytes": 282646,
-      "decodeMs": 19.11959200000001,
-      "peakBytes": 9593200,
-      "maxRssBytes": 139190272,
-      "wallMs": 301
+      "decodeMs": 12.337803000000008,
+      "peakBytes": 6245432,
+      "maxRssBytes": 144150528,
+      "wallMs": 276
     },
     {
       "stream": "obj-codec-web",
@@ -838,10 +838,10 @@
       "status": "ok",
       "chunks": 18,
       "payloadBytes": 282646,
-      "decodeMs": 20.38912400000001,
-      "peakBytes": 10679200,
-      "maxRssBytes": 139288576,
-      "wallMs": 296
+      "decodeMs": 4.372365000000002,
+      "peakBytes": 5489680,
+      "maxRssBytes": 144736256,
+      "wallMs": 274
     },
     {
       "stream": "obj-codec-web",
@@ -852,10 +852,10 @@
       "status": "ok",
       "chunks": 2,
       "payloadBytes": 282646,
-      "decodeMs": 16.039467000000002,
-      "peakBytes": 7918528,
-      "maxRssBytes": 137015296,
-      "wallMs": 289
+      "decodeMs": 9.346339,
+      "peakBytes": 5383344,
+      "maxRssBytes": 144654336,
+      "wallMs": 275
     },
     {
       "stream": "obj-codec-web",
@@ -866,10 +866,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 282646,
-      "decodeMs": 12.111804000000006,
-      "peakBytes": 5579448,
-      "maxRssBytes": 139657216,
-      "wallMs": 287
+      "decodeMs": 5.8530370000000005,
+      "peakBytes": 5309176,
+      "maxRssBytes": 144474112,
+      "wallMs": 262
     },
     {
       "stream": "turbo-stream",
@@ -880,10 +880,10 @@
       "status": "ok",
       "chunks": 577,
       "payloadBytes": 589825,
-      "decodeMs": 14.812031999999988,
-      "peakBytes": 14048104,
-      "maxRssBytes": 144904192,
-      "wallMs": 322
+      "decodeMs": 14.852207999999962,
+      "peakBytes": 14049984,
+      "maxRssBytes": 161935360,
+      "wallMs": 310
     },
     {
       "stream": "turbo-stream",
@@ -894,10 +894,10 @@
       "status": "ok",
       "chunks": 37,
       "payloadBytes": 589825,
-      "decodeMs": 14.528537000000028,
+      "decodeMs": 14.900197999999989,
       "peakBytes": 13705712,
-      "maxRssBytes": 144506880,
-      "wallMs": 317
+      "maxRssBytes": 162086912,
+      "wallMs": 319
     },
     {
       "stream": "turbo-stream",
@@ -908,10 +908,10 @@
       "status": "ok",
       "chunks": 3,
       "payloadBytes": 589825,
-      "decodeMs": 14.66260299999999,
+      "decodeMs": 14.328071999999963,
       "peakBytes": 13689288,
-      "maxRssBytes": 143462400,
-      "wallMs": 312
+      "maxRssBytes": 162996224,
+      "wallMs": 319
     },
     {
       "stream": "turbo-stream",
@@ -922,10 +922,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 589825,
-      "decodeMs": 13.424155999999982,
-      "peakBytes": 13645840,
-      "maxRssBytes": 144187392,
-      "wallMs": 311
+      "decodeMs": 13.576393000000053,
+      "peakBytes": 13645744,
+      "maxRssBytes": 162816000,
+      "wallMs": 313
     },
     {
       "stream": "cbor-x-buffered",
@@ -936,10 +936,10 @@
       "status": "ok",
       "chunks": 360,
       "payloadBytes": 367694,
-      "decodeMs": 2.7998350000000016,
+      "decodeMs": 2.7457220000000007,
       "peakBytes": 2480472,
-      "maxRssBytes": 121978880,
-      "wallMs": 250
+      "maxRssBytes": 141172736,
+      "wallMs": 249
     },
     {
       "stream": "cbor-x-buffered",
@@ -950,10 +950,10 @@
       "status": "ok",
       "chunks": 23,
       "payloadBytes": 367694,
-      "decodeMs": 2.8227329999999995,
-      "peakBytes": 2450592,
-      "maxRssBytes": 122773504,
-      "wallMs": 254
+      "decodeMs": 2.8023190000000113,
+      "peakBytes": 2450568,
+      "maxRssBytes": 140304384,
+      "wallMs": 245
     },
     {
       "stream": "cbor-x-buffered",
@@ -964,10 +964,10 @@
       "status": "ok",
       "chunks": 2,
       "payloadBytes": 367694,
-      "decodeMs": 2.890425000000022,
-      "peakBytes": 2443136,
-      "maxRssBytes": 122560512,
-      "wallMs": 246
+      "decodeMs": 2.7275769999999966,
+      "peakBytes": 2443352,
+      "maxRssBytes": 141160448,
+      "wallMs": 245
     },
     {
       "stream": "cbor-x-buffered",
@@ -978,10 +978,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 367694,
-      "decodeMs": 3.009055999999987,
-      "peakBytes": 2443160,
-      "maxRssBytes": 121851904,
-      "wallMs": 256
+      "decodeMs": 2.8615609999999947,
+      "peakBytes": 2443552,
+      "maxRssBytes": 141885440,
+      "wallMs": 243
     },
     {
       "stream": "msgpackr-buffered",
@@ -992,10 +992,10 @@
       "status": "ok",
       "chunks": 227,
       "payloadBytes": 231652,
-      "decodeMs": 2.086463000000009,
-      "peakBytes": 1466200,
-      "maxRssBytes": 121204736,
-      "wallMs": 250
+      "decodeMs": 2.020038999999997,
+      "peakBytes": 1486592,
+      "maxRssBytes": 142336000,
+      "wallMs": 243
     },
     {
       "stream": "msgpackr-buffered",
@@ -1006,10 +1006,10 @@
       "status": "ok",
       "chunks": 15,
       "payloadBytes": 231652,
-      "decodeMs": 1.9775350000000174,
-      "peakBytes": 1444952,
-      "maxRssBytes": 120520704,
-      "wallMs": 246
+      "decodeMs": 1.9602620000000002,
+      "peakBytes": 1470752,
+      "maxRssBytes": 141238272,
+      "wallMs": 242
     },
     {
       "stream": "msgpackr-buffered",
@@ -1020,10 +1020,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 231652,
-      "decodeMs": 1.965641000000005,
-      "peakBytes": 1447216,
-      "maxRssBytes": 121188352,
-      "wallMs": 242
+      "decodeMs": 1.9110850000000141,
+      "peakBytes": 1462968,
+      "maxRssBytes": 142315520,
+      "wallMs": 238
     },
     {
       "stream": "msgpackr-buffered",
@@ -1034,10 +1034,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 231652,
-      "decodeMs": 1.996645000000001,
-      "peakBytes": 1440248,
-      "maxRssBytes": 120582144,
-      "wallMs": 241
+      "decodeMs": 1.976553000000024,
+      "peakBytes": 1446160,
+      "maxRssBytes": 142315520,
+      "wallMs": 238
     },
     {
       "stream": "json-buffered",
@@ -1048,10 +1048,10 @@
       "status": "ok",
       "chunks": 576,
       "payloadBytes": 589824,
-      "decodeMs": 1.7081929999999943,
+      "decodeMs": 1.7484489999999937,
       "peakBytes": 1458456,
-      "maxRssBytes": 119115776,
-      "wallMs": 239
+      "maxRssBytes": 140132352,
+      "wallMs": 232
     },
     {
       "stream": "json-buffered",
@@ -1062,10 +1062,10 @@
       "status": "ok",
       "chunks": 36,
       "payloadBytes": 589824,
-      "decodeMs": 1.7215000000000202,
+      "decodeMs": 1.728145999999981,
       "peakBytes": 1458456,
-      "maxRssBytes": 119296000,
-      "wallMs": 241
+      "maxRssBytes": 141602816,
+      "wallMs": 236
     },
     {
       "stream": "json-buffered",
@@ -1076,10 +1076,10 @@
       "status": "ok",
       "chunks": 3,
       "payloadBytes": 589824,
-      "decodeMs": 1.7768289999999922,
+      "decodeMs": 1.733148,
       "peakBytes": 1458456,
-      "maxRssBytes": 117907456,
-      "wallMs": 243
+      "maxRssBytes": 139137024,
+      "wallMs": 235
     },
     {
       "stream": "json-buffered",
@@ -1090,10 +1090,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 589824,
-      "decodeMs": 1.608395999999999,
+      "decodeMs": 1.6052540000000022,
       "peakBytes": 868616,
-      "maxRssBytes": 119885824,
-      "wallMs": 237
+      "maxRssBytes": 140181504,
+      "wallMs": 233
     },
     {
       "stream": "obj-codec-node",
@@ -1104,10 +1104,10 @@
       "status": "ok",
       "chunks": 1025,
       "payloadBytes": 1048620,
-      "decodeMs": 3.032648999999992,
-      "peakBytes": 1226888,
-      "maxRssBytes": 119320576,
-      "wallMs": 248
+      "decodeMs": 3.6510350000000074,
+      "peakBytes": 973808,
+      "maxRssBytes": 141053952,
+      "wallMs": 246
     },
     {
       "stream": "obj-codec-node",
@@ -1118,23 +1118,9 @@
       "status": "ok",
       "chunks": 65,
       "payloadBytes": 1048620,
-      "decodeMs": 0.7153729999999996,
-      "peakBytes": 290064,
-      "maxRssBytes": 119300096,
-      "wallMs": 238
-    },
-    {
-      "stream": "obj-codec-node",
-      "lib": "obj-codec",
-      "mode": "incremental",
-      "dataset": "B04-binary",
-      "chunkSize": 262144,
-      "status": "ok",
-      "chunks": 5,
-      "payloadBytes": 1048620,
-      "decodeMs": 0.5526040000000023,
-      "peakBytes": 199760,
-      "maxRssBytes": 120561664,
+      "decodeMs": 0.6264819999999816,
+      "peakBytes": 262640,
+      "maxRssBytes": 140144640,
       "wallMs": 235
     },
     {
@@ -1142,14 +1128,28 @@
       "lib": "obj-codec",
       "mode": "incremental",
       "dataset": "B04-binary",
+      "chunkSize": 262144,
+      "status": "ok",
+      "chunks": 5,
+      "payloadBytes": 1048620,
+      "decodeMs": 0.5308890000000019,
+      "peakBytes": 183496,
+      "maxRssBytes": 142057472,
+      "wallMs": 238
+    },
+    {
+      "stream": "obj-codec-node",
+      "lib": "obj-codec",
+      "mode": "incremental",
+      "dataset": "B04-binary",
       "chunkSize": -1,
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 1048620,
-      "decodeMs": 0.5017100000000028,
-      "peakBytes": 187056,
-      "maxRssBytes": 119578624,
-      "wallMs": 240
+      "decodeMs": 0.499574999999993,
+      "peakBytes": 177824,
+      "maxRssBytes": 139472896,
+      "wallMs": 238
     },
     {
       "stream": "obj-codec-web",
@@ -1160,10 +1160,10 @@
       "status": "ok",
       "chunks": 1025,
       "payloadBytes": 1048620,
-      "decodeMs": 4.791791000000018,
-      "peakBytes": 3923832,
-      "maxRssBytes": 118972416,
-      "wallMs": 254
+      "decodeMs": 4.660152000000011,
+      "peakBytes": 3680024,
+      "maxRssBytes": 139993088,
+      "wallMs": 251
     },
     {
       "stream": "obj-codec-web",
@@ -1174,10 +1174,10 @@
       "status": "ok",
       "chunks": 65,
       "payloadBytes": 1048620,
-      "decodeMs": 0.9112449999999797,
-      "peakBytes": 789456,
-      "maxRssBytes": 120451072,
-      "wallMs": 247
+      "decodeMs": 0.8341890000000092,
+      "peakBytes": 759656,
+      "maxRssBytes": 139563008,
+      "wallMs": 244
     },
     {
       "stream": "obj-codec-web",
@@ -1188,10 +1188,10 @@
       "status": "ok",
       "chunks": 5,
       "payloadBytes": 1048620,
-      "decodeMs": 0.6665690000000097,
-      "peakBytes": 553536,
-      "maxRssBytes": 118370304,
-      "wallMs": 248
+      "decodeMs": 0.6769689999999855,
+      "peakBytes": 540376,
+      "maxRssBytes": 139661312,
+      "wallMs": 241
     },
     {
       "stream": "obj-codec-web",
@@ -1202,10 +1202,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 1048620,
-      "decodeMs": 0.6013499999999965,
-      "peakBytes": 518376,
-      "maxRssBytes": 118411264,
-      "wallMs": 243
+      "decodeMs": 0.5725990000000252,
+      "peakBytes": 510368,
+      "maxRssBytes": 138809344,
+      "wallMs": 240
     },
     {
       "stream": "turbo-stream",
@@ -1216,10 +1216,10 @@
       "status": "ok",
       "chunks": 1366,
       "payloadBytes": 1398131,
-      "decodeMs": 61.70709499999998,
-      "peakBytes": 46549408,
-      "maxRssBytes": 240603136,
-      "wallMs": 436
+      "decodeMs": 60.873966000000024,
+      "peakBytes": 46549312,
+      "maxRssBytes": 260952064,
+      "wallMs": 428
     },
     {
       "stream": "turbo-stream",
@@ -1230,10 +1230,10 @@
       "status": "ok",
       "chunks": 86,
       "payloadBytes": 1398131,
-      "decodeMs": 61.84326199999998,
-      "peakBytes": 45916024,
-      "maxRssBytes": 241029120,
-      "wallMs": 439
+      "decodeMs": 60.56654599999999,
+      "peakBytes": 45927632,
+      "maxRssBytes": 259047424,
+      "wallMs": 433
     },
     {
       "stream": "turbo-stream",
@@ -1244,10 +1244,10 @@
       "status": "ok",
       "chunks": 6,
       "payloadBytes": 1398131,
-      "decodeMs": 52.16198800000001,
+      "decodeMs": 53.52550099999996,
       "peakBytes": 45942336,
-      "maxRssBytes": 244047872,
-      "wallMs": 457
+      "maxRssBytes": 265052160,
+      "wallMs": 461
     },
     {
       "stream": "turbo-stream",
@@ -1258,10 +1258,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 1398131,
-      "decodeMs": 60.06880699999999,
-      "peakBytes": 45910032,
-      "maxRssBytes": 243183616,
-      "wallMs": 444
+      "decodeMs": 61.45763199999996,
+      "peakBytes": 45911088,
+      "maxRssBytes": 257036288,
+      "wallMs": 440
     },
     {
       "stream": "cbor-x-buffered",
@@ -1272,23 +1272,9 @@
       "status": "ok",
       "chunks": 1025,
       "payloadBytes": 1048601,
-      "decodeMs": 0.4421639999999911,
-      "peakBytes": 218592,
-      "maxRssBytes": 117727232,
-      "wallMs": 238
-    },
-    {
-      "stream": "cbor-x-buffered",
-      "lib": "cbor-x",
-      "mode": "buffered",
-      "dataset": "B04-binary",
-      "chunkSize": 16384,
-      "status": "ok",
-      "chunks": 65,
-      "payloadBytes": 1048601,
-      "decodeMs": 0.4329579999999851,
-      "peakBytes": 133208,
-      "maxRssBytes": 119648256,
+      "decodeMs": 0.7277059999999835,
+      "peakBytes": 219024,
+      "maxRssBytes": 139399168,
       "wallMs": 240
     },
     {
@@ -1296,14 +1282,28 @@
       "lib": "cbor-x",
       "mode": "buffered",
       "dataset": "B04-binary",
+      "chunkSize": 16384,
+      "status": "ok",
+      "chunks": 65,
+      "payloadBytes": 1048601,
+      "decodeMs": 0.3805250000000058,
+      "peakBytes": 133208,
+      "maxRssBytes": 140955648,
+      "wallMs": 237
+    },
+    {
+      "stream": "cbor-x-buffered",
+      "lib": "cbor-x",
+      "mode": "buffered",
+      "dataset": "B04-binary",
       "chunkSize": 262144,
       "status": "ok",
       "chunks": 5,
       "payloadBytes": 1048601,
-      "decodeMs": 0.39873200000002385,
-      "peakBytes": 126720,
-      "maxRssBytes": 120041472,
-      "wallMs": 233
+      "decodeMs": 0.5182869999999866,
+      "peakBytes": 127816,
+      "maxRssBytes": 140070912,
+      "wallMs": 232
     },
     {
       "stream": "cbor-x-buffered",
@@ -1314,10 +1314,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 1048601,
-      "decodeMs": 0.5966390000000104,
+      "decodeMs": 0.3474830000000111,
       "peakBytes": 127496,
-      "maxRssBytes": 118280192,
-      "wallMs": 242
+      "maxRssBytes": 140615680,
+      "wallMs": 229
     },
     {
       "stream": "msgpackr-buffered",
@@ -1328,10 +1328,10 @@
       "status": "ok",
       "chunks": 1025,
       "payloadBytes": 1048602,
-      "decodeMs": 0.7643729999999778,
-      "peakBytes": 223792,
-      "maxRssBytes": 121331712,
-      "wallMs": 241
+      "decodeMs": 0.7595240000000274,
+      "peakBytes": 222200,
+      "maxRssBytes": 142688256,
+      "wallMs": 232
     },
     {
       "stream": "msgpackr-buffered",
@@ -1342,10 +1342,10 @@
       "status": "ok",
       "chunks": 65,
       "payloadBytes": 1048602,
-      "decodeMs": 0.8224739999999997,
-      "peakBytes": 137944,
-      "maxRssBytes": 120598528,
-      "wallMs": 236
+      "decodeMs": 0.715879000000001,
+      "peakBytes": 136688,
+      "maxRssBytes": 143675392,
+      "wallMs": 235
     },
     {
       "stream": "msgpackr-buffered",
@@ -1356,10 +1356,10 @@
       "status": "ok",
       "chunks": 5,
       "payloadBytes": 1048602,
-      "decodeMs": 0.6906730000000039,
+      "decodeMs": 0.8262210000000039,
       "peakBytes": 132552,
-      "maxRssBytes": 121303040,
-      "wallMs": 238
+      "maxRssBytes": 142872576,
+      "wallMs": 247
     },
     {
       "stream": "msgpackr-buffered",
@@ -1370,10 +1370,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 1048602,
-      "decodeMs": 0.6793360000000064,
+      "decodeMs": 0.7384820000000047,
       "peakBytes": 132232,
-      "maxRssBytes": 119959552,
-      "wallMs": 241
+      "maxRssBytes": 142409728,
+      "wallMs": 242
     },
     {
       "stream": "obj-codec-node",
@@ -1384,10 +1384,10 @@
       "status": "ok",
       "chunks": 45,
       "payloadBytes": 45946,
-      "decodeMs": 3.5551049999999975,
-      "peakBytes": 5942248,
-      "maxRssBytes": 115073024,
-      "wallMs": 248
+      "decodeMs": 2.643542999999994,
+      "peakBytes": 1887624,
+      "maxRssBytes": 132136960,
+      "wallMs": 235
     },
     {
       "stream": "obj-codec-node",
@@ -1398,10 +1398,10 @@
       "status": "ok",
       "chunks": 3,
       "payloadBytes": 45946,
-      "decodeMs": 5.576526999999999,
-      "peakBytes": 5730800,
-      "maxRssBytes": 117325824,
-      "wallMs": 251
+      "decodeMs": 2.327814999999987,
+      "peakBytes": 1807720,
+      "maxRssBytes": 132136960,
+      "wallMs": 237
     },
     {
       "stream": "obj-codec-node",
@@ -1412,10 +1412,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 45946,
-      "decodeMs": 4.846952000000016,
-      "peakBytes": 5347808,
-      "maxRssBytes": 115437568,
-      "wallMs": 247
+      "decodeMs": 2.0247590000000173,
+      "peakBytes": 1963184,
+      "maxRssBytes": 131506176,
+      "wallMs": 238
     },
     {
       "stream": "obj-codec-node",
@@ -1426,10 +1426,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 45946,
-      "decodeMs": 5.402445999999998,
-      "peakBytes": 5343080,
-      "maxRssBytes": 113971200,
-      "wallMs": 247
+      "decodeMs": 1.938919999999996,
+      "peakBytes": 1783488,
+      "maxRssBytes": 131870720,
+      "wallMs": 233
     },
     {
       "stream": "obj-codec-web",
@@ -1440,10 +1440,10 @@
       "status": "ok",
       "chunks": 45,
       "payloadBytes": 45946,
-      "decodeMs": 4.37191900000002,
-      "peakBytes": 6402032,
-      "maxRssBytes": 117526528,
-      "wallMs": 243
+      "decodeMs": 4.561421000000024,
+      "peakBytes": 2323240,
+      "maxRssBytes": 130203648,
+      "wallMs": 242
     },
     {
       "stream": "obj-codec-web",
@@ -1454,10 +1454,10 @@
       "status": "ok",
       "chunks": 3,
       "payloadBytes": 45946,
-      "decodeMs": 5.062205000000006,
-      "peakBytes": 6059312,
-      "maxRssBytes": 116383744,
-      "wallMs": 256
+      "decodeMs": 2.4261789999999905,
+      "peakBytes": 2110104,
+      "maxRssBytes": 131248128,
+      "wallMs": 237
     },
     {
       "stream": "obj-codec-web",
@@ -1468,10 +1468,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 45946,
-      "decodeMs": 4.888486,
-      "peakBytes": 5650832,
-      "maxRssBytes": 115961856,
-      "wallMs": 251
+      "decodeMs": 3.5055130000000077,
+      "peakBytes": 2118016,
+      "maxRssBytes": 131887104,
+      "wallMs": 237
     },
     {
       "stream": "obj-codec-web",
@@ -1482,9 +1482,9 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 45946,
-      "decodeMs": 4.79240999999999,
-      "peakBytes": 5707616,
-      "maxRssBytes": 116273152,
+      "decodeMs": 3.5532269999999926,
+      "peakBytes": 2104320,
+      "maxRssBytes": 131489792,
       "wallMs": 246
     },
     {
@@ -1496,10 +1496,10 @@
       "status": "ok",
       "chunks": 100,
       "payloadBytes": 101962,
-      "decodeMs": 4.511910999999998,
+      "decodeMs": 4.643956000000003,
       "peakBytes": 3026296,
-      "maxRssBytes": 127537152,
-      "wallMs": 273
+      "maxRssBytes": 147120128,
+      "wallMs": 272
     },
     {
       "stream": "turbo-stream",
@@ -1510,10 +1510,10 @@
       "status": "ok",
       "chunks": 7,
       "payloadBytes": 101962,
-      "decodeMs": 4.735993000000008,
+      "decodeMs": 5.20906500000001,
       "peakBytes": 2999408,
-      "maxRssBytes": 128495616,
-      "wallMs": 284
+      "maxRssBytes": 146411520,
+      "wallMs": 272
     },
     {
       "stream": "turbo-stream",
@@ -1524,10 +1524,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 101962,
-      "decodeMs": 4.553533000000016,
-      "peakBytes": 2940312,
-      "maxRssBytes": 125886464,
-      "wallMs": 282
+      "decodeMs": 6.111348000000021,
+      "peakBytes": 2940384,
+      "maxRssBytes": 142245888,
+      "wallMs": 274
     },
     {
       "stream": "turbo-stream",
@@ -1538,10 +1538,10 @@
       "status": "ok",
       "chunks": 1,
       "payloadBytes": 101962,
-      "decodeMs": 6.011896000000036,
+      "decodeMs": 6.069040999999999,
       "peakBytes": 2940384,
-      "maxRssBytes": 125808640,
-      "wallMs": 275
+      "maxRssBytes": 143671296,
+      "wallMs": 263
     }
   ]
 }

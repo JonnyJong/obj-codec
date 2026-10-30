@@ -45,10 +45,7 @@ const CONTAINERS: Readonly<
  */
 const READERS: (ReadFn | undefined)[] = [];
 
-/** 可引用 ID 集合 */
-const REFERABLE_IDS = new Set<number>(Object.keys(CONTAINERS).map(Number));
-
-for (const { readers, referable } of [
+for (const { readers } of [
 	numberCodec,
 	bigintCodec,
 	...BINARY_CODECS,
@@ -64,9 +61,6 @@ for (const { readers, referable } of [
 			throw new Error(`Duplicate reader for builtin tag ${index}`);
 		}
 		READERS[index] = read;
-		// 构建可引用 ID 集合
-		if (!referable) continue;
-		REFERABLE_IDS.add(index);
 	}
 }
 
@@ -90,18 +84,17 @@ export function readerOf(id: number): ReadFn | undefined {
 	return READERS[id];
 }
 
-/** 该 ID 是否需要登记引用 */
+/**
+ * 该 ID 是否需要登记引用  */
 export function isReferableTag(id: number): boolean {
-	return REFERABLE_IDS.has(id);
+	// HACK：`ARRAY_HOLE` 不可达，故直接比较
+	return id >= TAG.STRING;
 }
 
-/** 找出能编码该值的标量 codec */
+/**
+ * 查找可引用标量 Codec */
 export function scalarFor(value: unknown): AnyScalar | undefined {
 	switch (typeof value) {
-		case 'number':
-			return numberCodec;
-		case 'bigint':
-			return bigintCodec;
 		case 'string':
 			return stringCodec;
 		case 'symbol':

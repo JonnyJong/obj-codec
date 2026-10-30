@@ -17,6 +17,9 @@ import type {
 } from './types';
 import { Queue } from './utils';
 
+/** 释放节流阈值 */
+const RELEASE_THRESHOLD = 64 * 1024;
+
 export interface DecoderOptions extends CodecOptions {
 	/** 自定义编解码器快照 */
 	snapshot: CodecSnapshot;
@@ -30,13 +33,6 @@ interface PendingFrame {
 	remaining: number;
 	/** 跨子项累加状态 */
 	state: unknown;
-}
-
-/** 正在处理的帧 */
-interface ItemFrame {
-	/** 类型 ID */
-	id?: number;
-	ctx: DecodeContext;
 }
 
 /**
@@ -60,14 +56,26 @@ export class Decoder {
 	#pending = new Queue<PendingFrame>();
 	#root: unknown;
 	#complete = false;
-	/** 正在处理的帧；`null` 表示当前没有半成品 */
-	#frame: ItemFrame | null = null;
+	/**
+	 * 当前帧的类型 ID
+	 * @description
+	 * `undefined` 表示当前没有半成品
+	 */
+	#frameId?: number;
+	/**
+	 * 帧上下文
+	 * @description
+	 * `reader` 在整个解码器生命周期内不变，因此可以跨帧复用：
+	 * 只有被打断的帧才需要保留，其余帧省掉每次两个对象的分配。
+	 */
+	#ctx: DecodeContext;
 	/** 下一步要执行的操作 */
 	#next: () => void = this.#doVersion;
 	#reader = new BufferReader();
 	constructor(options: DecoderOptions) {
 		this.#snapshot = options.snapshot;
 		this.#extRefs = options.externalRefs ?? [];
+		this.#ctx = { reader: this.#reader };
 	}
 	/** 是否已解码完成 */
 	get done(): boolean {
@@ -102,16 +110,7 @@ export class Decoder {
 		}
 		return this.#root;
 	}
-	/**
-	 * 推进解码
-	 * @description
-	 * 循环到「解完」或「数据不足」为止。数据不足时直接返回：
-	 * 已读出的部分留在 `#item` / `#pending` 里，下次从原处续读。
-	 *
-	 * 这里**不回退**。`Reader` 的每个方法要么完整读完、要么一个字节都不动，
-	 * 所以只跨方法边界的半成品需要记住 —— 正是 `ItemFrame` 的作用。
-	 * 回退反而会让「已读出的 ID」重复消费。
-	 */
+	/** 推进解码 */
 	#step(): void {
 		while (!this.#complete) {
 			try {
@@ -128,6 +127,9 @@ export class Decoder {
 	 * 避免长时间解码无界占内存
 	 */
 	#release(): void {
+		// 超过上限再清理，避免反复扫描分块
+		const reader = this.#reader;
+		if (reader.position - reader.front < RELEASE_THRESHOLD) return;
 		this.#reader.discard(this.#reader.position);
 	}
 	//#region 头部
@@ -173,40 +175,37 @@ export class Decoder {
 		while (true) {
 			const frame = this.#pending.peek();
 			if (!frame) break;
+			// XXX: 容器完成时再释放，减少释放频率，内存占用可能高一些
 			if (frame.remaining === 0) {
 				this.#pending.dequeue();
+				this.#release();
 				continue;
 			}
 			const child = this.#readFrame();
 			frame.state = frame.codec.addChild(frame.shell, child, frame.state);
 			frame.remaining--;
-			this.#release();
 		}
 		this.#complete = true;
 	}
 	//#endregion
 	//#region 帧
-	/**
-	 * 读一个完整帧
-	 * @description
-	 * 使用 `#item` 存储中断状态；
-	 * `#item` 生命周期只覆盖一帧
-	 */
+	/** 读一个完整帧 */
 	#readFrame(): unknown {
-		this.#frame ??= { ctx: { reader: this.#reader } };
-		this.#frame.id ??= this.#reader.varint();
-		const value = this.#dispatch(this.#frame);
-		this.#frame = null;
+		this.#frameId ??= this.#reader.varint();
+		const value = this.#dispatch(this.#frameId);
+		// 收尾清理
+		this.#frameId = undefined;
+		this.#ctx.state = undefined;
+
 		return value;
 	}
 	/** 按类型 ID 分派 */
-	#dispatch({ id, ctx }: ItemFrame): unknown {
-		if (id === undefined) throw new Error('Internal: item frame has no type id');
-		if (id >= CUSTOM_BEGIN) return this.#readCustom(id, ctx);
-		return this.#readBuiltin(id, ctx);
+	#dispatch(id: number): unknown {
+		if (id >= CUSTOM_BEGIN) return this.#readCustom(id);
+		return this.#readBuiltin(id);
 	}
 	/** 读内置类型 */
-	#readBuiltin(id: number, ctx: DecodeContext): unknown {
+	#readBuiltin(id: number): unknown {
 		// 不可引用标量
 		switch (id) {
 			case TAG.NULL:
@@ -243,16 +242,16 @@ export class Decoder {
 		// 其它可引用类型
 		const read = readerOf(id);
 		if (!read) throw new Error(`Unknown type tag: ${id}`);
-		const value = read(ctx);
+		const value = read(this.#ctx);
 		if (isReferableTag(id)) this.#refs.push(value);
 		return value;
 	}
 	/** 读自定义类型 */
-	#readCustom(id: number, ctx: DecodeContext): unknown {
+	#readCustom(id: number): unknown {
 		const codec = this.#customs[id - CUSTOM_BEGIN];
 		if (!codec) throw new Error(`Unknown custom type: ${id}`);
 		if (codec.kind === 'referable') {
-			const value = codec.read(ctx);
+			const value = codec.read(this.#ctx);
 			this.#refs.push(value);
 			return value;
 		}

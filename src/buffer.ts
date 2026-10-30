@@ -169,6 +169,9 @@ const COALESCE_LIMIT = 256;
 /** 紧凑阈值 */
 const COMPACT_THRESHOLD = 64;
 
+/** 安全整数上限的 BigInt 形式 */
+const MAX_SAFE_BIGINT = BigInt(Number.MAX_SAFE_INTEGER);
+
 /** 初始缓冲区容量 */
 const INITIAL_CAPACITY = 1024;
 
@@ -367,6 +370,11 @@ export class BufferWriter implements ChunkWriter {
 		if (v < 0n) {
 			throw new RangeError('varintBig: require a non-negative bigint');
 		}
+		// 安全整数直接走 Number 路径
+		if (v <= MAX_SAFE_BIGINT) {
+			this.varint(Number(v));
+			return;
+		}
 		// 按需精确扩容
 		let length = 1;
 		for (let rest = v >> 7n; rest > 0n; rest >>= 7n) length++;
@@ -434,6 +442,8 @@ interface Chunk {
 	data: Uint8Array;
 	/** 该分块首字节的绝对位置 */
 	start: number;
+	/** 已释放的前缀长度；不截断 `data`，避免每次 discard 都分配视图 */
+	consumed: number;
 }
 
 export class BufferReader implements ChunkReader {
@@ -476,9 +486,9 @@ export class BufferReader implements ChunkReader {
 		return this.#ended;
 	}
 	get front(): number {
-		return this.#head >= this.#list.length
-			? this.#end
-			: this.#list[this.#head].start;
+		if (this.#head >= this.#list.length) return this.#end;
+		const head = this.#list[this.#head];
+		return head.start + head.consumed;
 	}
 	push(chunk: Uint8Array): void {
 		if (this.#ended) throw new Error('Reader has already ended');
@@ -497,7 +507,7 @@ export class BufferReader implements ChunkReader {
 			this.#end += chunk.length;
 			return;
 		}
-		this.#list.push({ data: chunk, start: this.#end });
+		this.#list.push({ data: chunk, start: this.#end, consumed: 0 });
 		this.#end += chunk.length;
 	}
 	end(): void {
@@ -537,10 +547,10 @@ export class BufferReader implements ChunkReader {
 			this.#index = 0;
 			return;
 		}
+		// 避免截断分配新视图（buffer 不因截断提前释放）
 		const head = this.#list[this.#head];
-		if (head.start < position) {
-			head.data = head.data.subarray(position - head.start);
-			head.start = position;
+		if (head.start + head.consumed < position) {
+			head.consumed = position - head.start;
 		}
 		// 已释放的前缀攒够一定量才真正搬一次
 		if (this.#head >= COMPACT_THRESHOLD) {
@@ -548,6 +558,7 @@ export class BufferReader implements ChunkReader {
 			this.#index = Math.max(0, this.#index - this.#head);
 			this.#head = 0;
 		}
+		// 必须从头重定位：`fill` 会把 `#index` 临时推过所在分块
 		this.#relocate();
 	}
 	reset(): void {
@@ -659,21 +670,27 @@ export class BufferReader implements ChunkReader {
 	varint(): number {
 		let position = this.#position;
 		let index = this.#index;
+		const list = this.#list;
+		let chunk = list[index];
+		// 缓存当前分块的末尾绝对位置
+		let end = chunk === undefined ? 0 : chunk.start + chunk.data.length;
 		let result = 0;
-		let shift = 0;
+		let factor = 1;
 		while (true) {
 			if (position >= this.#end) this.#blocked(1);
-			while (position >= this.#list[index].start + this.#list[index].data.length) {
-				index++;
+			while (position >= end) {
+				chunk = list[++index];
+				end = chunk.start + chunk.data.length;
 			}
-			const chunk = this.#list[index];
 			const byte = chunk.data[position - chunk.start];
 			position++;
-			result += (byte & 0x7f) * 2 ** shift;
+			result += (byte & 0x7f) * factor;
 			if (byte < 0x80) break;
-			shift += 7;
-			// 安全整数最多 8 字节，最后一次左移量为 49
-			if (shift > 49) throw new RangeError('varint: value is too long');
+			factor *= 0x80;
+			// 0x80 ** 7
+			if (factor > 0x2_00_00_00_00_00_00) {
+				throw new RangeError('varint: value is too long');
+			}
 		}
 		if (!Number.isSafeInteger(result)) {
 			throw new RangeError('varint: value exceeds safe integer range');
@@ -681,7 +698,8 @@ export class BufferReader implements ChunkReader {
 		// 实际消费
 		this.#position = position;
 		this.#index = index;
-		this.#advance();
+		// 只有正好读完当前分块才需要推进游标
+		if (position >= end) this.#advance();
 		return result;
 	}
 	varintBig(): bigint {

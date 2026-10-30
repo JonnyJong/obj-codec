@@ -1,9 +1,11 @@
 import { BufferWriter } from './buffer';
 import { scalarFor } from './builtins';
+import { bigintCodec } from './codecs/bigint';
 import { ARRAY_HOLE, arrayCodec } from './codecs/container/array';
 import { mapCodec } from './codecs/container/map';
 import { objectCodec } from './codecs/container/object';
 import { setCodec } from './codecs/container/set';
+import { numberCodec } from './codecs/number';
 import { CUSTOM_FLAG, TAG, VERSION } from './protocol';
 import type { CodecSnapshot } from './snapshot';
 import type {
@@ -139,10 +141,13 @@ export class Encoder {
 	 * 若成功写引用则无需继续编码。
 	 */
 	#writeExistingRef(value: unknown): boolean {
-		const extIndex = this.#extRefs.get(value);
-		if (extIndex !== undefined) {
-			this.#writeRef(TAG.EXT_REF, extIndex);
-			return true;
+		// 避免无外部引用时查表
+		if (this.#extRefs.size > 0) {
+			const extIndex = this.#extRefs.get(value);
+			if (extIndex !== undefined) {
+				this.#writeRef(TAG.EXT_REF, extIndex);
+				return true;
+			}
 		}
 		const ref = this.#refs.get(value);
 		if (ref !== undefined) {
@@ -185,6 +190,16 @@ export class Encoder {
 				return;
 			case false:
 				this.#writer.u8(TAG.FALSE);
+				return;
+		}
+
+		// 提前处理不可引用标量，避免查引用
+		switch (typeof value) {
+			case 'number':
+				numberCodec.write(this.#ctx, value);
+				return;
+			case 'bigint':
+				bigintCodec.write(this.#ctx, value);
 				return;
 		}
 
